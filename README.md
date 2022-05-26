@@ -6,7 +6,7 @@
     <img src='https://img.shields.io/pypi/v/TagScript' alt=' yPI' />
 </a>
 
-This repository is a fork of JonSnowbd's [TagScript](https://github.com/JonSnowbd/TagScript).
+This repository is a fork of JonSnowbd's [TagScript](https://github.com/JonSnowbd/TagScript), a string templating language.
 This fork adds support for Discord object adapters and a couple Discord related blocks, as
 well as multiple utility blocks. Additionally, several tweaks have been made to the engine's
 behavior.
