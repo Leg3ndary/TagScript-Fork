@@ -109,7 +109,7 @@ class MemberAdapter(AttributeAdapter):
             "color": self.object.color,
             "colour": self.object.color,
             "nick": self.object.display_name,
-            "avatar": (self.object.avatar_url, False),
+            "avatar": (self.object.avatar.url, False),
             "discriminator": self.object.discriminator,
             "joined_at": getattr(self.object, "joined_at", self.object.created_at),
             "mention": self.object.mention,
@@ -210,12 +210,12 @@ class GuildAdapter(AttributeAdapter):
                 humans += 1
         member_count = guild.member_count
         additional_attributes = {
-            "icon": (guild.icon_url, False),
+            "icon": (guild.icon.url, False),
             "member_count": member_count,
             "members": member_count,
             "bots": bots,
             "humans": humans,
-            "description": guild.description or "No description.",
+            "description": guild.description or "No description",
         }
         self._attributes.update(additional_attributes)
 
