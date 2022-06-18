@@ -1,6 +1,3 @@
-import asyncio
-from typing import Union
-
 from discord import Guild
 from re import match
 
