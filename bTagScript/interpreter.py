@@ -26,7 +26,6 @@ AdapterDict = Dict[str, Adapter]
 class Node:
     """
     A low-level object representing a bracketed block.
-
     Attributes
     ----------
     coordinates: Tuple[int, int]
@@ -54,7 +53,6 @@ class Node:
 def build_node_tree(message: str) -> List[Node]:
     """
     Function that finds all possible nodes in a string.
-
     Returns
     -------
     List[Node]
@@ -81,7 +79,6 @@ def build_node_tree(message: str) -> List[Node]:
 class Response:
     """
     An object containing information on a completed TagScript process.
-
     Attributes
     ----------
     body: str
@@ -112,7 +109,6 @@ class Context:
     """
     An object containing data on the TagScript block processed by the interpreter.
     This class is passed to adapters and blocks during processing.
-
     Attributes
     ----------
     verb: Verb
@@ -138,7 +134,6 @@ class Context:
 class Interpreter:
     """
     The TagScript interpreter.
-
     Attributes
     ----------
     blocks: List[Block]
@@ -276,7 +271,6 @@ class Interpreter:
     ) -> Response:
         """
         Processes a given TagScript string.
-
         Parameters
         ----------
         message: str
@@ -289,12 +283,10 @@ class Interpreter:
             Whether the parameter should be followed after a "." or use the default of parantheses.
         kwargs: Dict[str, Any]
             Additional keyword arguments that may be used by blocks during processing.
-
         Returns
         -------
         Response
             A response object containing the processed body, actions and variables.
-
         Raises
         ------
         TagScriptError
@@ -325,13 +317,12 @@ class AsyncInterpreter(Interpreter):
     """
     An asynchronous subclass of `Interpreter` that allows blocks to implement asynchronous methods.
     Synchronous blocks are still supported.
-
     This subclass has no additional attributes from the `Interpreter` class.
     See `Interpreter` for full documentation.
     """
 
     async def _get_acceptors(self, ctx: Context) -> List[Block]:
-        return [b for b in self.blocks if b.will_accept(ctx)]
+        return [b for b in self.blocks if await maybe_await(b.will_accept, ctx)]
 
     async def _process_blocks(self, ctx: Context, node: Node) -> Optional[str]:
         acceptors = await self._get_acceptors(ctx)
@@ -388,7 +379,6 @@ class AsyncInterpreter(Interpreter):
     ) -> Response:
         """
         Asynchronously process a given TagScript string.
-
         This method has no additional attributes from the `Interpreter` class.
         See `Interpreter.process` for full documentation.
         """

@@ -25,14 +25,13 @@ def escape_content(string: str) -> str:
     return pattern.sub(_sub_match, string)
 
 
-async def maybe_await(func: Union[Callable[..., Any], Awaitable[Any]], args) -> Any:
+async def maybe_await(func: Union[Callable[..., Any], Awaitable[Any]], *args, **kwargs) -> Any:
     """
     Await the given function if it is awaitable or call it synchronously.
-
     Returns
     -------
     Any
         The result of the awaitable function.
     """
-    value = func(args)
+    value = func(*args, **kwargs)
     return await value if isawaitable(value) else value
