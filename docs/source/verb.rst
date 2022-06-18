@@ -2,5 +2,5 @@
 Verb
 ====
 
-.. automodule:: TagScriptEngine.verb
+.. automodule:: bTagScript.verb
     :members:

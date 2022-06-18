@@ -6,136 +6,136 @@ Blocks
 All Block
 ---------
 
-.. autoclass:: TagScriptEngine.block.AllBlock
+.. autoclass:: bTagScript.block.AllBlock
 
 ---------
 Any Block
 ---------
 
-.. autoclass:: TagScriptEngine.block.AnyBlock
+.. autoclass:: bTagScript.block.AnyBlock
 
 ----------------
 Assignment Block
 ----------------
 
-.. autoclass:: TagScriptEngine.block.AssignmentBlock
+.. autoclass:: bTagScript.block.AssignmentBlock
 
 ---------------
 Blacklist Block
 ---------------
 
-.. autoclass:: TagScriptEngine.block.BlacklistBlock
+.. autoclass:: bTagScript.block.BlacklistBlock
 
 -----------
 Break Block
 -----------
 
-.. autoclass:: TagScriptEngine.block.BreakBlock
+.. autoclass:: bTagScript.block.BreakBlock
 
 -------------
 Command Block
 -------------
 
-.. autoclass:: TagScriptEngine.block.CommandBlock
+.. autoclass:: bTagScript.block.CommandBlock
 
 --------------
 Cooldown Block
 --------------
 
-.. autoclass:: TagScriptEngine.block.CooldownBlock
+.. autoclass:: bTagScript.block.CooldownBlock
 
 -----------
 Embed Block
 -----------
 
-.. autoclass:: TagScriptEngine.block.EmbedBlock
+.. autoclass:: bTagScript.block.EmbedBlock
 
 -----------------
 Fifty Fifty Block
 -----------------
 
-.. autoclass:: TagScriptEngine.block.FiftyFiftyBlock
+.. autoclass:: bTagScript.block.FiftyFiftyBlock
 
 --------
 If Block
 --------
 
-.. autoclass:: TagScriptEngine.block.IfBlock
+.. autoclass:: bTagScript.block.IfBlock
 
 --------------------
 Loose Variable Block
 --------------------
 
-.. autoclass:: TagScriptEngine.block.LooseVariableGetterBlock
+.. autoclass:: bTagScript.block.LooseVariableGetterBlock
 
 ----------
 Math Block
 ----------
 
-.. autoclass:: TagScriptEngine.block.MathBlock
+.. autoclass:: bTagScript.block.MathBlock
 
 --------------
 Override Block
 --------------
 
-.. autoclass:: TagScriptEngine.block.OverrideBlock
+.. autoclass:: bTagScript.block.OverrideBlock
 
 ------------
 Random Block
 ------------
 
-.. autoclass:: TagScriptEngine.block.RandomBlock
+.. autoclass:: bTagScript.block.RandomBlock
 
 -----------
 Range Block
 -----------
 
-.. autoclass:: TagScriptEngine.block.RangeBlock
+.. autoclass:: bTagScript.block.RangeBlock
 
 --------------
 Redirect Block
 --------------
 
-.. autoclass:: TagScriptEngine.block.RedirectBlock
+.. autoclass:: bTagScript.block.RedirectBlock
 
 -------------
 Replace Block
 -------------
 
-.. autoclass:: TagScriptEngine.block.ReplaceBlock
+.. autoclass:: bTagScript.block.ReplaceBlock
 
 -------------
 Require Block
 -------------
 
-.. autoclass:: TagScriptEngine.block.RequireBlock
+.. autoclass:: bTagScript.block.RequireBlock
 
 ----------------------
 ShortCutRedirect Block
 ----------------------
 
-.. autoclass:: TagScriptEngine.block.ShortCutRedirectBlock
+.. autoclass:: bTagScript.block.ShortCutRedirectBlock
 
 ----------
 STRF Block
 ----------
 
-.. autoclass:: TagScriptEngine.block.StrfBlock
+.. autoclass:: bTagScript.block.StrfBlock
 
 ---------------------
 Strict Variable Block
 ---------------------
 
-.. autoclass:: TagScriptEngine.block.StrictVariableGetterBlock
+.. autoclass:: bTagScript.block.StrictVariableGetterBlock
 
 --------------------
 SubstringBlock Block
 --------------------
 
-.. autoclass:: TagScriptEngine.block.SubstringBlock
+.. autoclass:: bTagScript.block.SubstringBlock
 
 ----------------
 URL Encode Block
 ----------------
 
-.. autoclass:: TagScriptEngine.block.URLEncodeBlock
+.. autoclass:: bTagScript.block.URLEncodeBlock

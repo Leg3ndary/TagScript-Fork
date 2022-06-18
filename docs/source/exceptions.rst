@@ -2,5 +2,5 @@
 Exceptions
 ==========
 
-.. automodule:: TagScriptEngine.exceptions
+.. automodule:: bTagScript.exceptions
     :members:

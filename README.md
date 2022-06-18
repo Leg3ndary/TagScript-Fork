@@ -9,7 +9,7 @@ This repository is a fork of JonSnowbd's [TagScript](https://github.com/JonSnowb
 
 This fork is also from phenom4n4n's forked version of the original TagScript package.
 
-Documentation on the TagScriptEngine library can be [found here](https://btagscript.readthedocs.io/en/latest/).
+Documentation on the bTagScript library can be [found here](https://btagscript.readthedocs.io/en/latest/).
 
 ## Installation
 

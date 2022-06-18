@@ -2,6 +2,6 @@
 Block Module
 ============
 
-.. automodule:: TagScriptEngine.block
+.. automodule:: bTagScript.block
     :members:
     :noindex:

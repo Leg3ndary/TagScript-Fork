@@ -2,5 +2,5 @@
 Utils
 =====
 
-.. automodule:: TagScriptEngine.utils
+.. automodule:: bTagScript.utils
     :members:

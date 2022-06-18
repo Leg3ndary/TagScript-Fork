@@ -30,17 +30,17 @@ class Block:
     @classmethod
     def will_accept(cls, ctx: Context) -> bool:
         """
-        Describes whether the block is valid for the given :class:`~TagScriptEngine.interpreter.Context`.
+        Describes whether the block is valid for the given :class:`~bTagScript.interpreter.Context`.
 
         Parameters
         ----------
         ctx: Context
-            The context object containing the TagScript :class:`~TagScriptEngine.verb.Verb`.
+            The context object containing the TagScript :class:`~bTagScript.verb.Verb`.
 
         Returns
         -------
         bool
-            Whether the block should be processed for this :class:`~TagScriptEngine.interpreter.Context`.
+            Whether the block should be processed for this :class:`~bTagScript.interpreter.Context`.
         """
         dec = ctx.verb.declaration.lower()
         return dec in cls.ACCEPTED_NAMES
@@ -50,14 +50,14 @@ class Block:
 
     def process(self, ctx: Context) -> Optional[str]:
         """
-        Processes the block's actions for a given :class:`~TagScriptEngine.interpreter.Context`.
+        Processes the block's actions for a given :class:`~bTagScript.interpreter.Context`.
 
         Subclasses must implement this.
 
         Parameters
         ----------
         ctx: Context
-            The context object containing the TagScript :class:`~TagScriptEngine.verb.Verb`.
+            The context object containing the TagScript :class:`~bTagScript.verb.Verb`.
 
         Returns
         -------
