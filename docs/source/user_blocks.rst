@@ -139,3 +139,9 @@ URL Encode Block
 ----------------
 
 .. autoclass:: bTagScript.block.URLEncodeBlock
+
+----------------
+URL Decode Block
+----------------
+
+.. autoclass:: bTagScript.block.URLDecodeBlock
