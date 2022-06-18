@@ -8,36 +8,39 @@ Welcome to TagScript's documentation!
 
 .. toctree::
    :maxdepth: 1
-   :caption: User Guide
+   :caption: User Guides
+   :hidden:
 
-   user_blocks
+   UserGuides/user_blocks
 
 .. toctree::
    :maxdepth: 2
-   :caption: Developer Guide
+   :caption: Developer Guides
+   :hidden:
 
-   getting_started
-   the_interpreter
-   blocks_and_adapters
+   DeveloperGuides/getting_started
+   DeveloperGuides/the_interpreter
+   DeveloperGuides/blocks_and_adapters
 
 .. toctree::
    :maxdepth: 2
    :caption: API Reference
+   :hidden:
 
-   interpreter
-   interface
-   verb
-   block
-   adapter
-   utils
-   exceptions
+   APIReference/interpreter
+   APIReference/interface
+   APIReference/verb
+   APIReference/block
+   APIReference/adapter
+   APIReference/utils
+   APIReference/exceptions
 
 .. toctree::
    :maxdepth: 2
    :caption: Credits
    :hidden:
 
-   credits/credits
+   Credits/credits
 
 Welcome to bTagScript's official documentation.
 
