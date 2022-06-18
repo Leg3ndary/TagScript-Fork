@@ -1,8 +1,5 @@
-discord.py
-karma-sphinx-theme
-Sphinx
-sphinx-book-theme
-sphinx-material
-sphinx_rtd_theme
 bTagScript
 git+https://github.com/Leg3ndary/tagscript-ansi
+discord.py
+Sphinx
+sphinx_rtd_theme
