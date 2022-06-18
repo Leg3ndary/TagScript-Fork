@@ -23,6 +23,7 @@ from .strictvariablegetter import StrictVariableGetterBlock
 from .substr import SubstringBlock
 from .urlencodeblock import URLEncodeBlock
 from .urldecodeblock import URLDecodeBlock
+from .getdiscord import GetDiscord
 
 __all__ = (
     "implicit_bool",
@@ -54,5 +55,6 @@ __all__ = (
     "StrictVariableGetterBlock",
     "SubstringBlock",
     "URLEncodeBlock",
-    "URLDecodeBlock"
+    "URLDecodeBlock",
+    "GetDiscord"
 )

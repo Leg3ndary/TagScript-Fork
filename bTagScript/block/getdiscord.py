@@ -28,24 +28,15 @@ class GetDiscord(verb_required_block(True, payload=True, parameter=True)):
     
     .. tagscript::
 
-        {request(user):_Leg3ndary#5759}
-        covid-19%20sucks
-
-        {urlencode(+):im stuck at home writing docs}
-        im+stuck+at+home+writing+docs
-
-        You can use this to search up blocks
-        Eg if {args} is command block
-
-        <https://btagscript.readthedocs.io/en/latest/search.html?q={urlencode(+):{args}}&check_keywords=yes&area=default>
-        <https://btagscript.readthedocs.io/en/latest/search.html?q=command+block&check_keywords=yes&area=default>
+        {request(user):user|360061101477724170}
+        _Leg3ndary#5759
     """
 
     ACCEPTED_NAMES = ("request", "getdiscord")
 
-    def __init__(self, guild: Guild, loop: asyncio.AbstractEventLoop, limit: int = 3, allow_fetch: bool = True) -> None:
+    def __init__(self, guild: Guild, limit: int = 3, allow_fetch: bool = True) -> None:
         """
-        You need access to a guild object from dpy.
+        You need access to a guild object from dpy for this to work.
 
 
         ``limit`` is how many blocks are allowed to be used in a single tag
@@ -55,12 +46,13 @@ class GetDiscord(verb_required_block(True, payload=True, parameter=True)):
         If set to ``False``, and you're cache is disabled, this block is essentially useless.
         """
         super().__init__()
-        self.loop = loop  
         self.guild = guild
         self.limit = limit
         self.allow_fetch = allow_fetch
 
-    def process(self, ctx: Context):
+    async def process(self, ctx: Context):
+        if "|" not in ctx.verb.payload:
+            return f"`YOU DON'T SEEM TO HAVE A PIPE (|)`"
         _type = ctx.verb.payload.split("|")[0].lower()
         query = ctx.verb.payload.split("|")[1]
 
@@ -72,18 +64,23 @@ class GetDiscord(verb_required_block(True, payload=True, parameter=True)):
                 if len(actions) > self.limit:
                     return f"`REQUEST LIMIT REACHED ({self.limit})`"
             
+            else:
+                actions = []
+            
             if _type == "channel":
-                channel = self.guild.get_channel(int(query)) or self.client.loop.run_in_executor(None, self.client.fetch_channel, int(query))
+                channel = self.guild.get_channel(int(query)) or (await self.guild.fetch_channel(int(query)))
                 if channel:
                     channel = discordadapters.ChannelAdapter(channel)
                 else:
-                    pass
+                    return f"Channel `{query}` not found"
+                    
             elif _type =="user":
-                user = self.client.get_user(int(query)) or self.client.loop.run_in_executor(None, self.client.get_mem, int(query))
+                user = self.guild.get_member(int(query)) or (await self.guild.fetch_member(int(query)))
                 if user:
-                    user = discordadapters.MemberAdapter
-
+                    user = discordadapters.MemberAdapter()
+                else:
+                    return f"User `{query}` not found"
             else:
-                ""
+                return f"Type {_type} not found"
 
-            return ""
+            ctx.response.actions["request"] = actions.append(f"{_type}:{query}")

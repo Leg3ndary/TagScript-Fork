@@ -144,3 +144,9 @@ URL Decode Block
 ----------------
 
 .. autoclass:: bTagScript.block.URLDecodeBlock
+
+--------------
+Request Block
+--------------
+
+.. autoclass:: bTagScript.block.GetDiscord
