@@ -3,7 +3,11 @@ from re import match
 
 from ..adapter import discordadapters
 from ..interface import verb_required_block
-from ..interpreter import Context
+from ..interpreter import Context\
+
+
+"""
+I have to rethink this later"""
 
 
 class GetDiscord(verb_required_block(True, payload=True, parameter=True)):
