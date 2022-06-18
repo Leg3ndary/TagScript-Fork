@@ -1,5 +1,5 @@
 bTagScript
-git+https://github.com/Leg3ndary/tagscript-ansi
+tagscript-ansi
 discord.py
 Sphinx
 sphinx_rtd_theme
