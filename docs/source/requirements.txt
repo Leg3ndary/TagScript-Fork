@@ -5,3 +5,4 @@ sphinx-book-theme
 sphinx-material
 sphinx_rtd_theme
 bTagScript
+git+https://github.com/Leg3ndary/tagscript-ansi
