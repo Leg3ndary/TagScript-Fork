@@ -1,4 +1,4 @@
 bTagScript
-tagscript-ansi
+tagscript-ansi==0.1.dev20220618
 discord.py
 sphinx_rtd_theme
