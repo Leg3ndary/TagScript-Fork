@@ -34,15 +34,13 @@ Welcome to TagScript's documentation!
 
 .. toctree::
    :maxdepth: 2
-   :caption: credits
+   :caption: Credits
+   :hidden:
 
-   credits
+   credits/credits
 
+Welcome to bTagScript's official documentation.
 
+.. note::
 
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+   This documentation is still being regularily updated, I hope.
