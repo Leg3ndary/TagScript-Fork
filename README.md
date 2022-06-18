@@ -18,38 +18,31 @@ Additional documentation on the TagScriptEngine library can be [found here](http
 
 ## Installation
 
-Download the latest version through pip:
+Download the latest version through github:
 
 ```
-pip(3) install TagScript
+pip(3) install https://github.com/Leg3ndary/bTagScript
 ```
 
 Download from a commit:
 
 ```
-pip(3) install git+https://github.com/phenom4n4n/TagScript.git@<COMMIT_HASH>
+pip(3) install git+https://github.com/Leg3ndary/bTagScript.git@<COMMIT_HASH>
 ```
 
 Install for editing/development:
 
 ```
-git clone https://github.com/phenom4n4n/TagScript.git
-pip(3) install -e ./TagScript
+git clone https://github.com/Leg3ndary/bTagScript.git
+pip(3) install -e ./bTagScript
 ```
 
 ## What?
 
-TagScript is a drop in easy to use string interpreter that lets you provide users with ways of
-customizing their profiles or chat rooms with interactive text.
-
-For example TagScript comes out of the box with a random block that would let users provide
-a template that produces a new result each time its ran, or assign math and variables for later
-use.
+TagScript allows you to create low level code, quickly, and easily. This is meant to be used with discord.py 2.0 and is not compatible with other versions.
 
 ## Dependencies
 
 `Python 3.8+`
-
 `discord.py`
-
 `pyparsing`
