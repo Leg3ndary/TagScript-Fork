@@ -19,13 +19,15 @@ class StopBlock(verb_required_block(True, parameter=True)):
 
     **Parameter:** bool
 
-    **Example:** ::
+    **Example:**
 
-        {stop({args}==):You must provide arguments for this tag.}
-        # enforces providing arguments for a tag
+    .. tagscript::
+
+        {stop(=={args}):You must provide arguments for this tag.}
+        enforces providing arguments for a tag
     """
 
-    ACCEPTED_NAMES = ("stop", "halt", "error")
+    ACCEPTED_NAMES = ("stop", "halt", "break")
 
     def process(self, ctx: Context) -> Optional[str]:
         if helper_parse_if(ctx.verb.parameter):

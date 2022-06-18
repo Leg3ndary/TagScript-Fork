@@ -19,18 +19,20 @@ class RandomBlock(verb_required_block(True, payload=True)):
 
     **Parameter:** seed, None
 
-    .. tagscript:: **Examples**
+    **Examples:**
+
+    .. tagscript::
 
         {random:Carl,Harold,Josh} attempts to pick the lock!
-        # Possible Outputs:
-        # Josh attempts to pick the lock!
-        # Carl attempts to pick the lock!
-        # Harold attempts to pick the lock!
+        Possible Outputs:
+        Josh attempts to pick the lock!
+        Carl attempts to pick the lock!
+        Harold attempts to pick the lock!
 
         {=(insults):You're so ugly that you went to the salon and it took 3 hours just to get an estimate.~I'll never forget the first time we met, although I'll keep trying.~You look like a before picture.}
         {=(insult):{#:{insults}}}
         {insult}
-        # Assigns a random insult to the insult variable
+        Assigns a random insult to the insult variable
     """
 
     ACCEPTED_NAMES = ("random", "#", "rand")

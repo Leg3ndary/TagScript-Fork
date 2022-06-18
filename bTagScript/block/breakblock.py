@@ -23,8 +23,10 @@ class BreakBlock(Block):
 
     **Parameter:**  expression
 
-    .. tagscript:: **Examples**
+    **Examples:**
 
+    .. tagscript::
+    
         {break({args}==):You did not provide any input.}
     """
 

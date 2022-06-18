@@ -17,7 +17,9 @@ class CommandBlock(verb_required_block(True, payload=True)):
 
     **Parameter:** None
 
-    .. tagscript:: **Examples**
+    **Examples:**
+
+    .. tagscript::
 
         {c:ping}
         # invokes ping command
@@ -62,17 +64,19 @@ class OverrideBlock(Block):
 
     **Parameter:** "admin", "mod", "permissions"
 
-    .. tagscript:: **Examples**
+    **Examples:**
+    
+    .. tagscript::
 
         {override}
-        # overrides all commands and permissions
+        overrides all commands and permissions
 
         {override(admin)}
-        # overrides commands that require the admin role
+        overrides commands that require the admin role
 
         {override(permissions)}
         {override(mod)}
-        # overrides commands that require the mod role or have user permission requirements
+        overrides commands that require the mod role or have user permission requirements
     """
 
     ACCEPTED_NAMES = ("override",)

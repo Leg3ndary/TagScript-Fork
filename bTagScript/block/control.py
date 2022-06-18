@@ -41,14 +41,16 @@ class AnyBlock(ImplicitPPRBlock):
     **Payload:** message
 
     **Parameter:** expression
+    
+    **Examples:**
 
-    .. tagscript:: **Examples**
+    .. tagscript::
 
         {any({args}==hi|{args}==hello|{args}==heyy):Hello {user}!|How rude.}
-        # if {args} is hi
+        if {args} is hi
         Hello sravan#0001!
 
-        # if {args} is what's up!
+        if {args} is what's up!
         How rude.
     """
 
@@ -75,7 +77,9 @@ class AllBlock(ImplicitPPRBlock):
 
     **Parameter:** expression
 
-    .. tagscript:: **Examples**
+    **Examples:**
+
+    .. tagscript::
 
         {all({args}>=100|{args}<=1000):You picked {args}.|You must provide a number between 100 and 1000.}
         # if {args} is 52
@@ -124,17 +128,19 @@ class IfBlock(ImplicitPPRBlock):
 
     **Parameter:** expression
 
-    .. tagscript:: **Examples**
+    **Examples:**
+    
+    .. tagscript::
 
         {if({args}==63):You guessed it! The number I was thinking of was 63!|Too {if({args}<63):low|high}, try again.}
-        # if args is 63
-        # You guessed it! The number I was thinking of was 63!
+        if args is 63
+        You guessed it! The number I was thinking of was 63!
 
-        # if args is 73
-        # Too low, try again.
+        if args is 73
+        Too low, try again.
 
-        # if args is 14
-        # Too high, try again.
+        if args is 14
+        Too high, try again.
     """
 
     ACCEPTED_NAMES = ("if",)

@@ -10,26 +10,26 @@ class ReplaceBlock(verb_required_block(True, payload=True, parameter=True)):
 
     **Usage:** ``{replace(<original,new>):<message>}``
 
-    **Aliases:** ``None``
+    **Aliases:** ``sub``
 
     **Payload:** message
 
     **Parameter:** original, new
 
-    .. tagscript:: **Examples**
+    .. tagscript::
 
         {replace(o,i):welcome to the server}
-        # welcime ti the server
+        welcime ti the server
 
         {replace(1,6):{args}}
-        # if {args} is 1637812
-        # 6637862
+        if {args} is 1637812
+        6637862
 
         {replace(, ):Test}
-        # T e s t
+        T e s t
     """
 
-    ACCEPTED_NAMES = ("replace",)
+    ACCEPTED_NAMES = ("replace", "sub")
 
     def process(self, ctx: Context):
         try:
@@ -61,7 +61,9 @@ class PythonBlock(verb_required_block(True, payload=True, parameter=True)):
 
     **Parameter:** string
 
-    .. tagscript:: **Examples**
+    **Examples:**
+    
+    .. tagscript::
 
         {in(apple pie):banana pie apple pie and other pie}
         # true

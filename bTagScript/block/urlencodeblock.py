@@ -16,18 +16,21 @@ class URLEncodeBlock(verb_required_block(True, payload=True)):
 
     **Parameter:** "+", None
 
-    .. tagscript:: **Examples**
+    **Example:**
+    
+    .. tagscript::
 
         {urlencode:covid-19 sucks}
-        # covid-19%20sucks
+        covid-19%20sucks
 
         {urlencode(+):im stuck at home writing docs}
-        # im+stuck+at+home+writing+docs
+        im+stuck+at+home+writing+docs
 
-        # the following tagscript can be used to search up tag blocks
-        # assume {args} = "command block"
-        <https://phen-cogs.readthedocs.io/en/latest/search.html?q={urlencode(+):{args}}&check_keywords=yes&area=default>
-        # <https://phen-cogs.readthedocs.io/en/latest/search.html?q=command+block&check_keywords=yes&area=default>
+        You can use this to search up blocks
+        Eg if {args} is command block
+
+        <https://btagscript.readthedocs.io/en/latest/search.html?q={urlencode(+):{args}}&check_keywords=yes&area=default>
+        <https://btagscript.readthedocs.io/en/latest/search.html?q=command+block&check_keywords=yes&area=default>
     """
 
     ACCEPTED_NAMES = ("urlencode",)

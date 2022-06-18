@@ -21,15 +21,17 @@ class RangeBlock(verb_required_block(True, payload=True)):
 
     **Parameter:** seed, None
 
-    .. tagscript:: **Examples**
+    **Examples:**
+
+    .. tagscript::
 
         Your lucky number is {range:10-30}!
-        # Your lucky number is 14!
-        # Your lucky number is 25!
+        Your lucky number is 14!
+        Your lucky number is 25!
 
         {=(height):{rangef:5-7}}
         I am guessing your height is {height}ft.
-        # I am guessing your height is 5.3ft.
+        I am guessing your height is 5.3ft.
     """
 
     ACCEPTED_NAMES = ("rangef", "range")

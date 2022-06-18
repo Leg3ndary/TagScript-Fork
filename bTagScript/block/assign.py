@@ -12,21 +12,23 @@ class AssignmentBlock(verb_required_block(False, parameter=True)):
 
     **Usage:** ``{=(<name>):<value>}``
 
-    **Aliases:** ``assign, let, var``
+    **Aliases:** ``assign, let, var, =``
 
     **Payload:** value
 
     **Parameter:** name
 
-    .. tagscript:: **Examples**
+    **Examples:**
+    
+    .. tagscript::
 
         {=(prefix):!}
         The prefix here is `{prefix}`.
-        # The prefix here is `!`.
+        The prefix here is `!`.
 
         {assign(day):Monday}
         {if({day}==Wednesday):It's Wednesday my dudes!|The day is {day}.}
-        # The day is Monday.
+        The day is Monday.
     """
 
     ACCEPTED_NAMES = ("=", "assign", "let", "var")

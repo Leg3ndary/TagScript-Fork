@@ -19,11 +19,13 @@ class StrictVariableGetterBlock(Block):
 
     **Parameter:** Depends on the variable's underlying adapter.
 
-    .. tagscript:: **Examples**
+    **Examples:**
+    
+    .. tagscript::
 
-        {=(var):This is my variable.}
-        {var}
-        # This is my variable.
+        {=(example):This is my variable.}
+        {example}
+        This is my variable.
     """
 
     def will_accept(self, ctx: Context) -> bool:

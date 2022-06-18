@@ -74,8 +74,7 @@ class EmbedBlock(Block):
 
     **Parameter:** json
 
-    .. tagscript:: **Examples**
-
+    .. tagscript:: 
         {embed({"title":"Hello!", "description":"This is a test embed."})}
         {embed({
             "title":"Here's a random duck!",
@@ -106,8 +105,7 @@ class EmbedBlock(Block):
 
     **Parameter:** attribute
 
-    .. tagscript:: **Examples**
-
+    .. tagscript:: 
         {embed(color):#37b2cb}
         {embed(title):Rules}
         {embed(description):Follow these rules to ensure a good experience in our server!}

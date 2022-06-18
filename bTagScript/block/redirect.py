@@ -15,7 +15,9 @@ class RedirectBlock(verb_required_block(True, parameter=True)):
 
     **Parameter:** "dm", "reply", channel
 
-    .. tagscript:: **Examples**
+    **Examples:**
+    
+    .. tagscript::
 
         {redirect(dm)}
         {redirect(reply)}

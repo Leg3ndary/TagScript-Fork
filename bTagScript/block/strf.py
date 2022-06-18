@@ -21,22 +21,24 @@ class StrfBlock(Block):
 
     **Parameter:** timestamp
 
-    **Example:** ::
+    **Example:**
+
+    .. tagscript::
 
         {strf:%Y-%m-%d}
-        # 2021-07-11
+        2021-07-11
 
         {strf({user(timestamp)}):%c}
-        # Fri Jun 29 21:10:28 2018
+        Fri Jun 29 21:10:28 2018
 
         {strf(1420070400):%A %d, %B %Y}
-        # Thursday 01, January 2015
+        Thursday 01, January 2015
 
         {strf(2019-10-09T01:45:00.805000):%H:%M %d-%B-%Y}
-        # 01:45 09-October-2019
+        01:45 09-October-2019
 
         {unix}
-        # 1629182008
+        1629182008
     """
 
     ACCEPTED_NAMES = ("strf", "unix")

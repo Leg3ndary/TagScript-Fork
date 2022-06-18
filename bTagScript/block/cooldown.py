@@ -32,15 +32,17 @@ class CooldownBlock(verb_required_block(True, payload=True, parameter=True)):
 
     **Parameter:** rate, per
 
-    .. tagscript:: **Examples**
+    **Examples:**
+
+    .. tagscript::
 
         {cooldown(1|10):{author(id)}}
-        # the tag author used the tag more than once in 10 seconds
-        # The bucket for 741074175875088424 has reached its cooldown. Retry in 3.25 seconds."
+        the tag author used the tag more than once in 10 seconds
+        The bucket for 741074175875088424 has reached its cooldown. Retry in 3.25 seconds."
 
         {cooldown(3|3):{channel(id)}|Slow down! This tag can only be used 3 times per 3 seconds per channel. Try again in **{retry_after}** seconds."}
-        # the tag was used more than 3 times in 3 seconds in a channel
-        # Slow down! This tag can only be used 3 times per 3 seconds per channel. Try again in **0.74** seconds.
+        the tag was used more than 3 times in 3 seconds in a channel
+        Slow down! This tag can only be used 3 times per 3 seconds per channel. Try again in **0.74** seconds.
     """
 
     ACCEPTED_NAMES = ("cooldown",)

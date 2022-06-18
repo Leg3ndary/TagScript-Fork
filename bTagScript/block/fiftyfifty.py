@@ -17,7 +17,9 @@ class FiftyFiftyBlock(verb_required_block(True, payload=True)):
 
     **Parameter:**  None
 
-    **Examples:**  ::
+    **Examples:**
+
+    .. tagscript::
 
         I pick {if({5050:.}!=):heads|tails}
         # I pick heads
