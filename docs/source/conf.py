@@ -35,6 +35,7 @@ extensions = [
     "sphinx.ext.viewcode",
     "sphinx.ext.napoleon",
     "sphinx.ext.intersphinx",
+    "sphinxcontrib.tagscript",
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -71,3 +72,6 @@ intersphinx_mapping = {
     "python": ("https://docs.python.org/3", None),
     "dpy": ("https://discordpy.readthedocs.io/en/stable/", None),
 }
+
+def setup(app):
+    app.add_css_file("style.css")

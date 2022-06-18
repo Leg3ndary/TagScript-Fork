@@ -17,7 +17,7 @@ class CommandBlock(verb_required_block(True, payload=True)):
 
     **Parameter:** None
 
-    **Examples:** ::
+    .. tagscript:: **Examples**
 
         {c:ping}
         # invokes ping command
@@ -62,7 +62,7 @@ class OverrideBlock(Block):
 
     **Parameter:** "admin", "mod", "permissions"
 
-    **Examples:** ::
+    .. tagscript:: **Examples**
 
         {override}
         # overrides all commands and permissions

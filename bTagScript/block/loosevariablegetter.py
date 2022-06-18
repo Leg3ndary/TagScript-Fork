@@ -18,7 +18,7 @@ class LooseVariableGetterBlock(Block):
 
     **Parameter:** Depends on the variable's underlying adapter.
 
-    **Examples:** ::
+    .. tagscript:: **Examples**
 
         {=(var):This is my variable.}
         {var}

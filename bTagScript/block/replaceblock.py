@@ -16,7 +16,7 @@ class ReplaceBlock(verb_required_block(True, payload=True, parameter=True)):
 
     **Parameter:** original, new
 
-    **Examples:** ::
+    .. tagscript:: **Examples**
 
         {replace(o,i):welcome to the server}
         # welcime ti the server
@@ -61,7 +61,7 @@ class PythonBlock(verb_required_block(True, payload=True, parameter=True)):
 
     **Parameter:** string
 
-    **Examples:** ::
+    .. tagscript:: **Examples**
 
         {in(apple pie):banana pie apple pie and other pie}
         # true

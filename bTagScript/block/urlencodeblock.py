@@ -16,7 +16,7 @@ class URLEncodeBlock(verb_required_block(True, payload=True)):
 
     **Parameter:** "+", None
 
-    **Examples:** ::
+    .. tagscript:: **Examples**
 
         {urlencode:covid-19 sucks}
         # covid-19%20sucks

@@ -21,7 +21,7 @@ class RangeBlock(verb_required_block(True, payload=True)):
 
     **Parameter:** seed, None
 
-    **Examples:** ::
+    .. tagscript:: **Examples**
 
         Your lucky number is {range:10-30}!
         # Your lucky number is 14!

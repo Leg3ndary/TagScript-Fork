@@ -74,7 +74,7 @@ class EmbedBlock(Block):
 
     **Parameter:** json
 
-    **Examples:** ::
+    .. tagscript:: **Examples**
 
         {embed({"title":"Hello!", "description":"This is a test embed."})}
         {embed({
@@ -106,7 +106,7 @@ class EmbedBlock(Block):
 
     **Parameter:** attribute
 
-    **Examples:** ::
+    .. tagscript:: **Examples**
 
         {embed(color):#37b2cb}
         {embed(title):Rules}

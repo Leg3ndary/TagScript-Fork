@@ -19,7 +19,7 @@ class RandomBlock(verb_required_block(True, payload=True)):
 
     **Parameter:** seed, None
 
-    **Examples:** ::
+    .. tagscript:: **Examples**
 
         {random:Carl,Harold,Josh} attempts to pick the lock!
         # Possible Outputs:

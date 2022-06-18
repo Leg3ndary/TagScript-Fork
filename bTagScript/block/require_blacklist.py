@@ -20,7 +20,7 @@ class RequireBlock(verb_required_block(True, parameter=True)):
 
     **Parameter:** role, channel
 
-    **Examples:** ::
+    .. tagscript:: **Examples**
 
         {require(Moderator)}
         {require(#general, #bot-cmds):This tag can only be run in #general and #bot-cmds.}
@@ -54,7 +54,7 @@ class BlacklistBlock(verb_required_block(True, parameter=True)):
 
     **Parameter:** role, channel
 
-    **Examples:** ::
+    .. tagscript:: **Examples**
 
         {blacklist(Muted)}
         {blacklist(#support):This tag is not allowed in #support.}

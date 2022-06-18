@@ -32,7 +32,7 @@ class CooldownBlock(verb_required_block(True, payload=True, parameter=True)):
 
     **Parameter:** rate, per
 
-    **Examples:** ::
+    .. tagscript:: **Examples**
 
         {cooldown(1|10):{author(id)}}
         # the tag author used the tag more than once in 10 seconds
