@@ -331,7 +331,7 @@ class AsyncInterpreter(Interpreter):
     """
 
     async def _get_acceptors(self, ctx: Context) -> List[Block]:
-        return [b for b in self.blocks if await maybe_await(b.will_accept, ctx)]
+        return [b for b in self.blocks if b.will_accept(ctx)]
 
     async def _process_blocks(self, ctx: Context, node: Node) -> Optional[str]:
         acceptors = await self._get_acceptors(ctx)
