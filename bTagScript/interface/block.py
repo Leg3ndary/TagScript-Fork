@@ -27,8 +27,7 @@ class Block:
     def __repr__(self):
         return f"<{type(self).__qualname__} at {hex(id(self))}>"
 
-    @classmethod
-    def will_accept(cls, ctx: Context) -> bool:
+    def will_accept(self, ctx: Context) -> bool:
         """
         Describes whether the block is valid for the given :class:`~bTagScript.interpreter.Context`.
 
@@ -43,7 +42,7 @@ class Block:
             Whether the block should be processed for this :class:`~bTagScript.interpreter.Context`.
         """
         dec = ctx.verb.declaration.lower()
-        return dec in cls.ACCEPTED_NAMES
+        return dec in self.ACCEPTED_NAMES
 
     def pre_process(self, ctx: Context):
         return None
