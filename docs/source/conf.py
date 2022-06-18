@@ -18,7 +18,7 @@ sys.path.insert(0, os.path.abspath(".."))
 
 # -- Project information -----------------------------------------------------
 
-project = "TagScript"
+project = "bTagScript"
 copyright = "2021, JonSnowbd, PhenoM4n4n, Leg3ndary"
 author = "JonSnowbd, PhenoM4n4n, Leg3ndary"
 
