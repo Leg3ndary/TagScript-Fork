@@ -4,3 +4,4 @@ Sphinx
 sphinx-book-theme
 sphinx-material
 sphinx_rtd_theme
+git+https://github.com/Leg3ndary/bTagScript
