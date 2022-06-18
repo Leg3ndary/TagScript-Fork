@@ -1,6 +1,6 @@
 from random import choice
 
-from discord import TextChannel
+from discord import TextChannel, Thread
 
 from ..interface import Adapter
 from ..utils import escape_content
@@ -151,14 +151,20 @@ class ChannelAdapter(AttributeAdapter):
         The channel's topic.
     """
 
-    def update_attributes(self):
+    def update_attributes(self) -> None:
+        """
+        Update block attributes
+        """
         if isinstance(self.object, TextChannel):
             additional_attributes = {
+                "channel_type": "textchannel",
                 "nsfw": self.object.nsfw,
                 "mention": self.object.mention,
                 "topic": self.object.topic or None,
             }
             self._attributes.update(additional_attributes)
+        elif isinstance(self.object, Thread):
+            pass
 
 
 class GuildAdapter(AttributeAdapter):
@@ -199,7 +205,10 @@ class GuildAdapter(AttributeAdapter):
         A random member from the server.
     """
 
-    def update_attributes(self):
+    def update_attributes(self) -> None:
+        """
+        Update block attributes
+        """
         guild = self.object
         bots = 0
         humans = 0
@@ -210,7 +219,7 @@ class GuildAdapter(AttributeAdapter):
                 humans += 1
         member_count = guild.member_count
         additional_attributes = {
-            "icon": (guild.icon.url, False),
+            "icon": guild.icon.url if guild.icon else "",
             "member_count": member_count,
             "members": member_count,
             "bots": bots,
@@ -219,9 +228,15 @@ class GuildAdapter(AttributeAdapter):
         }
         self._attributes.update(additional_attributes)
 
-    def update_methods(self):
+    def update_methods(self) -> None:
+        """
+        Update methods for the block
+        """
         additional_methods = {"random": self.random_member}
         self._methods.update(additional_methods)
 
-    def random_member(self):
+    def random_member(self) -> None:
+        """
+        Return a random member
+        """
         return choice(self.object.members)
