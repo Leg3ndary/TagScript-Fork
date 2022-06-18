@@ -1,6 +1,6 @@
 import unittest
 
-from TagScriptEngine import Interpreter, adapter, block
+from bTagScript import Interpreter, adapter, block
 
 
 def dummy_function():

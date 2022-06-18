@@ -1,6 +1,6 @@
 import unittest
 
-from TagScriptEngine import Interpreter, WorkloadExceededError, adapter, block, interface
+from bTagScript import Interpreter, WorkloadExceededError, adapter, block, interface
 
 
 class TestEdgeCases(unittest.TestCase):

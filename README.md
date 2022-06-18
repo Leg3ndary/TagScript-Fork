@@ -1,22 +1,15 @@
 ## Information
-<a href='https://tagscript.readthedocs.io/en/latest/?badge=latest'>
-    <img src='https://readthedocs.org/projects/tagscript/badge/?version=latest' alt='Documentation Status' />
-</a>
-<a href='https://pypi.python.org/pypi/TagScript/'>
-    <img src='https://img.shields.io/pypi/v/TagScript' alt=' yPI' />
+<a href='https://btagscript.readthedocs.io/en/latest/?badge=latest'>
+    <img src='https://readthedocs.org/projects/btagscript/badge/?version=latest' alt='Documentation Status' />
 </a>
 
-**The original creator Phen seems to have halted development for some reason, this is me duct taping and adding features, use if you want, not writing any documentation up though**
+**This is my own implementation of TagScript. Will write documentation for how to use this later.**
 
 This repository is a fork of JonSnowbd's [TagScript](https://github.com/JonSnowbd/TagScript), a string templating language.
-This fork adds support for Discord object adapters and a couple Discord related blocks, as
-well as multiple utility blocks. Additionally, several tweaks have been made to the engine's
-behavior.
 
-This TagScriptEngine is used on [Noumenon, a Discord bot](https://discordapp.com/oauth2/authorize?client_id=634866217764651009&permissions=2080894207&scope=bot%20applications.commands).
-An example implementation can be found its [Tags cog](https://github.com/phenom4n4n/phen-cogs/tree/master/tags).
+This fork is also from phenom4n4n's forked version of the original TagScript package.
 
-Additional documentation on the TagScriptEngine library can be [found here](https://tagscript.readthedocs.io/en/latest/).
+Documentation on the TagScriptEngine library can be [found here](https://btagscript.readthedocs.io/en/latest/).
 
 ## Installation
 
@@ -46,5 +39,7 @@ TagScript allows you to create low level code, quickly, and easily. This is mean
 ## Dependencies
 
 `Python 3.8+`
+
 `discord.py`
+
 `pyparsing`

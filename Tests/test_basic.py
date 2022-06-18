@@ -1,6 +1,6 @@
 import unittest
 
-from TagScriptEngine import Verb
+from bTagScript import Verb
 
 
 class TestVerbParsing(unittest.TestCase):

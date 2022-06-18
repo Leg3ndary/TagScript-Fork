@@ -1,4 +1,4 @@
-import TagScriptEngine as tse
+import bTagScript as tse
 
 blocks = [
     tse.MathBlock(),

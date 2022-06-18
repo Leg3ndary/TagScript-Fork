@@ -1,6 +1,6 @@
 from appJar import gui
 
-from TagScriptEngine import Interpreter, block
+from bTagScript import Interpreter, block
 
 blocks = [
     block.MathBlock(),

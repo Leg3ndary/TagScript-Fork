@@ -1,6 +1,6 @@
 import time
 
-from TagScriptEngine import Interpreter, adapter, block
+from bTagScript import Interpreter, adapter, block
 
 blocks = [
     block.MathBlock(),
