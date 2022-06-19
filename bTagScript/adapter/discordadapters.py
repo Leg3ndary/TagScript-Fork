@@ -175,6 +175,8 @@ class ChannelAdapter(AttributeAdapter):
         A formatted text that pings the channel.
     topic
         The channel's topic.
+    slowmode
+        The channel's slowmode in seconds, 0 if disabled
     """
 
     def update_attributes(self) -> None:
@@ -187,6 +189,7 @@ class ChannelAdapter(AttributeAdapter):
                 "nsfw": self.object.nsfw,
                 "mention": self.object.mention,
                 "topic": self.object.topic or None,
+                "slowmode": self.object.slowmode_delay,
             }
             self._attributes.update(additional_attributes)
         elif isinstance(self.object, Thread):
@@ -266,37 +269,3 @@ class GuildAdapter(AttributeAdapter):
         Return a random member
         """
         return choice(self.object.members)
-
-
-class RequestAdapter(Adapter):
-    """
-    Request Adapter, represents a block with info about 
-    """
-    __slots__ = ("object", "_attributes", "_methods")
-
-    def __init__(self, base):
-        self.object = base
-        self._attributes = {
-            "id": base.id,
-            "created_at": base.created_at,
-            "timestamp": int(base.created_at.timestamp()),
-            "name": getattr(base, "name", str(base)),
-        }
-        self._methods = {}
-        self.update_attributes()
-        self.update_methods()
-
-    def __repr__(self):
-        return f"<{type(self).__qualname__} object={self.object!r}>"
-
-    def update_attributes(self):
-        pass
-
-    def update_methods(self):
-        pass
-
-    async def get_value(self, ctx: Verb) -> str:
-        """
-        Get the value
-        """
-        pass
