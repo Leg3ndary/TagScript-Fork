@@ -145,3 +145,9 @@ URL Decode Block
 ----------------
 
 .. autoclass:: bTagScript.block.URLDecodeBlock
+
+------------
+Length Block
+------------
+
+.. autoclass:: bTagScript.block.LengthBlock

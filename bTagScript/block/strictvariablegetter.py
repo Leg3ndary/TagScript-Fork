@@ -32,4 +32,4 @@ class StrictVariableGetterBlock(Block):
         return ctx.verb.declaration in ctx.response.variables
 
     def process(self, ctx: Context) -> Optional[str]:
-        return ctx.response.variables[ctx.verb.declaration].get_value(ctx.verb)
+        return ctx.response.variables[ctx.verb.declaration].Zaa(ctx.verb)
