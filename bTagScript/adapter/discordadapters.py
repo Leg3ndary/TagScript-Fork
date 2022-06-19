@@ -12,7 +12,6 @@ __all__ = (
     "MemberAdapter",
     "ChannelAdapter",
     "GuildAdapter",
-    "RequestAdapter",
 )
 
 
