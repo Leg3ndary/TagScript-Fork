@@ -1,6 +1,7 @@
 from random import choice
+from typing import Union
 
-from discord import TextChannel, Thread
+from discord import TextChannel, Thread, Guild, Member
 
 from ..interface import Adapter
 from ..utils import escape_content
@@ -11,13 +12,20 @@ __all__ = (
     "MemberAdapter",
     "ChannelAdapter",
     "GuildAdapter",
+    "RequestAdapter",
 )
 
 
 class AttributeAdapter(Adapter):
+    """
+    Base attribute adapter for discord.py objects
+    """
     __slots__ = ("object", "_attributes", "_methods")
 
-    def __init__(self, base):
+    def __init__(self, base: Union[TextChannel, Member, Guild]) -> None:
+        """
+        Init for the attribute adapter
+        """
         self.object = base
         self._attributes = {
             "id": base.id,
@@ -29,13 +37,22 @@ class AttributeAdapter(Adapter):
         self.update_attributes()
         self.update_methods()
 
-    def __repr__(self):
+    def __repr__(self) -> str:
+        """
+        printable repr
+        """
         return f"<{type(self).__qualname__} object={self.object!r}>"
 
-    def update_attributes(self):
+    def update_attributes(self) -> None:
+        """
+        Update attributes for the block
+        """
         pass
 
-    def update_methods(self):
+    def update_methods(self) -> None:
+        """
+        Update methods for the block
+        """
         pass
 
     def get_value(self, ctx: Verb) -> str:
@@ -100,6 +117,12 @@ class MemberAdapter(AttributeAdapter):
         The author's top role's color as a hex code.
     top_role
         The author's top role.
+    boost
+        If the user boosted, this will be the the UTC timestamp of when they did, if not, this will be empty.
+    timed_out
+        If the user is timed out, this will be the the UTC timestamp of when they'll be "untimed-out", if not timed out, this will be empty.
+    banner
+        The users banner url
     roleids
         A list of the author's role IDs, split by spaces.
     """
@@ -109,12 +132,15 @@ class MemberAdapter(AttributeAdapter):
             "color": self.object.color,
             "colour": self.object.color,
             "nick": self.object.display_name,
-            "avatar": (self.object.avatar.url, False),
+            "avatar": (self.object.display_avatar.url, False),
             "discriminator": self.object.discriminator,
-            "joined_at": getattr(self.object, "joined_at", self.object.created_at),
+            "joined_at": getattr(self.object, "joined_at", None),
             "mention": self.object.mention,
             "bot": self.object.bot,
             "top_role": getattr(self.object, "top_role", None),
+            "boost": getattr(self.object, "premium_since", None),
+            "timed_out": getattr(self.object, "timed_out_until", None),
+            "banner": self.object.banner.url
         }
         if roleids := getattr(self.object, "_roles", None):
             additional_attributes["roleids"] = " ".join(str(r) for r in roleids)
@@ -240,3 +266,37 @@ class GuildAdapter(AttributeAdapter):
         Return a random member
         """
         return choice(self.object.members)
+
+
+class RequestAdapter(Adapter):
+    """
+    Request Adapter, represents a block with info about 
+    """
+    __slots__ = ("object", "_attributes", "_methods")
+
+    def __init__(self, base):
+        self.object = base
+        self._attributes = {
+            "id": base.id,
+            "created_at": base.created_at,
+            "timestamp": int(base.created_at.timestamp()),
+            "name": getattr(base, "name", str(base)),
+        }
+        self._methods = {}
+        self.update_attributes()
+        self.update_methods()
+
+    def __repr__(self):
+        return f"<{type(self).__qualname__} object={self.object!r}>"
+
+    def update_attributes(self):
+        pass
+
+    def update_methods(self):
+        pass
+
+    async def get_value(self, ctx: Verb) -> str:
+        """
+        Get the value
+        """
+        pass
