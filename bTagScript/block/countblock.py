@@ -35,6 +35,6 @@ class CountBlock(verb_required_block(True, payload=True)):
         Check the count of a string
         """
         if ctx.verb.parameter:
-            return len(ctx.verb.payload.count(ctx.verb.parameter))
+            return ctx.verb.payload.count(ctx.verb.parameter)
         else:
-            return len(ctx.verb.parameter) + 1
+            return len(ctx.verb.payload) + 1
