@@ -139,7 +139,7 @@ class MemberAdapter(AttributeAdapter):
             "top_role": getattr(self.object, "top_role", None),
             "boost": getattr(self.object, "premium_since", None),
             "timed_out": getattr(self.object, "timed_out_until", None),
-            "banner": self.object.banner.url
+            "banner": self.object.banner.url if self.object.banner else ""
         }
         if roleids := getattr(self.object, "_roles", None):
             additional_attributes["roleids"] = " ".join(str(r) for r in roleids)
