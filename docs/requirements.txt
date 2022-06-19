@@ -1,3 +1,4 @@
 git+https://github.com/Leg3ndary/tagscript-ansi
 discord.py
 sphinx_rtd_theme
+bTagscript
