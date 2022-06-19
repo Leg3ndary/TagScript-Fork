@@ -1,4 +1,4 @@
 git+https://github.com/Leg3ndary/tagscript-ansi
-discord.py
+git+http://github.com/Rapptz/discord.py
 sphinx_rtd_theme
 bTagScript
