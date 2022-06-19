@@ -24,6 +24,7 @@ from .substr import SubstringBlock
 from .urlencodeblock import URLEncodeBlock
 from .urldecodeblock import URLDecodeBlock
 from .length import LengthBlock
+from .countblock import CountBlock
 
 __all__ = (
     "implicit_bool",
@@ -56,5 +57,6 @@ __all__ = (
     "SubstringBlock",
     "URLEncodeBlock",
     "URLDecodeBlock",
-    "LengthBlock"
+    "LengthBlock",
+    "CountBlock",
 )

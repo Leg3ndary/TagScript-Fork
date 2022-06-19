@@ -7,26 +7,30 @@ class LengthBlock(verb_required_block(True, payload=True)):
     """
     The length block will check the length of the given String.
     If a parameter is passed in, the block will check the length
-    split by the given "delimiter".
+    based on what you passed in, w for word, s for spaces.
+    If you provide an invalid paramet
 
-    **Usage:** ``{length(<Optional Character(s)>):<String>}``
+    **Usage:** ``{length(<w, s>):<String>}``
 
     **Aliases:** ``len``
 
     **Payload:** String to check length of
 
-    **Parameter:** 
+    **Parameter:** w or s, words or spaces, if not one of these will return -1
 
     .. tagscript::
 
         {length:TagScript}
         9
 
-        {len( ):Tag Script}
+        {len(w):Tag Script}
         2
 
-        {len(,):Hello World, Tag, Script}
+        {len(s):Hello World, Tag, Script}
         3
+
+        {len(S):Hello World, Tag, Script}
+        -1
     """
 
     ACCEPTED_NAMES = ("length", "len")
@@ -36,6 +40,12 @@ class LengthBlock(verb_required_block(True, payload=True)):
         Check the length of a string
         """
         if ctx.verb.parameter:
-            return len(ctx.verb.payload.split(ctx.verb.parameter))
+            if ctx.verb.parameter == "w":
+                return str(len(ctx.verb.payload.split(" ")))
+            elif ctx.verb.parameter == "s":
+                return str(len(ctx.verb.payload.split(" ") - 1))
+            else:
+                return "-1"
+            
         else:
             return len(ctx.verb.payload)

@@ -151,3 +151,9 @@ Length Block
 ------------
 
 .. autoclass:: bTagScript.block.LengthBlock
+
+-----------
+Count Block
+-----------
+
+.. autoclass:: bTagScript.block.CountBlock
