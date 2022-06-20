@@ -34,6 +34,7 @@ class LooseVariableGetterBlock(Block):
         if ctx.verb.declaration in ctx.response.variables:
             if ctx.verb.parameter:
                 if ctx.verb.parameter.isdigit() or ctx.verb.parameter.startswith("-") and ctx.verb.parameter.split("-", 1)[1].isdigit():
+                    print(ctx.response.variables[ctx.verb.declaration].get_value(ctx.verb).split(" "))
                     return (
                         ctx.response.variables[ctx.verb.declaration]
                         .get_value(ctx.verb)
