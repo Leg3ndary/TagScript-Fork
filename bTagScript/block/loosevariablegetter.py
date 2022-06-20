@@ -38,7 +38,7 @@ class LooseVariableGetterBlock(Block):
                         ctx.response.variables[ctx.verb.declaration]
                         .get_value(ctx.verb)
                         .split(ctx.verb.payload if ctx.verb.payload else " ")[
-                            int(ctx.verb.parameter) + 1
+                            int(ctx.verb.parameter) - 1
                         ]
                     )
                 elif ctx.verb.parameter.starswith("+") and ctx.verb.parameter.split("+", 1)[1].isdigit():
