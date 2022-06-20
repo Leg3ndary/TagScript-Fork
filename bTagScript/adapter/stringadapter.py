@@ -37,13 +37,13 @@ class StringAdapter(Adapter):
             if ctx.parameter.isdigit():
                 index = int(ctx.parameter) - 1
                 return self.string.split(splitter)[index]
-
-            elif ctx.parameter.startswith("-") and ctx.parameter.split("-", 1)[0].isdigit():
-                index = (int(ctx.parameter.split("-", 1)[1]) - 1 ) * -1
-                return self.string.split(splitter)[index] + index
+            
+            elif ctx.parameter.startswith("-") and ctx.parameter.split("-", 1)[1].isdigit():
+                index = int(ctx.parameter)
+                return self.string.split(splitter)[index]
 
             else:
-                index = int(ctx.parameter.replace("+", "")) - 1
+                index = int(ctx.parameter.replace("+", "")) - 1 if int(ctx.parameter.replace("+", "")) > 0 else int(ctx.parameter.replace("+", ""))
                 splitter = " " if not ctx.payload else ctx.payload
                 if ctx.parameter.startswith("+"):
                     return splitter.join(self.string.split(splitter)[: index + 1])
