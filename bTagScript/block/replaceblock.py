@@ -62,7 +62,7 @@ class PythonBlock(verb_required_block(True, payload=True, parameter=True)):
     **Parameter:** string
 
     **Examples:**
-    
+
     .. tagscript::
 
         {in(apple pie):banana pie apple pie and other pie}

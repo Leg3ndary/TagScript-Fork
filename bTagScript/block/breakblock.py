@@ -26,7 +26,7 @@ class BreakBlock(Block):
     **Examples:**
 
     .. tagscript::
-    
+
         {break({args}==):You did not provide any input.}
     """
 

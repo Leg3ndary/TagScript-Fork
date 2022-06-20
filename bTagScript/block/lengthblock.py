@@ -46,6 +46,6 @@ class LengthBlock(verb_required_block(True, payload=True)):
                 return str(len(ctx.verb.payload.split(" ") - 1))
             else:
                 return "-1"
-            
+
         else:
             return len(ctx.verb.payload)

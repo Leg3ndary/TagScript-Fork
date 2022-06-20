@@ -21,7 +21,7 @@ class RequireBlock(verb_required_block(True, parameter=True)):
     **Parameter:** role, channel
 
     **Examples:**
-    
+
     .. tagscript::
 
         {require(Moderator)}
@@ -58,7 +58,7 @@ class BlacklistBlock(verb_required_block(True, parameter=True)):
 
     **Examples:**
 
-    .. tagscript:: 
+    .. tagscript::
         {blacklist(Muted)}
         {blacklist(#support):This tag is not allowed in #support.}
         {blacklist(Tag Blacklist, 668713062186090506):You are blacklisted from using tags.}

@@ -41,7 +41,7 @@ class AnyBlock(ImplicitPPRBlock):
     **Payload:** message
 
     **Parameter:** expression
-    
+
     **Examples:**
 
     .. tagscript::
@@ -129,7 +129,7 @@ class IfBlock(ImplicitPPRBlock):
     **Parameter:** expression
 
     **Examples:**
-    
+
     .. tagscript::
 
         {if({args}==63):You guessed it! The number I was thinking of was 63!|Too {if({args}<63):low|high}, try again.}

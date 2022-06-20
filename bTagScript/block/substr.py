@@ -7,8 +7,9 @@ from ..interpreter import Context
 class SubstringBlock(verb_required_block(True, parameter=True)):
     """
     Grabs substrings of payload
-    
+
     """
+
     ACCEPTED_NAMES = ("substr", "substring")
 
     def process(self, ctx: Context) -> Optional[str]:

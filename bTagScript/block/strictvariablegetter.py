@@ -20,7 +20,7 @@ class StrictVariableGetterBlock(Block):
     **Parameter:** Depends on the variable's underlying adapter.
 
     **Examples:**
-    
+
     .. tagscript::
 
         {=(example):This is my variable.}

@@ -19,7 +19,7 @@ class AssignmentBlock(verb_required_block(False, parameter=True)):
     **Parameter:** name
 
     **Examples:**
-    
+
     .. tagscript::
 
         {=(prefix):!}

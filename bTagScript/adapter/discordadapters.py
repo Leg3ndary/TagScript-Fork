@@ -19,6 +19,7 @@ class AttributeAdapter(Adapter):
     """
     Base attribute adapter for discord.py objects
     """
+
     __slots__ = ("object", "_attributes", "_methods")
 
     def __init__(self, base: Union[TextChannel, Member, Guild]) -> None:
@@ -133,13 +134,13 @@ class MemberAdapter(AttributeAdapter):
             "nick": self.object.display_name,
             "avatar": (self.object.display_avatar.url, False),
             "discriminator": self.object.discriminator,
-            "joined_at": getattr(self.object, "joined_at", None),
+            "joined_at": getattr(self.object, "joined_at", ""),
             "mention": self.object.mention,
             "bot": self.object.bot,
-            "top_role": getattr(self.object, "top_role", None),
-            "boost": getattr(self.object, "premium_since", None),
-            "timed_out": getattr(self.object, "timed_out_until", None),
-            "banner": self.object.banner.url if self.object.banner else ""
+            "top_role": getattr(self.object, "top_role", ""),
+            "boost": getattr(self.object, "premium_since", ""),
+            "timed_out": getattr(self.object, "timed_out_until", ""),
+            "banner": self.object.banner.url if self.object.banner else "",
         }
         if roleids := getattr(self.object, "_roles", None):
             additional_attributes["roleids"] = " ".join(str(r) for r in roleids)

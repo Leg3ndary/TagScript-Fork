@@ -65,7 +65,7 @@ class OverrideBlock(Block):
     **Parameter:** "admin", "mod", "permissions"
 
     **Examples:**
-    
+
     .. tagscript::
 
         {override}

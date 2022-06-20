@@ -106,7 +106,7 @@ class EmbedBlock(Block):
 
     **Parameter:** attribute
 
-    .. tagscript:: 
+    .. tagscript::
         {embed(color):#37b2cb}
         {embed(title):Rules}
         {embed(description):Follow these rules to ensure a good experience in our server!}
@@ -202,7 +202,9 @@ class EmbedBlock(Block):
 
         lowered = ctx.verb.parameter.lower()
         try:
-            if ctx.verb.parameter.strip().startswith("{") and ctx.verb.parameter.strip().endswith("}"):
+            if ctx.verb.parameter.strip().startswith("{") and ctx.verb.parameter.strip().endswith(
+                "}"
+            ):
                 embed = self.text_to_embed(ctx.verb.parameter)
             elif lowered in self.ATTRIBUTE_HANDLERS and ctx.verb.payload:
                 embed = self.get_embed(ctx)
