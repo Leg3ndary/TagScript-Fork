@@ -2,7 +2,7 @@
 from .helpers import *
 
 # isort: on
-from .assign import AssignmentBlock
+from .assignblock import AssignmentBlock
 from .breakblock import BreakBlock
 from .command import CommandBlock, OverrideBlock
 from .control import AllBlock, AnyBlock, IfBlock

@@ -38,15 +38,24 @@ class Node:
 
     __slots__ = ("output", "verb", "coordinates")
 
-    def __init__(self, coordinates: Tuple[int, int], verb: Optional[Verb] = None):
+    def __init__(self, coordinates: Tuple[int, int], verb: Optional[Verb] = None) -> None:
+        """
+        Init
+        """
         self.output: Optional[str] = None
         self.verb = verb
         self.coordinates = coordinates
 
-    def __str__(self):
+    def __str__(self) -> str:
+        """
+        str func
+        """
         return str(self.verb) + " at " + str(self.coordinates)
 
-    def __repr__(self):
+    def __repr__(self) -> str:
+        """
+        String repr
+        """
         return f"<Node verb={self.verb!r} coordinates={self.coordinates!r} output={self.output!r}>"
 
 
@@ -79,6 +88,7 @@ def build_node_tree(message: str) -> List[Node]:
 class Response:
     """
     An object containing information on a completed TagScript process.
+
     Attributes
     ----------
     body: str
@@ -109,6 +119,7 @@ class Context:
     """
     An object containing data on the TagScript block processed by the interpreter.
     This class is passed to adapters and blocks during processing.
+
     Attributes
     ----------
     verb: Verb
@@ -121,13 +132,19 @@ class Context:
 
     __slots__ = ("verb", "original_message", "interpreter", "response")
 
-    def __init__(self, verb: Verb, res: Response, interpreter: Interpreter, og: str):
+    def __init__(self, verb: Verb, res: Response, interpreter: Interpreter, og: str) -> None:
+        """
+        Context class init
+        """
         self.verb: Verb = verb
         self.original_message: str = og
         self.interpreter: Interpreter = interpreter
         self.response: Response = res
 
-    def __repr__(self):
+    def __repr__(self) -> str:
+        """
+        String repr
+        """
         return f"<Context verb={self.verb!r}>"
 
 
