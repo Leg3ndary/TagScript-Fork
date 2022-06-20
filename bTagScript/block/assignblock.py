@@ -9,6 +9,8 @@ class AssignmentBlock(verb_required_block(False, parameter=True)):
     """
     Variables are useful for choosing a value and referencing it later in a tag.
     Variables can be referenced using brackets as any other block.
+    Note that if the variable's name is being "used" by any other block the variable
+    will be ignored.
 
     **Usage:** ``{=(<name>):<value>}``
 
@@ -34,7 +36,9 @@ class AssignmentBlock(verb_required_block(False, parameter=True)):
     ACCEPTED_NAMES = ("=", "assign", "let", "var")
 
     def process(self, ctx: Context) -> Optional[str]:
-        if ctx.verb.parameter is None:
+        if not ctx.verb.parameter:
+            return None
+        elif ctx.verb.parameter in ctx.interpreter._blocknames:
             return None
         ctx.response.variables[ctx.verb.parameter] = StringAdapter(str(ctx.verb.payload))
         return ""

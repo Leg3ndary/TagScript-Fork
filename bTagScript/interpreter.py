@@ -4,7 +4,7 @@ import logging
 from itertools import islice
 from typing import Any, Dict, List, Optional, Tuple
 
-from .exceptions import ProcessError, StopError, TagScriptError, WorkloadExceededError
+from .exceptions import ProcessError, StopError, TagScriptError, WorkloadExceededError, BlocknameDuplicateError
 from .interface import Adapter, Block
 from .utils import maybe_await
 from .verb import Verb
@@ -157,10 +157,21 @@ class Interpreter:
         A list of blocks to be used for TagScript processing.
     """
 
-    __slots__ = ("blocks",)
+    __slots__ = ("blocks", "_blocknames")
 
-    def __init__(self, blocks: List[Block]):
+    def __init__(self, blocks: List[Block]) -> None:
+        """
+        Creates a list of blocks, and also gets all acceptable names for processing
+        """
         self.blocks: List[Block] = blocks
+        self._blocknames = []
+        for block in blocks:
+            for name in block.ACCEPTED_NAMES:
+                if block in self._blocknames:
+                    raise BlocknameDuplicateError(block)
+                self._blocknames.append(name)
+        
+
 
     def __repr__(self):
         return f"<{type(self).__name__} blocks={self.blocks!r}>"
