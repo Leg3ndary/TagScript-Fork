@@ -23,7 +23,7 @@ from .strictvariablegetter import StrictVariableGetterBlock
 from .substr import SubstringBlock
 from .urlencodeblock import URLEncodeBlock
 from .urldecodeblock import URLDecodeBlock
-from .length import LengthBlock
+from .lengthblock import LengthBlock
 from .countblock import CountBlock
 
 __all__ = (

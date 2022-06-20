@@ -29,7 +29,7 @@ class LengthBlock(verb_required_block(True, payload=True)):
         {len(s):Hello World, Tag, Script}
         3
 
-        {len(S):Hello World, Tag, Script}
+        {len(space):Hello World, Tag, Script}
         -1
     """
 
@@ -40,9 +40,9 @@ class LengthBlock(verb_required_block(True, payload=True)):
         Check the length of a string
         """
         if ctx.verb.parameter:
-            if ctx.verb.parameter == "w":
+            if ctx.verb.parameter in ("w", "words", "word"):
                 return str(len(ctx.verb.payload.split(" ")))
-            elif ctx.verb.parameter == "s":
+            elif ctx.verb.parameter in ("s", "spaces", "space"):
                 return str(len(ctx.verb.payload.split(" ") - 1))
             else:
                 return "-1"
