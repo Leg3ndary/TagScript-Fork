@@ -5,24 +5,24 @@ from .helpers import *
 from .assignblock import AssignmentBlock
 from .breakblock import BreakBlock
 from .command import CommandBlock, OverrideBlock
-from .control import AllBlock, AnyBlock, IfBlock
-from .cooldown import CooldownBlock
+from .controlblock import AllBlock, AnyBlock, IfBlock
+from .cooldownblock import CooldownBlock
 from .embedblock import EmbedBlock
 from .fiftyfifty import FiftyFiftyBlock
 from .loosevariablegetter import LooseVariableGetterBlock
 from .mathblock import MathBlock
 from .randomblock import RandomBlock
-from .range import RangeBlock
-from .redirect import RedirectBlock
+from .rangeblock import RangeBlock
+from .redirectblock import RedirectBlock
 from .replaceblock import PythonBlock, ReplaceBlock
 from .require_blacklist import BlacklistBlock, RequireBlock
 from .shortcutredirect import ShortCutRedirectBlock
 from .stopblock import StopBlock
-from .strf import StrfBlock
+from .strfblock import StrfBlock
 from .strictvariablegetter import StrictVariableGetterBlock
-from .substr import SubstringBlock
-from .urlencodeblock import URLEncodeBlock
-from .urldecodeblock import URLDecodeBlock
+from .substrblock import SubstringBlock
+from .urlblocks import URLEncodeBlock
+from .urlblocks import URLDecodeBlock, URLEncodeBlock
 from .lengthblock import LengthBlock
 from .countblock import CountBlock
 
