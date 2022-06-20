@@ -32,25 +32,6 @@ class LooseVariableGetterBlock(Block):
 
     def process(self, ctx: Context) -> Optional[str]:
         if ctx.verb.declaration in ctx.response.variables:
-            if ctx.verb.parameter:
-                if ctx.verb.parameter.isdigit() or ctx.verb.parameter.startswith("-") and ctx.verb.parameter.split("-", 1)[1].isdigit():
-                    print(ctx.response.variables[ctx.verb.declaration].get_value(ctx.verb).split(" "))
-                    return (
-                        ctx.response.variables[ctx.verb.declaration]
-                        .get_value(ctx.verb)
-                        .split(ctx.verb.payload if ctx.verb.payload else " ")[
-                            int(ctx.verb.parameter) - 1
-                        ]
-                    )
-                elif ctx.verb.parameter.starswith("+") and ctx.verb.parameter.split("+", 1)[1].isdigit():
-                    return (
-                        ctx.response.variables[ctx.verb.declaration]
-                        .get_value(ctx.verb)
-                        .split(ctx.verb.payload if ctx.verb.payload else " ")[
-                            0:int(ctx.verb.parameter)
-                        ]
-                    )
-            else:
-                return ctx.response.variables[ctx.verb.declaration].get_value(ctx.verb)
+            return ctx.response.variables[ctx.verb.declaration].get_value(ctx.verb)
         else:
             return None
