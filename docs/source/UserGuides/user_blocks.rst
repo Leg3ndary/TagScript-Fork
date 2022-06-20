@@ -157,3 +157,10 @@ Count Block
 -----------
 
 .. autoclass:: bTagScript.block.CountBlock
+
+-------------
+Comment Block
+-------------
+
+.. autoclass:: bTagScript.block.CommentBlock
+

@@ -4,7 +4,7 @@ from .helpers import *
 # isort: on
 from .assignblock import AssignmentBlock
 from .breakblock import BreakBlock
-from .command import CommandBlock, OverrideBlock
+from .commandblock import CommandBlock, OverrideBlock
 from .controlblock import AllBlock, AnyBlock, IfBlock
 from .cooldownblock import CooldownBlock
 from .embedblock import EmbedBlock
@@ -25,6 +25,7 @@ from .urlblocks import URLEncodeBlock
 from .urlblocks import URLDecodeBlock, URLEncodeBlock
 from .lengthblock import LengthBlock
 from .countblock import CountBlock
+from .commentblock import CommentBlock
 
 __all__ = (
     "implicit_bool",
@@ -59,4 +60,5 @@ __all__ = (
     "URLDecodeBlock",
     "LengthBlock",
     "CountBlock",
+    "CommentBlock",
 )
