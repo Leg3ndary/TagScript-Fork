@@ -7,6 +7,7 @@ class StringAdapter(Adapter):
     """
     String adapter, allows blocks to be parsed, used basically only for variables
     """
+
     __slots__ = ("string", "escape_content")
 
     def __init__(self, string: str, *, escape: bool = False) -> None:
@@ -37,13 +38,17 @@ class StringAdapter(Adapter):
             if ctx.parameter.isdigit():
                 index = int(ctx.parameter) - 1
                 return self.string.split(splitter)[index]
-            
+
             elif ctx.parameter.startswith("-") and ctx.parameter.split("-", 1)[1].isdigit():
                 index = int(ctx.parameter)
                 return self.string.split(splitter)[index]
 
             else:
-                index = int(ctx.parameter.replace("+", "")) - 1 if int(ctx.parameter.replace("+", "")) > 0 else int(ctx.parameter.replace("+", ""))
+                index = (
+                    int(ctx.parameter.replace("+", "")) - 1
+                    if int(ctx.parameter.replace("+", "")) > 0
+                    else int(ctx.parameter.replace("+", ""))
+                )
                 splitter = " " if not ctx.payload else ctx.payload
                 if ctx.parameter.startswith("+"):
                     return splitter.join(self.string.split(splitter)[: index + 1])

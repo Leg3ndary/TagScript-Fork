@@ -26,7 +26,8 @@ default = """{=(smth):Hello, how are you doing today?}
 {smth(-1)}
 """
 
-def press(button):
+
+def press(button: gui.button) -> None:
     o = x.process(app.getTextArea("input")).body
     app.clearTextArea("output")
     app.setTextArea("output", o)
