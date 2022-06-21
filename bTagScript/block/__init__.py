@@ -10,7 +10,7 @@ from .cooldownblock import CooldownBlock
 from .embedblock import EmbedBlock
 from .fiftyfifty import FiftyFiftyBlock
 from .loosevariablegetter import LooseVariableGetterBlock
-from .mathblock import MathBlock
+from .mathblock import MathBlock, OrdinalAbbreviationBlock
 from .randomblock import RandomBlock
 from .rangeblock import RangeBlock
 from .redirectblock import RedirectBlock
@@ -61,4 +61,5 @@ __all__ = (
     "LengthBlock",
     "CountBlock",
     "CommentBlock",
+    "OrdinalAbbreviationBlock",
 )

@@ -17,6 +17,8 @@ blocks = [
     block.ShortCutRedirectBlock("message"),
     block.LooseVariableGetterBlock(),
     block.SubstringBlock(),
+    block.OrdinalAbbreviationBlock(),
+    block.CommentBlock()
 ]
 x = Interpreter(blocks)
 

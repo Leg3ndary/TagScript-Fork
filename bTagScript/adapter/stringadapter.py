@@ -39,7 +39,7 @@ class StringAdapter(Adapter):
                 index = int(ctx.parameter) - 1
                 return self.string.split(splitter)[index]
 
-            elif ctx.parameter.startswith("-") and ctx.parameter.split("-", 1)[1].isdigit():
+            elif ctx.parameter.startswith("-") and ctx.parameter.split("-", 1)[-1].isdigit():
                 index = int(ctx.parameter)
                 return self.string.split(splitter)[index]
 

@@ -155,3 +155,51 @@ class MathBlock(Block):
             return str(NSP.eval(ctx.verb.payload.strip(" ")))
         except:
             return None
+
+
+class OrdinalAbbreviationBlock(Block):
+    """
+    The ordinalabbreviation block returns the ordinal abbreviation of a number.
+    If a parameter is provided, it must be, one of, c, comma, indicator, i
+    Comma being adding commas every 3 digits, indicator, meaning the ordinal indicator.
+    (The st of 1st, nd of 2nd, etc.)
+
+    The number may be positive or negative, if the payload is invalid, -1 is returned.
+
+    **Usage:** ``{ord(<ord Type>):<number>}``
+
+    **Aliases:** ``None``
+
+    **Payload:** The number to ord
+
+    **Parameter:** original, new
+
+    .. tagscript::
+
+        {ord:1000}
+        1,000th
+
+        {ord(c):1213123}
+        1,213,123
+
+        {ord(i):2022}
+        2022nd
+    """
+
+    ACCEPTED_NAMES = ("ord",)
+
+    def process(self, ctx: Context) -> str:
+        num = ctx.verb.payload.split("-", 1)[-1]
+        if num.isdigit():
+            comma = "{:,}".format(int(num))
+            if ctx.verb.parameter in ["c", "comma"]:
+                return comma
+            else:
+                i = int(ctx.verb.payload.split("-", 1)[-1])
+                indicator = "tsnrhtdd"[(i//10%10!=1)*(i%10<4)*i%10::4] # I stole this from stack overflow
+                
+                if ctx.verb.parameter in ["i", "indicator"]:
+                    return f"{ctx.verb.payload}{indicator}" # concatenation is slower?
+                return f"{comma}{indicator}"
+
+        return "-1"

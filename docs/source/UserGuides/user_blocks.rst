@@ -164,3 +164,9 @@ Comment Block
 
 .. autoclass:: bTagScript.block.CommentBlock
 
+-------------------------
+OrdinalAbbreviation Block
+-------------------------
+
+.. autoclass:: bTagScript.block.OrdinalAbbreviationBlock
+
