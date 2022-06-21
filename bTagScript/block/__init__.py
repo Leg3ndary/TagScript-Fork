@@ -20,7 +20,6 @@ from .shortcutredirect import ShortCutRedirectBlock
 from .stopblock import StopBlock
 from .strfblock import StrfBlock
 from .strictvariablegetter import StrictVariableGetterBlock
-from .substrblock import SubstringBlock
 from .urlblocks import URLEncodeBlock
 from .urlblocks import URLDecodeBlock, URLEncodeBlock
 from .lengthblock import LengthBlock
@@ -55,7 +54,6 @@ __all__ = (
     "StopBlock",
     "StrfBlock",
     "StrictVariableGetterBlock",
-    "SubstringBlock",
     "URLEncodeBlock",
     "URLDecodeBlock",
     "LengthBlock",

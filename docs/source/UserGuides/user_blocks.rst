@@ -128,12 +128,6 @@ Strict Variable Block
 
 .. autoclass:: bTagScript.block.StrictVariableGetterBlock
 
---------------------
-SubstringBlock Block
---------------------
-
-.. autoclass:: bTagScript.block.SubstringBlock
-
 ----------------
 URL Encode Block
 ----------------
