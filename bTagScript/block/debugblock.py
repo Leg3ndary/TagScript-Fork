@@ -23,12 +23,12 @@ class DebugBlock(Block):
         {debug:somevar~anothervar} is the same as {debug(include):somevar~anothervar}
     
     **Examples:**
-
-    .. tagscript::
-
-        .. note::
+    
+    .. note::
 
             THIS SHOULD ALWAYS BE PLACED AT THE VERY BOTTOM, IT WILL NOT RETURN ANYTHING UNDER IT.
+
+    .. tagscript::
 
         Assuming we have the following tagscript, we first set the var something, then set
         parsed (using the dollar sign method), to Hello|World, (assume we actually wanted just the Hello
