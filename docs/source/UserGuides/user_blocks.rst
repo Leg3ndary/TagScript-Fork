@@ -164,3 +164,8 @@ OrdinalAbbreviation Block
 
 .. autoclass:: bTagScript.block.OrdinalAbbreviationBlock
 
+-----------
+Debug Block
+-----------
+
+.. autoclass:: bTagScript.block.DebugBlock

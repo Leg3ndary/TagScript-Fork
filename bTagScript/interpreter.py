@@ -103,11 +103,12 @@ class Response:
 
     __slots__ = ("body", "actions", "variables", "extra_kwargs")
 
-    def __init__(self, *, variables: AdapterDict = None, extra_kwargs: Dict[str, Any] = None):
+    def __init__(self, *, variables: AdapterDict = None, extra_kwargs: Dict[str, Any] = None) -> None:
         self.body: str = None
         self.actions: Dict[str, Any] = {}
         self.variables: AdapterDict = variables if variables is not None else {}
         self.extra_kwargs: Dict[str, Any] = extra_kwargs if extra_kwargs is not None else {}
+        self.debug: dict = {}
 
     def __repr__(self):
         return (

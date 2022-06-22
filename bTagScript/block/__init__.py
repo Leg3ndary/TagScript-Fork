@@ -25,6 +25,7 @@ from .urlblocks import URLDecodeBlock, URLEncodeBlock
 from .lengthblock import LengthBlock
 from .countblock import CountBlock
 from .commentblock import CommentBlock
+from .debugblock import DebugBlock
 
 __all__ = (
     "implicit_bool",
@@ -60,4 +61,5 @@ __all__ = (
     "CountBlock",
     "CommentBlock",
     "OrdinalAbbreviationBlock",
+    "DebugBlock",
 )

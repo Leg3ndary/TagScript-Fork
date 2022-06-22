@@ -16,16 +16,17 @@ blocks = [
     block.FiftyFiftyBlock(),
     block.ShortCutRedirectBlock("message"),
     block.LooseVariableGetterBlock(),
-    block.SubstringBlock(),
     block.OrdinalAbbreviationBlock(),
-    block.CommentBlock()
+    block.CommentBlock(),
+    block.DebugBlock(),
 ]
 x = Interpreter(blocks)
 
 default = """{=(smth):Hello, how are you doing today?}
-
 {smth}
-{smth(-1)}
+{$parsed:{smth(-1)}}
+
+{debug}
 """
 
 
