@@ -101,7 +101,7 @@ class Response:
         A dictionary of extra keyword arguments that blocks can use to define their own behavior.
     """
 
-    __slots__ = ("body", "actions", "variables", "extra_kwargs")
+    __slots__ = ("body", "actions", "variables", "extra_kwargs", "debug")
 
     def __init__(self, *, variables: AdapterDict = None, extra_kwargs: Dict[str, Any] = None) -> None:
         self.body: str = None
@@ -112,7 +112,7 @@ class Response:
 
     def __repr__(self):
         return (
-            f"<Response body={self.body!r} actions={self.actions!r} variables={self.variables!r}>"
+            f"<Response body={self.body!r} actions={self.actions!r} variables={self.variables!r} debug={self.debug!r}>"
         )
 
 
