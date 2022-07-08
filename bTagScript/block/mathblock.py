@@ -196,10 +196,12 @@ class OrdinalAbbreviationBlock(Block):
                 return comma
             else:
                 i = int(ctx.verb.payload.split("-", 1)[-1])
-                indicator = "tsnrhtdd"[(i//10%10!=1)*(i%10<4)*i%10::4] # I stole this from stack overflow
-                
+                indicator = "tsnrhtdd"[
+                    (i // 10 % 10 != 1) * (i % 10 < 4) * i % 10 :: 4
+                ]  # I stole this from stack overflow
+
                 if ctx.verb.parameter in ["i", "indicator"]:
-                    return f"{ctx.verb.payload}{indicator}" # concatenation is slower?
+                    return f"{ctx.verb.payload}{indicator}"  # concatenation is slower?
                 return f"{comma}{indicator}"
 
         return "-1"

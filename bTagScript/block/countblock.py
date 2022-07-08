@@ -1,4 +1,5 @@
 from typing import Optional
+
 from ..interface import verb_required_block
 from ..interpreter import Context
 

@@ -4,7 +4,13 @@ import logging
 from itertools import islice
 from typing import Any, Dict, List, Optional, Tuple
 
-from .exceptions import ProcessError, StopError, TagScriptError, WorkloadExceededError, BlocknameDuplicateError
+from .exceptions import (
+    BlocknameDuplicateError,
+    ProcessError,
+    StopError,
+    TagScriptError,
+    WorkloadExceededError,
+)
 from .interface import Adapter, Block
 from .utils import maybe_await
 from .verb import Verb
@@ -103,7 +109,9 @@ class Response:
 
     __slots__ = ("body", "actions", "variables", "extra_kwargs", "debug")
 
-    def __init__(self, *, variables: AdapterDict = None, extra_kwargs: Dict[str, Any] = None) -> None:
+    def __init__(
+        self, *, variables: AdapterDict = None, extra_kwargs: Dict[str, Any] = None
+    ) -> None:
         self.body: str = None
         self.actions: Dict[str, Any] = {}
         self.variables: AdapterDict = variables if variables is not None else {}
@@ -111,9 +119,7 @@ class Response:
         self.debug: dict = {}
 
     def __repr__(self):
-        return (
-            f"<Response body={self.body!r} actions={self.actions!r} variables={self.variables!r} debug={self.debug!r}>"
-        )
+        return f"<Response body={self.body!r} actions={self.actions!r} variables={self.variables!r} debug={self.debug!r}>"
 
 
 class Context:
@@ -171,8 +177,6 @@ class Interpreter:
                 if block in self._blocknames:
                     raise BlocknameDuplicateError(block)
                 self._blocknames.append(name)
-        
-
 
     def __repr__(self):
         return f"<{type(self).__name__} blocks={self.blocks!r}>"

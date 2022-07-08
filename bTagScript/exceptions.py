@@ -105,6 +105,7 @@ class CooldownExceeded(StopError):
         self.retry_after = retry_after
         super().__init__(message)
 
+
 class BlocknameDuplicateError(TagScriptError):
     """
     Raised when a block's name is duplicated when passed to the interpreter

@@ -5,10 +5,14 @@ from .helpers import *
 from .assignblock import AssignmentBlock
 from .breakblock import BreakBlock
 from .commandblock import CommandBlock, OverrideBlock
+from .commentblock import CommentBlock
 from .controlblock import AllBlock, AnyBlock, IfBlock
 from .cooldownblock import CooldownBlock
+from .countblock import CountBlock
+from .debugblock import DebugBlock
 from .embedblock import EmbedBlock
 from .fiftyfifty import FiftyFiftyBlock
+from .lengthblock import LengthBlock
 from .loosevariablegetter import LooseVariableGetterBlock
 from .mathblock import MathBlock, OrdinalAbbreviationBlock
 from .randomblock import RandomBlock
@@ -20,12 +24,7 @@ from .shortcutredirect import ShortCutRedirectBlock
 from .stopblock import StopBlock
 from .strfblock import StrfBlock
 from .strictvariablegetter import StrictVariableGetterBlock
-from .urlblocks import URLEncodeBlock
 from .urlblocks import URLDecodeBlock, URLEncodeBlock
-from .lengthblock import LengthBlock
-from .countblock import CountBlock
-from .commentblock import CommentBlock
-from .debugblock import DebugBlock
 
 __all__ = (
     "implicit_bool",

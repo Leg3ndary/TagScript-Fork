@@ -1,7 +1,7 @@
 from random import choice
 from typing import Union
 
-from discord import TextChannel, Thread, Guild, Member
+from discord import Guild, Member, TextChannel, Thread
 
 from ..interface import Adapter
 from ..utils import escape_content

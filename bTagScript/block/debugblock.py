@@ -1,4 +1,5 @@
 from typing import Optional
+
 from ..interface import Block
 from ..interpreter import Context
 
@@ -21,9 +22,9 @@ class DebugBlock(Block):
         {debug} is the same as {debug(exclude):}
 
         {debug:somevar~anothervar} is the same as {debug(include):somevar~anothervar}
-    
+
     **Examples:**
-    
+
     .. note::
 
             THIS SHOULD ALWAYS BE PLACED AT THE VERY BOTTOM, IT WILL NOT RETURN ANYTHING UNDER IT.

@@ -1,8 +1,8 @@
 from typing import Optional
 
+from ..adapter import StringAdapter
 from ..interface import Block
 from ..interpreter import Context
-from ..adapter import StringAdapter
 
 
 class LooseVariableGetterBlock(Block):

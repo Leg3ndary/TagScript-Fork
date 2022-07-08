@@ -1,4 +1,4 @@
-from urllib.parse import unquote, unquote_plus, quote, quote_plus
+from urllib.parse import quote, quote_plus, unquote, unquote_plus
 
 from ..interface import verb_required_block
 from ..interpreter import Context
