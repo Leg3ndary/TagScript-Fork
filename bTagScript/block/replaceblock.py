@@ -1,3 +1,5 @@
+from typing import Optional
+
 from ..interface import verb_required_block
 from ..interpreter import Context
 
@@ -31,11 +33,14 @@ class ReplaceBlock(verb_required_block(True, payload=True, parameter=True)):
 
     ACCEPTED_NAMES = ("replace", "sub")
 
-    def process(self, ctx: Context):
+    def process(self, ctx: Context) -> Optional[str]:
+        """
+        Replace the characters in the payload
+        """
         try:
             before, after = ctx.verb.parameter.split(",", 1)
         except ValueError:
-            return
+            return None
 
         return ctx.verb.payload.replace(before, after)
 
@@ -55,46 +60,51 @@ class PythonBlock(verb_required_block(True, payload=True, parameter=True)):
 
     **Usage:** ``{in(<string>):<payload>}``
 
-    **Aliases:** ``index``, ``contains``
+    **Aliases:** ``index, contains``
 
-    **Payload:** payload
+    **Payload:** ``payload``
 
-    **Parameter:** string
+    **Parameter:** ``string``
 
     **Examples:**
 
     .. tagscript::
 
         {in(apple pie):banana pie apple pie and other pie}
-        # true
+        true
         {in(mute):How does it feel to be muted?}
-        # true
+        true
         {in(a):How does it feel to be muted?}
-        # false
+        false
 
         {contains(mute):How does it feel to be muted?}
-        # false
+        false
         {contains(muted?):How does it feel to be muted?}
-        # false
+        false
 
         {index(food):I love to eat food. everyone does.}
-        # 4
+        4
         {index(pie):I love to eat food. everyone does.}
-        # -1
+        -1
     """
 
-    def will_accept(self, ctx: Context):
+    def will_accept(self, ctx: Context) -> bool:
+        """
+        Check if we can accept
+        """
         dec = ctx.verb.declaration.lower()
         return dec in ("contains", "in", "index")
 
-    def process(self, ctx: Context):
+    def process(self, ctx: Context) -> Optional[str]:
+        """
+        Process the block
+        """
         dec = ctx.verb.declaration.lower()
         if dec == "contains":
             return str(bool(ctx.verb.parameter in ctx.verb.payload.split())).lower()
-        elif dec == "in":
+        if dec == "in":
             return str(bool(ctx.verb.parameter in ctx.verb.payload)).lower()
-        else:
-            try:
-                return str(ctx.verb.payload.strip().split().index(ctx.verb.parameter))
-            except ValueError:
-                return "-1"
+        try:
+            return str(ctx.verb.payload.strip().split().index(ctx.verb.parameter))
+        except ValueError:
+            return "-1"

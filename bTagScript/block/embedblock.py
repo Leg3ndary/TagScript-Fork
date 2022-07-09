@@ -11,6 +11,9 @@ from .helpers import helper_split, implicit_bool
 
 
 def string_to_color(argument: str) -> Colour:
+    """
+    Converts a string to a discord.Colour object
+    """
     arg = argument.replace("0x", "").lower()
 
     if arg[0] == "#":
@@ -24,27 +27,36 @@ def string_to_color(argument: str) -> Colour:
         arg = arg.replace(" ", "_")
         method = getattr(Colour, arg, None)
         if arg.startswith("from_") or method is None or not ismethod(method):
-            raise BadColourArgument(arg)
+            raise BadColourArgument(arg) # pylint: disable=raise-missing-from
         return method()
 
 
-def set_color(embed: Embed, attribute: str, value: str):
+def set_color(embed: Embed, attribute: str, value: str) -> None:
+    """
+    Sets the colour of the embed given
+    """
     value = string_to_color(value)
     setattr(embed, attribute, value)
 
 
-def set_dynamic_url(embed: Embed, attribute: str, value: str):
+def set_dynamic_url(embed: Embed, attribute: str, value: str) -> None:
+    """
+    Dynamically sets the url of the embed
+    """
     method = getattr(embed, f"set_{attribute}")
     method(url=value)
 
 
-def add_field(embed: Embed, _: str, payload: str):
+def add_field(embed: Embed, _: str, payload: str) -> None:
+    """
+    Adds a field to the embed
+    """
     try:
         name, value, _inline = helper_split(payload, 3)
         inline = implicit_bool(_inline)
         if inline is None:
             raise EmbedParseError(
-                f"`inline` argument for `add_field` is not a boolean value (_inline)"
+                    "`inline` argument for `add_field` is not a boolean value (_inline)"
             )
     except ValueError:
         try:
@@ -70,9 +82,9 @@ class EmbedBlock(Block):
 
     **Usage:** ``{embed(<json>)}``
 
-    **Payload:** None
+    **Payload:** ``None``
 
-    **Parameter:** json
+    **Parameter:** ``json``
 
     .. tagscript::
 
@@ -102,9 +114,9 @@ class EmbedBlock(Block):
 
     **Usage:** ``{embed(<attribute>):<value>}``
 
-    **Payload:** value
+    **Payload:** ``value``
 
-    **Parameter:** attribute
+    **Parameter:** ``attribute``
 
     .. tagscript::
         {embed(color):#37b2cb}
@@ -116,7 +128,7 @@ class EmbedBlock(Block):
     The following tagscript uses JSON to create an embed with fields and later
     set the embed title.
 
-    ::
+    :: tagscript::
 
         {embed({{"fields":[{"name":"Field 1","value":"field description","inline":false}]})}
         {embed(title):my embed title}
@@ -137,10 +149,16 @@ class EmbedBlock(Block):
 
     @staticmethod
     def get_embed(ctx: Context) -> Embed:
+        """
+        Gets the embed object
+        """
         return ctx.response.actions.get("embed", Embed())
 
     @staticmethod
     def value_to_color(value: Optional[Union[int, str]]) -> Colour:
+        """
+        Converts a value to a discord.Colour object
+        """
         if value is None or isinstance(value, Colour):
             return value
         if isinstance(value, int):
@@ -151,6 +169,9 @@ class EmbedBlock(Block):
             raise EmbedParseError("Received invalid type for color key (expected string or int)")
 
     def text_to_embed(self, text: str) -> Embed:
+        """
+        Converts json to an embed
+        """
         try:
             data = json.loads(text)
         except json.decoder.JSONDecodeError as error:
@@ -174,6 +195,9 @@ class EmbedBlock(Block):
 
     @classmethod
     def update_embed(cls, embed: Embed, attribute: str, value: str) -> Embed:
+        """
+        Update the embed with all attributes
+        """
         handler = cls.ATTRIBUTE_HANDLERS[attribute]
         try:
             handler(embed, attribute, value)
@@ -183,13 +207,19 @@ class EmbedBlock(Block):
 
     @staticmethod
     def return_error(error: Exception) -> str:
+        """
+        Return an error message
+        """
         return f"Embed Parse Error: {error}"
 
     @staticmethod
     def return_embed(ctx: Context, embed: Embed) -> str:
+        """
+        Returns the embed
+        """
         try:
             length = len(embed)
-        except Exception as error:
+        except Exception as error: # pylint: disable=broad-except
             return str(error)
         if length > 6000:
             return f"`MAX EMBED LENGTH REACHED ({length}/6000)`"
@@ -197,6 +227,9 @@ class EmbedBlock(Block):
         return ""
 
     def process(self, ctx: Context) -> Optional[str]:
+        """
+        Process the block
+        """
         if not ctx.verb.parameter:
             return self.return_embed(ctx, self.get_embed(ctx))
 

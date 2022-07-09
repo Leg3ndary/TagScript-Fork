@@ -10,14 +10,16 @@ class RandomBlock(verb_required_block(True, payload=True)):
     Pick a random item from a list of strings, split by either ``~``
     or ``,``. An optional seed can be provided to the parameter to
     always choose the same item when using that seed.
+    You can weight options differently by adding a weight and | before
+    the item.
 
     **Usage:** ``{random([seed]):<list>}``
 
     **Aliases:** ``#, rand``
 
-    **Payload:** list
+    **Payload:** ``list``
 
-    **Parameter:** seed, None
+    **Parameter:** ``seed``
 
     **Examples:**
 
@@ -33,16 +35,29 @@ class RandomBlock(verb_required_block(True, payload=True)):
         {=(insult):{#:{insults}}}
         {insult}
         Assigns a random insult to the insult variable
+
+        {#:5|Cool,3|Lame}
+        5 to 3 chances of being cool vs lame
     """
 
     ACCEPTED_NAMES = ("random", "#", "rand")
 
     def process(self, ctx: Context) -> Optional[str]:
+        """
+        Process the randomness woo
+        """
         spl = []
         if "~" in ctx.verb.payload:
             spl = ctx.verb.payload.split("~")
         else:
             spl = ctx.verb.payload.split(",")
-        random.seed(ctx.verb.parameter)
 
-        return random.choice(spl)
+        weights = []
+        for choice in spl:
+            if "|" in choice:
+                weight, choice = choice.split("|", 1)
+                weights.append(int(weight))
+            else:
+                weights.append(1)
+        random.seed(ctx.verb.parameter)
+        return random.choices(spl, weights, k=1)

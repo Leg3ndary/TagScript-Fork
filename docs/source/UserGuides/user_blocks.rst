@@ -50,12 +50,6 @@ Embed Block
 
 .. autoclass:: bTagScript.block.EmbedBlock
 
------------------
-Fifty Fifty Block
------------------
-
-.. autoclass:: bTagScript.block.FiftyFiftyBlock
-
 --------
 If Block
 --------

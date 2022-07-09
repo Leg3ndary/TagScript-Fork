@@ -2,7 +2,8 @@ from __future__ import division
 
 import math
 import operator
-from typing import Optional
+
+from typing import Optional as Optional_
 
 from pyparsing import (
     CaselessLiteral,
@@ -28,14 +29,20 @@ class NumericStringParser(object):
 
     """
 
-    def pushFirst(self, strg, loc, toks):
+    def pushFirst(self, strg: str, loc, toks) -> None: # pylint: disable=unused-argument
+        """
+        Parse actions that push the first element of the matched tokens
+        """
         self.exprStack.append(toks[0])
 
-    def pushUMinus(self, strg, loc, toks):
+    def pushUMinus(self, strg: str, loc, toks) -> None:# pylint: disable=unused-argument
+        """
+        Parse actions that push the last element of the matched tokens??
+        """
         if toks and toks[0] == "-":
             self.exprStack.append("unary -")
 
-    def __init__(self):
+    def __init__(self) -> None:
         """
         expop   :: '^'
         multop  :: '*' | '/'
@@ -46,6 +53,7 @@ class NumericStringParser(object):
         term    :: factor [ multop factor ]*
         expr    :: term [ addop term ]*
         """
+        self.exprStack = []
         point = Literal(".")
         e = CaselessLiteral("E")
         fnumber = Combine(
@@ -82,9 +90,9 @@ class NumericStringParser(object):
         # "atom [ ^ atom ]...", we get right-to-left exponents, instead of left-to-right
         # that is, 2^3^2 = 2^(3^2), not (2^3)^2.
         factor = Forward()
-        factor << atom + ZeroOrMore((expop + factor).setParseAction(self.pushFirst))
+        factor << atom + ZeroOrMore((expop + factor).setParseAction(self.pushFirst)) # pylint: disable=expression-not-assigned
         term = factor + ZeroOrMore((multop + factor).setParseAction(self.pushFirst))
-        expr << term + ZeroOrMore((addop + term).setParseAction(self.pushFirst))
+        expr << term + ZeroOrMore((addop + term).setParseAction(self.pushFirst)) # pylint: disable=expression-not-assigned
         final = expr + ZeroOrMore((iop + expr).setParseAction(self.pushFirst))
         # addop_term = ( addop + term ).setParseAction( self.pushFirst )
         # general_term = term + ZeroOrMore( addop_term ) | OneOrMore( addop_term)
@@ -110,7 +118,7 @@ class NumericStringParser(object):
             "tan": math.tan,
             "exp": math.exp,
             "abs": abs,
-            "trunc": lambda a: int(a),
+            "trunc": lambda a: int(a), # pylint: disable=unnecessary-lambda
             "round": round,
             "sgn": lambda a: abs(a) > epsilon and ((a > 0) - (a < 0)) or 0,
             "log": lambda a: math.log(a, 10),
@@ -120,6 +128,9 @@ class NumericStringParser(object):
         }
 
     def evaluateStack(self, s):
+        """
+        Evaluate the expression on the input data in the stack.
+        """
         op = s.pop()
         if op == "unary -":
             return -self.evaluateStack(s)
@@ -138,9 +149,11 @@ class NumericStringParser(object):
         else:
             return float(op)
 
-    def eval(self, num_string, parseAll=True):
-        self.exprStack = []
-        results = self.bnf.parseString(num_string, parseAll)
+    def eval(self, num_string: str, parseAll: bool = True) -> float:
+        """
+        Evaluate the expression on the input data.
+        """
+        results = self.bnf.parseString(num_string, parseAll) # pylint: disable=unused-variable
         return self.evaluateStack(self.exprStack[:])
 
 
@@ -148,12 +161,41 @@ NSP = NumericStringParser()
 
 
 class MathBlock(Block):
+    """
+    A math block is a block that contains a math expression.
+    Will write out everything later bleh
+
+    **Usage:** ``{math:<expression>}``
+
+    **Aliases:** ``math, m, +, calc``
+
+    **Payload:** ``expression``
+
+    **Parameter:** None
+
+    **Examples:**
+
+    .. tagscript::
+
+        {m:2+3}
+        5.0
+
+        {math:7(2+3)}
+        42.0
+     
+        {math:trunc(7(2+3))}
+        42
+    """
+
     ACCEPTED_NAMES = ("math", "m", "+", "calc")
 
-    def process(self, ctx: Context):
+    def process(self, ctx: Context) -> Optional_[str]:
+        """
+        Try and process the block into a float
+        """
         try:
             return str(NSP.eval(ctx.verb.payload.strip(" ")))
-        except:
+        except: # pylint: disable=bare-except
             return None
 
 
@@ -166,13 +208,13 @@ class OrdinalAbbreviationBlock(Block):
 
     The number may be positive or negative, if the payload is invalid, -1 is returned.
 
-    **Usage:** ``{ord(<ord Type>):<number>}``
+    **Usage:** ``{ord(["c", "comma", "i", "indicator"]):<number>}``
 
     **Aliases:** ``None``
 
-    **Payload:** The number to ord
+    **Payload:** ``number``
 
-    **Parameter:** original, new
+    **Parameter:** ``"c", "comma", "i", "indicator"``
 
     .. tagscript::
 
@@ -189,19 +231,19 @@ class OrdinalAbbreviationBlock(Block):
     ACCEPTED_NAMES = ("ord",)
 
     def process(self, ctx: Context) -> str:
+        """
+        Process the ordinal abbreviation block
+        """
         num = ctx.verb.payload.split("-", 1)[-1]
         if num.isdigit():
-            comma = "{:,}".format(int(num))
+            comma = f"{int(num):,}"
             if ctx.verb.parameter in ["c", "comma"]:
                 return comma
-            else:
-                i = int(ctx.verb.payload.split("-", 1)[-1])
-                indicator = "tsnrhtdd"[
-                    (i // 10 % 10 != 1) * (i % 10 < 4) * i % 10 :: 4
-                ]  # I stole this from stack overflow
-
-                if ctx.verb.parameter in ["i", "indicator"]:
-                    return f"{ctx.verb.payload}{indicator}"  # concatenation is slower?
-                return f"{comma}{indicator}"
-
+            i = int(ctx.verb.payload.split("-", 1)[-1])
+            indicator = "tsnrhtdd"[
+                (i // 10 % 10 != 1) * (i % 10 < 4) * i % 10 :: 4
+            ]  # I stole this from stack overflow
+            if ctx.verb.parameter in ["i", "indicator"]:
+                return f"{ctx.verb.payload}{indicator}"  # concatenation is slower?
+            return f"{comma}{indicator}"
         return "-1"

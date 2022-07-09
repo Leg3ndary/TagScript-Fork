@@ -17,9 +17,9 @@ class RangeBlock(verb_required_block(True, payload=True)):
 
     **Aliases:** ``rangef``
 
-    **Payload:** number
+    **Payload:** ``number``
 
-    **Parameter:** seed, None
+    **Parameter:** ``seed``
 
     **Examples:**
 
@@ -37,6 +37,9 @@ class RangeBlock(verb_required_block(True, payload=True)):
     ACCEPTED_NAMES = ("rangef", "range")
 
     def process(self, ctx: Context) -> Optional[str]:
+        """
+        Process the range block
+        """
         try:
             spl = ctx.verb.payload.split("-")
             random.seed(ctx.verb.parameter)
@@ -53,9 +56,8 @@ class RangeBlock(verb_required_block(True, payload=True)):
                 # else:
                 #     random.seed(None)
                 # return str(str(base)+"."+str(random.randint(1,9)))
-            else:
-                lower = int(float(spl[0]))
-                upper = int(float(spl[1]))
-                return str(random.randint(lower, upper))
-        except:
+            lower = int(float(spl[0]))
+            upper = int(float(spl[1]))
+            return str(random.randint(lower, upper))
+        except: # pylint: disable=bare-except
             return None

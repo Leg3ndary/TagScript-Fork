@@ -11,13 +11,13 @@ class LengthBlock(verb_required_block(True, payload=True)):
     based on what you passed in, w for word, s for spaces.
     If you provide an invalid paramet
 
-    **Usage:** ``{length(<w, s>):<String>}``
+    **Usage:** ``{length(["w", "s"]):<text>}``
 
     **Aliases:** ``len``
 
-    **Payload:** String to check length of
+    **Payload:** ``text``
 
-    **Parameter:** w or s, words or spaces, if not one of these will return -1
+    **Parameter:** ``"w", "s"``
 
     .. tagscript::
 
@@ -43,10 +43,7 @@ class LengthBlock(verb_required_block(True, payload=True)):
         if ctx.verb.parameter:
             if ctx.verb.parameter in ("w", "words", "word"):
                 return str(len(ctx.verb.payload.split(" ")))
-            elif ctx.verb.parameter in ("s", "spaces", "space"):
+            if ctx.verb.parameter in ("s", "spaces", "space"):
                 return str(len(ctx.verb.payload.split(" ") - 1))
-            else:
-                return "-1"
-
-        else:
-            return len(ctx.verb.payload)
+            return "-1"
+        return len(ctx.verb.payload)

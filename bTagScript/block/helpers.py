@@ -82,7 +82,7 @@ def helper_parse_if(string: str) -> Optional[bool]:
         if "<" in string:
             spl = string.split("<")
             return float(spl[0].strip()) < float(spl[1].strip())
-    except:
+    except: # pylint: disable=bare-except
         pass
 
 
@@ -107,7 +107,10 @@ def helper_split(
     return
 
 
-def helper_parse_list_if(if_string):
+def helper_parse_list_if(if_string: str) -> Optional[List[str]]:
+    """
+    Returns a list of bool strings from a string.
+    """
     split = helper_split(if_string, False)
     if split is None:
         return [helper_parse_if(if_string)]

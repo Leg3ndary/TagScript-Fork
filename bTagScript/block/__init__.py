@@ -11,7 +11,6 @@ from .cooldownblock import CooldownBlock
 from .countblock import CountBlock
 from .debugblock import DebugBlock
 from .embedblock import EmbedBlock
-from .fiftyfifty import FiftyFiftyBlock
 from .lengthblock import LengthBlock
 from .loosevariablegetter import LooseVariableGetterBlock
 from .mathblock import MathBlock, OrdinalAbbreviationBlock
@@ -39,7 +38,6 @@ __all__ = (
     "CommandBlock",
     "CooldownBlock",
     "EmbedBlock",
-    "FiftyFiftyBlock",
     "IfBlock",
     "LooseVariableGetterBlock",
     "MathBlock",

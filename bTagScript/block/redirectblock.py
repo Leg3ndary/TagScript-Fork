@@ -11,9 +11,9 @@ class RedirectBlock(verb_required_block(True, parameter=True)):
 
     **Usage:** ``{redirect(<"dm"|"reply"|channel>)}``
 
-    **Payload:** None
+    **Payload:** ``None``
 
-    **Parameter:** "dm", "reply", channel
+    **Parameter:** ``"dm", "reply", "channel"``
 
     **Examples:**
 
@@ -28,6 +28,9 @@ class RedirectBlock(verb_required_block(True, parameter=True)):
     ACCEPTED_NAMES = ("redirect",)
 
     def process(self, ctx: Context) -> Optional[str]:
+        """
+        Process the redirect block and params
+        """
         param = ctx.verb.parameter.strip()
         if param.lower() == "dm":
             target = "dm"

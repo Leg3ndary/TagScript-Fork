@@ -10,6 +10,7 @@ class LooseVariableGetterBlock(Block):
     The loose variable block represents the adapters for any seeded or defined variables.
     This variable implementation is considered "loose" since it checks whether the variable is
     valid during :meth:`process`, rather than :meth:`will_accept`.
+    You may also define variables here with {$<variable name>:<value>}
 
     **Usage:** ``{<variable_name>([parameter]):[payload]}``
 
@@ -26,17 +27,26 @@ class LooseVariableGetterBlock(Block):
         {=(example):This is my variable.}
         {example}
         This is my variable.
+
+        {$variablename:This is another variable.}
+        {variablename}
+        This is another variable.
     """
 
-    def will_accept(self, ctx: Context) -> bool:
+    def will_accept(self, ctx: Context) -> bool: # pylint: disable=arguments-differ
+        """
+        This block will accept any declaration.
+        """
         return True
 
     def process(self, ctx: Context) -> Optional[str]:
+        """
+        This block will check whether the variable is valid.
+        """
         if ctx.verb.declaration.startswith("$"):
             varname = ctx.verb.declaration.split("$", 1)[1]
             ctx.response.variables[varname] = StringAdapter(str(ctx.verb.payload))
             return ""
-        elif ctx.verb.declaration in ctx.response.variables:
+        if ctx.verb.declaration in ctx.response.variables:
             return ctx.response.variables[ctx.verb.declaration].get_value(ctx.verb)
-        else:
-            return None
+        return None
