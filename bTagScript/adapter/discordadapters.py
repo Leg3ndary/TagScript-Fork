@@ -47,15 +47,16 @@ class AttributeAdapter(Adapter):
         """
         Update attributes for the block
         """
-        pass
 
     def update_methods(self) -> None:
         """
         Update methods for the block
         """
-        pass
 
     def get_value(self, ctx: Verb) -> str:
+        """
+        Get the value for the adapter
+        """
         should_escape = False
 
         if ctx.parameter is None:
@@ -127,7 +128,10 @@ class MemberAdapter(AttributeAdapter):
         A list of the author's role IDs, split by spaces.
     """
 
-    def update_attributes(self):
+    def update_attributes(self) -> None:
+        """
+        Update the adapter with all it's needed attributes
+        """
         additional_attributes = {
             "color": self.object.color,
             "colour": self.object.color,

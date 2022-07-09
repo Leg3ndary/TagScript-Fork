@@ -53,7 +53,7 @@ class DebugBlock(Block):
 
     ACCEPTED_NAMES = ("debug",)
 
-    def process(self, ctx: Context) -> Optional[str]: # pylint: disable=too-many-branches
+    def process(self, ctx: Context) -> Optional[str]:  # pylint: disable=too-many-branches
         """
         Check the count of a string
         """
