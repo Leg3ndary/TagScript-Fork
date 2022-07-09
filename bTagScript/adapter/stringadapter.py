@@ -59,7 +59,7 @@ class StringAdapter(Adapter):
                     return splitter.join(self.string.split(splitter)[index:])
                 else:
                     return self.string.split(splitter)[index]
-        except:  # pylint: disable=bare-except
+        except: # pylint: disable=bare-except
             return self.string
 
     def return_value(self, string: str) -> str:

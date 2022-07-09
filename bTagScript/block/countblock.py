@@ -6,16 +6,19 @@ from ..interpreter import Context
 
 class CountBlock(verb_required_block(True, payload=True)):
     """
-    The count block will count how much of x is in string.
-    This is case sensitive and will include substrings
+    The count block will count how much of text is in message.
+    This is case sensitive and will include substrings, if you
+    don't provide a parameter, it will count the spaces in the
+    message.
 
-    **Usage:** ``{count(<Optional Character(s)>):<String>}``
+
+    **Usage:** ``{count([text]):<message>}``
 
     **Aliases:** ``None``
 
-    **Payload:** String to check length of
+    **Payload:** ``message``
 
-    **Parameter:** Optional, if present, will count it, if not, will check "empty characters" (len + 1)
+    **Parameter:** text
 
     .. tagscript::
 
@@ -37,5 +40,4 @@ class CountBlock(verb_required_block(True, payload=True)):
         """
         if ctx.verb.parameter:
             return ctx.verb.payload.count(ctx.verb.parameter)
-        else:
-            return len(ctx.verb.payload) + 1
+        return len(ctx.verb.payload) + 1

@@ -8,14 +8,20 @@ class DebugBlock(Block):
     """
     The debug block allows you to debug your tagscript quickly and easily,
     it will save the output to the debug_var key in the response dict.
+    Separate the variables you want to include or exclude with a comma or
+    a tilde.
 
-    **Usage:** ``{debug([i, include, e, exclude]):[Variables]}``
+    If no parameters are provided in addition to no payload, all variables
+    will be included. If no parameters are provided and a payload is
+    provided, it will assume you want to include those variables.
+
+    **Usage:** ``{debug(["i", "include", "e", "exclude"]):<variables>}``
 
     **Aliases:** ``None``
 
-    **Payload:** List of variables separated by ``~`` or ``,``
+    **Payload:** ``variables``
 
-    **Parameter:** Optional, if present, must be i, include, e or exclude
+    **Parameter:** ``"i", "include", "e", "exclude"``
 
     .. note::
 
@@ -55,27 +61,25 @@ class DebugBlock(Block):
 
     def process(self, ctx: Context) -> Optional[str]:  # pylint: disable=too-many-branches
         """
-        Check the count of a string
+        Debug the tagscript!
         """
         debug = {}
 
         if ctx.verb.parameter:
             if ctx.verb.parameter in ("e", "exc", "exclude"):
-                if not ctx.verb.payload:
-                    return None
-                else:
+                if ctx.verb.payload:
                     if "~" in ctx.verb.payload:
                         exclude = ctx.verb.payload.split("~")
                     else:
                         exclude = ctx.verb.payload.split(",")
-                for k, v in ctx.response.variables.items():
-                    if k not in exclude:
-                        debug[k] = v.get_value(ctx.verb)
+                    for k, v in ctx.response.variables.items():
+                        if k not in exclude:
+                            debug[k] = v.get_value(ctx.verb)
+                else:
+                    return None
 
             elif ctx.verb.parameter in ("i", "inc", "include"):
-                if not ctx.verb.payload:
-                    return None
-                else:
+                if ctx.verb.payload:
                     if "~" in ctx.verb.payload:
                         include = ctx.verb.payload.split("~")
                     else:
@@ -84,6 +88,8 @@ class DebugBlock(Block):
                     for k, v in ctx.response.variables.items():
                         if k in include:
                             debug[k] = v.get_value(ctx.verb)
+                else:
+                    return None
 
         elif ctx.verb.payload:
             if "~" in ctx.verb.payload:

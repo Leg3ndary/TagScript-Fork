@@ -6,11 +6,14 @@ from . import helper_parse_if, helper_parse_list_if, helper_split
 
 
 def parse_into_output(payload: str, result: Optional[bool]) -> Optional[str]:
+    """
+    Parse a payload into an output.
+    """
     if result is None:
         return
     try:
         output = helper_split(payload, False)
-        if output != None and len(output) == 2:
+        if output is not None and len(output) == 2:
             if result:
                 return output[0]
             else:
@@ -19,7 +22,7 @@ def parse_into_output(payload: str, result: Optional[bool]) -> Optional[str]:
             return payload
         else:
             return ""
-    except:
+    except: # pylint: disable=bare-except
         return
 
 
@@ -38,25 +41,28 @@ class AnyBlock(ImplicitPPRBlock):
 
     **Aliases:** ``or``
 
-    **Payload:** message
+    **Payload:** ``message``
 
-    **Parameter:** expression
+    **Parameter:** ``expression``
 
     **Examples:**
 
     .. tagscript::
 
-        {any({args}==hi|{args}==hello|{args}==heyy):Hello {user}!|How rude.}
-        if {args} is hi
-        Hello sravan#0001!
+        {any(hi=={args}|hello=={args}|heyy=={args}):Hello {user}!|How rude.}
+        If {args} is hi
+        Hello _Leg3ndary#0001!
 
-        if {args} is what's up!
+        If {args} is what's up!
         How rude.
     """
 
     ACCEPTED_NAMES = ("any", "or")
 
     def process(self, ctx: Context) -> Optional[str]:
+        """
+        Process the any block
+        """
         result = any(helper_parse_list_if(ctx.verb.parameter) or [])
         return parse_into_output(ctx.verb.payload, result)
 
@@ -73,9 +79,9 @@ class AllBlock(ImplicitPPRBlock):
 
     **Aliases:** ``and``
 
-    **Payload:** message
+    **Payload:** ``message``
 
-    **Parameter:** expression
+    **Parameter:** ``expression``
 
     **Examples:**
 
@@ -92,6 +98,9 @@ class AllBlock(ImplicitPPRBlock):
     ACCEPTED_NAMES = ("all", "and")
 
     def process(self, ctx: Context) -> Optional[str]:
+        """
+        Process all the expressions
+        """
         result = all(helper_parse_list_if(ctx.verb.parameter) or [])
         return parse_into_output(ctx.verb.payload, result)
 
@@ -124,27 +133,30 @@ class IfBlock(ImplicitPPRBlock):
 
     **Usage:** ``{if(<expression>):<message>]}``
 
-    **Payload:** message
+    **Payload:** ``message``
 
-    **Parameter:** expression
+    **Parameter:** ``expression``
 
     **Examples:**
 
     .. tagscript::
 
-        {if({args}==63):You guessed it! The number I was thinking of was 63!|Too {if({args}<63):low|high}, try again.}
-        if args is 63
+        {if(63=={args}):You guessed it! The number I was thinking of was 63!|Too {if({args}<63):low|high}, try again.}
+        If args is 63
         You guessed it! The number I was thinking of was 63!
 
-        if args is 73
+        If args is 73
         Too low, try again.
 
-        if args is 14
+        If args is 14
         Too high, try again.
     """
 
     ACCEPTED_NAMES = ("if",)
 
     def process(self, ctx: Context) -> Optional[str]:
+        """
+        Process the if block
+        """
         result = helper_parse_if(ctx.verb.parameter)
         return parse_into_output(ctx.verb.payload, result)

@@ -1,33 +1,33 @@
 from typing import Optional
 
-from ..interface import verb_required_block
+from ..interface import Block
 from ..interpreter import Context
 
 
-class CommentBlock(verb_required_block(True, payload=True)):
+class CommentBlock(Block):
     """
-    The count block will count how much of x is in string.
-    This is case sensitive and will include substrings
+    The comment block is literally just for comments, it will not be
+    parsed, however it will be removed from your codes output.
 
-    **Usage:** ``{comment(<Optional String>):<String>}``
+    **Usage:** ``{comment([other]):[text]}``
 
-    **Aliases:** ``/, Comment``
+    **Aliases:** /, Comment, comment, //
 
-    **Payload:** Whatever you want to comment, won't do anything with it
+    **Payload:** ``text``
 
-    **Parameter:** Optional, put whatever here
+    **Parameter:** ``other``
 
     .. tagscript::
 
-        {/:Comment!}
+        {//:Comment!}
 
         {Comment(Something):Comment!}
     """
 
-    ACCEPTED_NAMES = ("/", "Comment", "comment")
+    ACCEPTED_NAMES = ("/", "Comment", "comment", "//")
 
     def process(self, ctx: Context) -> Optional[str]:
         """
-        Check the count of a string
+        Remove the block
         """
         return ""

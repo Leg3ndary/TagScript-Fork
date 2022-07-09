@@ -14,11 +14,11 @@ class AssignmentBlock(verb_required_block(False, parameter=True)):
 
     **Usage:** ``{=(<name>):<value>}``
 
-    **Aliases:** ``assign, let, var, =``
+    **Aliases:** ``let, var, =``
 
-    **Payload:** value
+    **Payload:** ``value``
 
-    **Parameter:** name
+    **Parameter:** ``name``
 
     **Examples:**
 
@@ -28,17 +28,24 @@ class AssignmentBlock(verb_required_block(False, parameter=True)):
         The prefix here is `{prefix}`.
         The prefix here is `!`.
 
-        {assign(day):Monday}
+        {let(day):Monday}
         {if({day}==Wednesday):It's Wednesday my dudes!|The day is {day}.}
         The day is Monday.
+
+        Variables can also be created like so
+        {$<name>:<value>}
+        {$day:Monday} == {=(day):Monday}
     """
 
-    ACCEPTED_NAMES = ("=", "assign", "let", "var")
+    ACCEPTED_NAMES = ("=", "let", "var")
 
     def process(self, ctx: Context) -> Optional[str]:
+        """
+        Process the block and assign the variable.
+        """
         if not ctx.verb.parameter:
             return None
-        elif ctx.verb.parameter in ctx.interpreter._blocknames:
+        elif ctx.verb.parameter in ctx.interpreter._blocknames: # pylint: disable=protected-access
             return None
         ctx.response.variables[ctx.verb.parameter] = StringAdapter(str(ctx.verb.payload))
         return ""

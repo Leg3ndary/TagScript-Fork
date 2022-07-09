@@ -22,19 +22,25 @@ class CommandBlock(verb_required_block(True, payload=True)):
     .. tagscript::
 
         {c:ping}
-        # invokes ping command
+        # Invokes ping command
 
         {c:ban {target(id)} Chatflood/spam}
-        # invokes ban command on the pinged user with the reason as "Chatflood/spam"
+        # Invokes ban command on the pinged user with the reason as "Chatflood/spam"
     """
 
     ACCEPTED_NAMES = ("c", "com", "command")
 
-    def __init__(self, limit: int = 3):
+    def __init__(self, limit: int = 3) -> None:
+        """
+        Construct with limits
+        """
         self.limit = limit
         super().__init__()
 
     def process(self, ctx: Context) -> Optional[str]:
+        """
+        Process the block and update response.actions
+        """
         command = ctx.verb.payload.strip()
         actions = ctx.response.actions.get("commands")
         if actions:
@@ -60,9 +66,9 @@ class OverrideBlock(Block):
 
     **Usage:** ``{override(["admin"|"mod"|"permissions"]):[command]}``
 
-    **Payload:** command
+    **Payload:** ``command``
 
-    **Parameter:** "admin", "mod", "permissions"
+    **Parameter:** ``"admin", "mod", "permissions"``
 
     **Examples:**
 
@@ -82,6 +88,8 @@ class OverrideBlock(Block):
     ACCEPTED_NAMES = ("override",)
 
     def process(self, ctx: Context) -> Optional[str]:
+        """
+        Process the block and update response.actions with correct overrides"""
         param = ctx.verb.parameter
         if not param:
             ctx.response.actions["overrides"] = {"admin": True, "mod": True, "permissions": True}

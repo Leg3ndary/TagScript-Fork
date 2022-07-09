@@ -28,9 +28,9 @@ class CooldownBlock(verb_required_block(True, payload=True, parameter=True)):
 
     **Usage:** ``{cooldown(<rate>|<per>):<key>|[message]}``
 
-    **Payload:** key, message
+    **Payload:** ``key, message``
 
-    **Parameter:** rate, per
+    **Parameter:** ``rate, per``
 
     **Examples:**
 
@@ -50,11 +50,17 @@ class CooldownBlock(verb_required_block(True, payload=True, parameter=True)):
 
     @classmethod
     def create_cooldown(cls, key: Any, rate: int, per: int) -> CooldownMapping:
+        """
+        Create a new cooldown for the given key.
+        """
         cooldown = CooldownMapping.from_cooldown(rate, per, lambda x: x)
         cls.COOLDOWNS[key] = cooldown
         return cooldown
 
     def process(self, ctx: Context) -> Optional[str]:
+        """
+        Process the cooldown block.
+        """
         verb = ctx.verb
         try:
             rate, per = helper_split(verb.parameter, maxsplit=1)
@@ -74,7 +80,7 @@ class CooldownBlock(verb_required_block(True, payload=True, parameter=True)):
             cooldown_key = ctx.original_message
         try:
             cooldown = self.COOLDOWNS[cooldown_key]
-            base = cooldown._cooldown
+            base = cooldown._cooldown # pylint: disable=protected-access
             if (rate, per) != (base.rate, base.per):
                 cooldown = self.create_cooldown(cooldown_key, rate, per)
         except KeyError:

@@ -19,20 +19,23 @@ class BreakBlock(Block):
 
     **Aliases:** ``short, shortcircuit``
 
-    **Payload:**  message
+    **Payload:** ``message``
 
-    **Parameter:**  expression
+    **Parameter:** ``expression``
 
     **Examples:**
 
     .. tagscript::
 
-        {break({args}==):You did not provide any input.}
+        {break(=={args}):You did not provide any input.}
     """
 
     ACCEPTED_NAMES = ("break", "shortcircuit", "short")
 
     def process(self, ctx: Context) -> Optional[str]:
+        """
+        Process the block and break the tag.
+        """
         if helper_parse_if(ctx.verb.parameter):
-            ctx.response.body = ctx.verb.payload if ctx.verb.payload != None else ""
+            ctx.response.body = ctx.verb.payload if ctx.verb.payload is not None else ""
         return ""
