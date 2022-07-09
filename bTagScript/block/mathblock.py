@@ -2,7 +2,6 @@ from __future__ import division
 
 import math
 import operator
-
 from typing import Optional as Optional_
 
 from pyparsing import (
@@ -29,13 +28,13 @@ class NumericStringParser(object):
 
     """
 
-    def pushFirst(self, strg: str, loc, toks) -> None: # pylint: disable=unused-argument
+    def pushFirst(self, strg: str, loc, toks) -> None:  # pylint: disable=unused-argument
         """
         Parse actions that push the first element of the matched tokens
         """
         self.exprStack.append(toks[0])
 
-    def pushUMinus(self, strg: str, loc, toks) -> None:# pylint: disable=unused-argument
+    def pushUMinus(self, strg: str, loc, toks) -> None:  # pylint: disable=unused-argument
         """
         Parse actions that push the last element of the matched tokens??
         """
@@ -90,9 +89,13 @@ class NumericStringParser(object):
         # "atom [ ^ atom ]...", we get right-to-left exponents, instead of left-to-right
         # that is, 2^3^2 = 2^(3^2), not (2^3)^2.
         factor = Forward()
-        factor << atom + ZeroOrMore((expop + factor).setParseAction(self.pushFirst)) # pylint: disable=expression-not-assigned
+        factor << atom + ZeroOrMore(
+            (expop + factor).setParseAction(self.pushFirst)
+        )  # pylint: disable=expression-not-assigned
         term = factor + ZeroOrMore((multop + factor).setParseAction(self.pushFirst))
-        expr << term + ZeroOrMore((addop + term).setParseAction(self.pushFirst)) # pylint: disable=expression-not-assigned
+        expr << term + ZeroOrMore(
+            (addop + term).setParseAction(self.pushFirst)
+        )  # pylint: disable=expression-not-assigned
         final = expr + ZeroOrMore((iop + expr).setParseAction(self.pushFirst))
         # addop_term = ( addop + term ).setParseAction( self.pushFirst )
         # general_term = term + ZeroOrMore( addop_term ) | OneOrMore( addop_term)
@@ -118,7 +121,7 @@ class NumericStringParser(object):
             "tan": math.tan,
             "exp": math.exp,
             "abs": abs,
-            "trunc": lambda a: int(a), # pylint: disable=unnecessary-lambda
+            "trunc": lambda a: int(a),  # pylint: disable=unnecessary-lambda
             "round": round,
             "sgn": lambda a: abs(a) > epsilon and ((a > 0) - (a < 0)) or 0,
             "log": lambda a: math.log(a, 10),
@@ -153,7 +156,7 @@ class NumericStringParser(object):
         """
         Evaluate the expression on the input data.
         """
-        results = self.bnf.parseString(num_string, parseAll) # pylint: disable=unused-variable
+        results = self.bnf.parseString(num_string, parseAll)  # pylint: disable=unused-variable
         return self.evaluateStack(self.exprStack[:])
 
 
@@ -182,7 +185,7 @@ class MathBlock(Block):
 
         {math:7(2+3)}
         42.0
-     
+
         {math:trunc(7(2+3))}
         42
     """
@@ -195,7 +198,7 @@ class MathBlock(Block):
         """
         try:
             return str(NSP.eval(ctx.verb.payload.strip(" ")))
-        except: # pylint: disable=bare-except
+        except:  # pylint: disable=bare-except
             return None
 
 

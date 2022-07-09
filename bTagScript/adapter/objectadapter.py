@@ -8,6 +8,7 @@ class SafeObjectAdapter(Adapter):
     """
     For objects
     """
+
     __slots__ = ("object",)
 
     def __init__(self, base) -> None:

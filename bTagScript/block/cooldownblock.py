@@ -80,7 +80,7 @@ class CooldownBlock(verb_required_block(True, payload=True, parameter=True)):
             cooldown_key = ctx.original_message
         try:
             cooldown = self.COOLDOWNS[cooldown_key]
-            base = cooldown._cooldown # pylint: disable=protected-access
+            base = cooldown._cooldown  # pylint: disable=protected-access
             if (rate, per) != (base.rate, base.per):
                 cooldown = self.create_cooldown(cooldown_key, rate, per)
         except KeyError:

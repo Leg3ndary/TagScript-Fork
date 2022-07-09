@@ -59,5 +59,5 @@ class RangeBlock(verb_required_block(True, payload=True)):
             lower = int(float(spl[0]))
             upper = int(float(spl[1]))
             return str(random.randint(lower, upper))
-        except: # pylint: disable=bare-except
+        except:  # pylint: disable=bare-except
             return None

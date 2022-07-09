@@ -1,5 +1,5 @@
-from urllib.parse import quote, quote_plus, unquote, unquote_plus
 from typing import Optional
+from urllib.parse import quote, quote_plus, unquote, unquote_plus
 
 from ..interface import verb_required_block
 from ..interpreter import Context

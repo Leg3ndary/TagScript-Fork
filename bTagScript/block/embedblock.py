@@ -27,7 +27,7 @@ def string_to_color(argument: str) -> Colour:
         arg = arg.replace(" ", "_")
         method = getattr(Colour, arg, None)
         if arg.startswith("from_") or method is None or not ismethod(method):
-            raise BadColourArgument(arg) # pylint: disable=raise-missing-from
+            raise BadColourArgument(arg)  # pylint: disable=raise-missing-from
         return method()
 
 
@@ -56,7 +56,7 @@ def add_field(embed: Embed, _: str, payload: str) -> None:
         inline = implicit_bool(_inline)
         if inline is None:
             raise EmbedParseError(
-                    "`inline` argument for `add_field` is not a boolean value (_inline)"
+                "`inline` argument for `add_field` is not a boolean value (_inline)"
             )
     except ValueError:
         try:
@@ -219,7 +219,7 @@ class EmbedBlock(Block):
         """
         try:
             length = len(embed)
-        except Exception as error: # pylint: disable=broad-except
+        except Exception as error:  # pylint: disable=broad-except
             return str(error)
         if length > 6000:
             return f"`MAX EMBED LENGTH REACHED ({length}/6000)`"

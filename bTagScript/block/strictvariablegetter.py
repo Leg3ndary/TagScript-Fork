@@ -28,7 +28,7 @@ class StrictVariableGetterBlock(Block):
         This is my variable.
     """
 
-    def will_accept(self, ctx: Context) -> bool: # pylint: disable=arguments-differ
+    def will_accept(self, ctx: Context) -> bool:  # pylint: disable=arguments-differ
         """
         Check if the declaration is in the response variables
         """

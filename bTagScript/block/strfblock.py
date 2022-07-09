@@ -55,7 +55,7 @@ class StrfBlock(Block):
             if ctx.verb.parameter.isdigit():
                 try:
                     t = datetime.fromtimestamp(int(ctx.verb.parameter))
-                except: # pylint: disable=bare-except
+                except:  # pylint: disable=bare-except
                     return
             else:
                 try:

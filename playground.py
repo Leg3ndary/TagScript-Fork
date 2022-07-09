@@ -13,7 +13,6 @@ blocks = [
     block.StrfBlock(),
     block.StopBlock(),
     block.AssignmentBlock(),
-    block.FiftyFiftyBlock(),
     block.ShortCutRedirectBlock("message"),
     block.LooseVariableGetterBlock(),
     block.OrdinalAbbreviationBlock(),
@@ -25,8 +24,7 @@ x = Interpreter(blocks)
 DEFAULT = """{=(smth):Hello, how are you doing today?}
 {smth}
 {$parsed:{smth(-1)}}
-
-{debug}
+{parsed}
 """
 
 

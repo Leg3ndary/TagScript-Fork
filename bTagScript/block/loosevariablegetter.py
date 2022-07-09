@@ -33,7 +33,7 @@ class LooseVariableGetterBlock(Block):
         This is another variable.
     """
 
-    def will_accept(self, ctx: Context) -> bool: # pylint: disable=arguments-differ
+    def will_accept(self, ctx: Context) -> bool:  # pylint: disable=arguments-differ
         """
         This block will accept any declaration.
         """

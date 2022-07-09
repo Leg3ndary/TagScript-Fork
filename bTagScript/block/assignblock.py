@@ -45,7 +45,8 @@ class AssignmentBlock(verb_required_block(False, parameter=True)):
         """
         if not ctx.verb.parameter:
             return None
-        elif ctx.verb.parameter in ctx.interpreter._blocknames: # pylint: disable=protected-access
+        elif ctx.verb.parameter in ctx.interpreter._blocknames:  # pylint: disable=protected-access
             return None
         ctx.response.variables[ctx.verb.parameter] = StringAdapter(str(ctx.verb.payload))
+        print(f"Assigned {ctx.verb.parameter} to {ctx.verb.payload}")
         return ""

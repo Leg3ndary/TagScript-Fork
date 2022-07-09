@@ -8,7 +8,6 @@ blocks = [
     block.RangeBlock(),
     block.StrfBlock(),
     block.AssignmentBlock(),
-    block.FiftyFiftyBlock(),
     block.LooseVariableGetterBlock(),
 ]
 x = Interpreter(blocks)

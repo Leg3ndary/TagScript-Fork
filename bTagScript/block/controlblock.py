@@ -22,7 +22,7 @@ def parse_into_output(payload: str, result: Optional[bool]) -> Optional[str]:
             return payload
         else:
             return ""
-    except: # pylint: disable=bare-except
+    except:  # pylint: disable=bare-except
         return
 
 

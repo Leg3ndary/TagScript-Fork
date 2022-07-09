@@ -7,7 +7,7 @@ from ..verb import Verb
 class FunctionAdapter(Adapter):
     """
     Function adapter...
-    
+
     Would be cool to have functions in tagscript
     """
 

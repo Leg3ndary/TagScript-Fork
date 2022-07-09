@@ -82,7 +82,7 @@ def helper_parse_if(string: str) -> Optional[bool]:
         if "<" in string:
             spl = string.split("<")
             return float(spl[0].strip()) < float(spl[1].strip())
-    except: # pylint: disable=bare-except
+    except:  # pylint: disable=bare-except
         pass
 
 

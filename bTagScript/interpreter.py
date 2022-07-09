@@ -78,16 +78,16 @@ def build_node_tree(message: str) -> List[Node]:
 
     starts = []
     for i, ch in enumerate(message):
-        if ch == "{" and previous != r"\\":
+        if ch == "{" and previous[1:] != "\\":
             starts.append(i)
-        if ch == "}" and previous != r"\\":
+        if ch == "}" and previous[1:] != "\\":
             if not starts:
                 continue
             coords = (starts.pop(), i)
             n = Node(coords)
             nodes.append(n)
 
-        previous = previous[1:] + ch
+        previous = previous[:1] + ch
     return nodes
 
 
@@ -194,17 +194,26 @@ class Interpreter:
         verb_limit: int,
         dot_parameter: bool,
     ) -> Context:
+        """
+        Get the context for a node.
+        """
         # Get the updated verb string from coordinates and make the context
         start, end = node.coordinates
         node.verb = Verb(final[start : end + 1], limit=verb_limit, dot_parameter=dot_parameter)
         return Context(node.verb, response, self, original_message)
 
     def _get_acceptors(self, ctx: Context) -> List[Block]:
+        """
+        Get acceptors
+        """
         acceptors = [b for b in self.blocks if b.will_accept(ctx)]
         log.debug("%r acceptors: %r", ctx, acceptors)
         return acceptors
 
     def _process_blocks(self, ctx: Context, node: Node) -> Optional[str]:
+        """
+        Process the blocks
+        """
         acceptors = self._get_acceptors(ctx)
         for b in acceptors:
             value = b.process(ctx)

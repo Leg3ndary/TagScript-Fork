@@ -16,7 +16,7 @@ class ShortCutRedirectBlock(Block):
         """
         self.redirect_name = var_name
 
-    def will_accept(self, ctx: Context) -> bool: # pylint: disable=arguments-differ
+    def will_accept(self, ctx: Context) -> bool:  # pylint: disable=arguments-differ
         """
         Check if the declaration is a digit
         """
