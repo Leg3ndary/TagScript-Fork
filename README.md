@@ -2,12 +2,9 @@
 <a href='https://btagscript.readthedocs.io/en/latest/?badge=latest'>
     <img src='https://readthedocs.org/projects/btagscript/badge/?version=latest' alt='Documentation Status' />
 </a>
+<img width="851" alt="bTagScriptBasic" src="https://user-images.githubusercontent.com/57199957/178122657-98041f02-0009-43d0-9c38-e12c2219e3a6.png">
 
-**This is my own implementation of TagScript. Will write documentation for how to use this later.**
-
-This repository is a fork of JonSnowbd's [TagScript](https://github.com/JonSnowbd/TagScript), a string templating language.
-
-This fork is also from Phenom4n4n's forked version of the original TagScript package.
+This repository is a fork of Phenom4n4n's fork of JonSnowbd's [TagScript](https://github.com/JonSnowbd/TagScript), a string templating language.
 
 Documentation on the bTagScript library can be [found here](https://btagscript.readthedocs.io/en/latest/).
 
@@ -24,12 +21,12 @@ Test String: {message} {#:1,2,3,4,5,6,7,8,9,10} {range:1-9} {$variablename:Hello
 
 Note that this was adjusted for different syntax, {=(variablename):Hello World}
 
-```asciidoc
-= 2.6.9 bTagScript =
-[0.08033132553100586 Seconds]
+```
+2.6.9 bTagScript
+0.08033132553100586 Seconds
 
-= 2.6.2 TagScript =
-[0.08630657196044922 Seconds]
+2.6.2 TagScript
+0.08630657196044922 Seconds
 ```
 
 ## What?
