@@ -17,9 +17,9 @@ class StrfBlock(Block):
 
     **Aliases:** ``unix``
 
-    **Payload:** format, None
+    **Payload:** ``format``
 
-    **Parameter:** timestamp
+    **Parameter:** ``timestamp``
 
     **Example:**
 
@@ -44,6 +44,9 @@ class StrfBlock(Block):
     ACCEPTED_NAMES = ("strf", "unix")
 
     def process(self, ctx: Context) -> Optional[str]:
+        """
+        Process the strf block
+        """
         if ctx.verb.declaration.lower() == "unix":
             return str(int(datetime.now(timezone.utc).timestamp()))
         if not ctx.verb.payload:
@@ -52,7 +55,7 @@ class StrfBlock(Block):
             if ctx.verb.parameter.isdigit():
                 try:
                     t = datetime.fromtimestamp(int(ctx.verb.parameter))
-                except:
+                except: # pylint: disable=bare-except
                     return
             else:
                 try:

@@ -24,7 +24,10 @@ class Block:
 
     ACCEPTED_NAMES = ()
 
-    def __repr__(self):
+    def __repr__(self) -> str:
+        """
+        String repr
+        """
         return f"<{type(self).__qualname__} at {hex(id(self))}>"
 
     @classmethod

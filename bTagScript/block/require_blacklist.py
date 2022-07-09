@@ -16,9 +16,9 @@ class RequireBlock(verb_required_block(True, parameter=True)):
 
     **Aliases:** ``whitelist``
 
-    **Payload:** response, None
+    **Payload:** ``response``
 
-    **Parameter:** role, channel
+    **Parameter:** ``role, channel``
 
     **Examples:**
 
@@ -32,6 +32,9 @@ class RequireBlock(verb_required_block(True, parameter=True)):
     ACCEPTED_NAMES = ("require", "whitelist")
 
     def process(self, ctx: Context) -> Optional[str]:
+        """
+        Process the requirements
+        """
         actions = ctx.response.actions.get("requires")
         if actions:
             return None
@@ -52,9 +55,9 @@ class BlacklistBlock(verb_required_block(True, parameter=True)):
 
     **Usage:** ``{blacklist(<role,channel>):[response]}``
 
-    **Payload:** response, None
+    **Payload:** ``response``
 
-    **Parameter:** role, channel
+    **Parameter:** ``role, channel``
 
     **Examples:**
 

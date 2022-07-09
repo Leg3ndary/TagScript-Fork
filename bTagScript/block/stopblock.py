@@ -15,9 +15,9 @@ class StopBlock(verb_required_block(True, parameter=True)):
 
     **Aliases:** ``halt, error``
 
-    **Payload:** string, None
+    **Payload:** ``string``
 
-    **Parameter:** bool
+    **Parameter:** ``bool``
 
     **Example:**
 
@@ -30,6 +30,9 @@ class StopBlock(verb_required_block(True, parameter=True)):
     ACCEPTED_NAMES = ("stop", "halt", "break")
 
     def process(self, ctx: Context) -> Optional[str]:
+        """
+        Process the stop block
+        """
         if helper_parse_if(ctx.verb.parameter):
             raise StopError("" if ctx.verb.payload is None else ctx.verb.payload)
         return ""

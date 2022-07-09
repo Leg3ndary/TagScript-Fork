@@ -87,7 +87,7 @@ def build_node_tree(message: str) -> List[Node]:
             n = Node(coords)
             nodes.append(n)
 
-        previous = ch
+        previous = previous[1:] + ch
     return nodes
 
 

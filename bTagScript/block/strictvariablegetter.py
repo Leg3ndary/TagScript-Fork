@@ -28,8 +28,14 @@ class StrictVariableGetterBlock(Block):
         This is my variable.
     """
 
-    def will_accept(self, ctx: Context) -> bool:
+    def will_accept(self, ctx: Context) -> bool: # pylint: disable=arguments-differ
+        """
+        Check if the declaration is in the response variables
+        """
         return ctx.verb.declaration in ctx.response.variables
 
     def process(self, ctx: Context) -> Optional[str]:
+        """
+        Process the strict variable block
+        """
         return ctx.response.variables[ctx.verb.declaration].get_value(ctx.verb)

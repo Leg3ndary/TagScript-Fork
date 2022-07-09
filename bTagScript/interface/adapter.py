@@ -13,7 +13,10 @@ class Adapter:
     Implementations must subclass this to create adapters.
     """
 
-    def __repr__(self):
+    def __repr__(self) -> str:
+        """
+        String repr
+        """
         return f"<{type(self).__qualname__} at {hex(id(self))}>"
 
     def get_value(self, ctx: Context) -> Optional[str]:
