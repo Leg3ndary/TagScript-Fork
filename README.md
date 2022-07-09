@@ -15,7 +15,7 @@ Documentation on the bTagScript library can be [found here](https://btagscript.r
 
 ### July 08, 2022
 
-Testing for this benchmark used the following seeds and test strings, and was ran `1,000` times.
+Testing for this benchmark used the following seeds and test strings, this was ran `1,000` times.
 
 ```yaml
 Seeds: {message: Hello, this is my message.}
