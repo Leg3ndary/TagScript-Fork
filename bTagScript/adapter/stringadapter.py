@@ -27,7 +27,7 @@ class StringAdapter(Adapter):
         """
         Get the value given the verb
         """
-        return self.return_value(self.handle_ctx(ctx))
+        self.return_value(self.handle_ctx(ctx))
 
     def handle_ctx(self, ctx: Verb) -> str:
         """

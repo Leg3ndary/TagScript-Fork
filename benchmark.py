@@ -43,7 +43,7 @@ def v2_test():
     """
     for _ in range(1000):
         x.process(
-            "{message} {#:1,2,3,4,5,6,7,8,9,10} {range:1-9} {#:1,2,3,4,5} {message} {strf:Its %A}",
+            "{message} {#:1,2,3,4,5,6,7,8,9,10} {range:1-9} {=(variablename):Hello World} {variablename} {message} {strf:Its %A}",
             dummy,
         )
 
