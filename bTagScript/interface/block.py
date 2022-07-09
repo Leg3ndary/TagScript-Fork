@@ -45,7 +45,10 @@ class Block:
         dec = ctx.verb.declaration.lower()
         return dec in cls.ACCEPTED_NAMES
 
-    def pre_process(self, ctx: Context):
+    def pre_process(self, ctx: Context) -> Optional[str]: # pylint: disable=unused-argument
+        """
+        Any pre processing that needs to be done before the block is processed.
+        """
         return None
 
     def process(self, ctx: Context) -> Optional[str]:
@@ -71,7 +74,10 @@ class Block:
         """
         raise NotImplementedError
 
-    def post_process(self, ctx: Context):
+    def post_process(self, ctx: Context) -> Optional[str]: # pylint: disable=unused-argument
+        """
+        Any post processing that needs to be done after the block is processed.
+        """
         return None
 
 
@@ -98,11 +104,24 @@ def verb_required_block(
     check = (lambda x: x) if implicit else (lambda x: x is not None)
 
     class RequireMeta(type):
-        def __repr__(self):
+        """
+        Require a verb to have a parameter or payload if added.
+        """
+        def __repr__(cls) -> str:
+            """
+            String repr
+            """
             return f"VerbRequiredBlock(implicit={implicit!r}, payload={payload!r}, parameter={parameter!r})"
 
-    class VerbRequiredBlock(Block, metaclass=RequireMeta):
-        def will_accept(self, ctx: Context) -> bool:
+    class VerbRequiredBlock(Block, metaclass=RequireMeta): # pylint: disable=abstract-method
+        """
+        The required block.
+        """
+
+        def will_accept(self, ctx: Context) -> bool: # pylint: disable=arguments-differ
+            """
+            Describes whether the block is valid for the given :class:`~bTagScript.interpreter.Context`.
+            """
             verb = ctx.verb
             if payload and not check(verb.payload):
                 return False

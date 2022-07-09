@@ -53,16 +53,16 @@ class DebugBlock(Block):
 
     ACCEPTED_NAMES = ("debug",)
 
-    def process(self, ctx: Context) -> Optional[str]:
+    def process(self, ctx: Context) -> Optional[str]: # pylint: disable=too-many-branches
         """
         Check the count of a string
         """
         debug = {}
 
         if ctx.verb.parameter:
-            if ctx.verb.parameter in ["e", "exclude"]:
+            if ctx.verb.parameter in ("e", "exc", "exclude"):
                 if not ctx.verb.payload:
-                    pass
+                    return None
                 else:
                     if "~" in ctx.verb.payload:
                         exclude = ctx.verb.payload.split("~")
@@ -72,7 +72,7 @@ class DebugBlock(Block):
                     if k not in exclude:
                         debug[k] = v.get_value(ctx.verb)
 
-            elif ctx.verb.parameter in ["i", "include"]:
+            elif ctx.verb.parameter in ("i", "inc", "include"):
                 if not ctx.verb.payload:
                     return None
                 else:

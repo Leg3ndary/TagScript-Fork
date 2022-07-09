@@ -57,9 +57,10 @@ class Verb:
         self.parameter: Optional[str] = None
         self.payload: Optional[str] = None
         self.dot_parameter = dot_parameter
-        if not verb_string:
+        if verb_string is None:
             return
         self.__parse(verb_string, limit)
+        self.dec_start: int = None
 
     def __str__(self) -> str:
         """
@@ -112,8 +113,8 @@ class Verb:
                 return
             elif parse_parameter(i, v):
                 return
-        else:
-            self.set_payload()
+        # Used to have an else here
+        self.set_payload()
 
     def _parse_paranthesis_parameter(self, i: int, v: str) -> bool:
         if v == "(":
@@ -130,18 +131,27 @@ class Verb:
         return False
 
     def set_payload(self) -> None:
+        """
+        Set the payload
+        """
         res = self.parsed_string.split(":", 1)
         if len(res) == 2:
             self.payload = res[1]
         self.declaration = res[0]
 
     def open_parameter(self, i: int) -> None:
+        """
+        Open the parameter
+        """
         self.dec_depth += 1
         if not self.dec_start:
             self.dec_start = i
             self.declaration = self.parsed_string[:i]
 
     def close_parameter(self, i: int) -> bool:
+        """
+        Close the parameter
+        """
         self.dec_depth -= 1
         if self.dec_depth == 0:
             self.parameter = self.parsed_string[self.dec_start + 1 : i]

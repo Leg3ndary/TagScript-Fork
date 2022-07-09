@@ -24,6 +24,9 @@ class StringAdapter(Adapter):
         return f"<{type(self).__qualname__} string={repr(self.string)}>"
 
     def get_value(self, ctx: Verb) -> str:
+        """
+        Get the value given the verb
+        """
         return self.return_value(self.handle_ctx(ctx))
 
     def handle_ctx(self, ctx: Verb) -> str:
@@ -34,7 +37,7 @@ class StringAdapter(Adapter):
             return self.string
 
         try:
-            splitter = " " if not ctx.payload else ctx.payload
+            splitter = " " if ctx.payload is None else ctx.payload
             if ctx.parameter.isdigit():
                 index = int(ctx.parameter) - 1
                 return self.string.split(splitter)[index]
@@ -49,15 +52,18 @@ class StringAdapter(Adapter):
                     if int(ctx.parameter.replace("+", "")) > 0
                     else int(ctx.parameter.replace("+", ""))
                 )
-                splitter = " " if not ctx.payload else ctx.payload
+                splitter = " " if ctx.payload is None else ctx.payload
                 if ctx.parameter.startswith("+"):
                     return splitter.join(self.string.split(splitter)[: index + 1])
                 elif ctx.parameter.endswith("+"):
                     return splitter.join(self.string.split(splitter)[index:])
                 else:
                     return self.string.split(splitter)[index]
-        except:
+        except: #pylint: disable=bare-except
             return self.string
 
     def return_value(self, string: str) -> str:
+        """
+        Return the value, escaped
+        """
         return escape_content(string) if self.escape_content else string

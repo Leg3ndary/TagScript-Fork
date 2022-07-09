@@ -178,7 +178,10 @@ class Interpreter:
                     raise BlocknameDuplicateError(block)
                 self._blocknames.append(name)
 
-    def __repr__(self):
+    def __repr__(self) -> str:
+        """
+        String repr
+        """
         return f"<{type(self).__name__} blocks={self.blocks!r}>"
 
     def _get_context(
@@ -355,9 +358,15 @@ class AsyncInterpreter(Interpreter):
     """
 
     async def _get_acceptors(self, ctx: Context) -> List[Block]:
+        """
+        Get acceptors for a given context.
+        """
         return [b for b in self.blocks if await maybe_await(b.will_accept, ctx)]
 
     async def _process_blocks(self, ctx: Context, node: Node) -> Optional[str]:
+        """
+        Process all blocks (Acceptors)
+        """
         acceptors = await self._get_acceptors(ctx)
         for b in acceptors:
             value = await maybe_await(b.process, ctx)
