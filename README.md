@@ -1,12 +1,15 @@
-## Information
-<a href='https://btagscript.readthedocs.io/en/latest/?badge=latest'>
-    <img src='https://readthedocs.org/projects/btagscript/badge/?version=latest' alt='Documentation Status' />
-</a>
+# bTagScript
+
+TagScript, but better.
+
 <img width="851" alt="bTagScriptBasic" src="https://user-images.githubusercontent.com/57199957/178122657-98041f02-0009-43d0-9c38-e12c2219e3a6.png">
 
 This repository is a fork of Phenom4n4n's fork of JonSnowbd's [TagScript](https://github.com/JonSnowbd/TagScript), a string templating language.
 
-Documentation on the bTagScript library can be [found here](https://btagscript.readthedocs.io/en/latest/).
+<a href='https://btagscript.readthedocs.io/en/latest/?badge=latest'>
+    <img src='https://readthedocs.org/projects/btagscript/badge/?version=latest' alt='Documentation Status' />
+</a> 
+Documentation on the bTagScript library can be [found here](https://btagscript.readthedocs.io/en/latest/). 
 
 ## Benchmarks (Performance Testing)
 
