@@ -7,18 +7,18 @@ from ..interpreter import Context
 class RequireBlock(verb_required_block(True, parameter=True)):
     """
     The require block will attempt to convert the given parameter into a channel
-    or role, using name or ID. If the user running the tag is not in the targeted
-    channel or doesn't have the targeted role, the tag will stop processing and
-    it will send the response if one is given. Multiple role or channel
+    role or member, using name or ID. If the user running the tag is not in the
+    targeted channel or doesn't have the targeted role, the tag will stop processing
+    and it will send the response if one is given. Multiple role or channel
     requirements can be given, and should be split by a ",".
 
-    **Usage:** ``{require(<role,channel>):[response]}``
+    **Usage:** ``{require(<role, channel, member>):[response]}``
 
     **Aliases:** ``whitelist``
 
     **Payload:** ``response``
 
-    **Parameter:** ``role, channel``
+    **Parameter:** ``role, channel, member``
 
     **Examples:**
 
