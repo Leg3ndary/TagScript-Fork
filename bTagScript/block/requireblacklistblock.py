@@ -70,6 +70,9 @@ class BlacklistBlock(verb_required_block(True, parameter=True)):
     ACCEPTED_NAMES = ("blacklist",)
 
     def process(self, ctx: Context) -> Optional[str]:
+        """
+        Process the blacklists
+        """
         actions = ctx.response.actions.get("blacklist")
         if actions:
             return None

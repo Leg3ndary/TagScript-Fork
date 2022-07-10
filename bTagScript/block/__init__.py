@@ -18,7 +18,7 @@ from .randomblock import RandomBlock
 from .rangeblock import RangeBlock
 from .redirectblock import RedirectBlock
 from .replaceblock import PythonBlock, ReplaceBlock
-from .require_blacklist import BlacklistBlock, RequireBlock
+from .requireblacklistblock import BlacklistBlock, RequireBlock
 from .shortcutredirect import ShortCutRedirectBlock
 from .stopblock import StopBlock
 from .strfblock import StrfBlock
