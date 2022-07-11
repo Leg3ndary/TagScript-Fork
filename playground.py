@@ -21,11 +21,10 @@ blocks = [
 ]
 x = Interpreter(blocks)
 
-DEFAULT = """{=(smth):Hello, how are you doing today?}
+DEFAULT = r"""{=(smth):Hello, how are you doing today?}
 {smth}
 {$parsed:{smth(-1)}}
-{parsed}
-"""
+{parsed} {debug}"""
 
 
 def press(button: gui.button) -> None:  # pylint: disable=unused-argument
@@ -36,7 +35,7 @@ def press(button: gui.button) -> None:  # pylint: disable=unused-argument
     app.clearTextArea("output")
     app.setTextArea("output", response.body)
     app.clearTextArea("actions")
-    app.setTextArea("actions", response.debug)
+    app.setTextArea("actions", response.extras.get("debug", r"{}"))  # pylint: disable=no-member
 
 
 app = gui("TSE Playground", "750x450")

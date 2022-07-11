@@ -29,9 +29,11 @@ class Verb:
     -------
     Below is a visual representation of a block and its attributes::
 
+    .. tagscript::
+        Normally
         {declaration(parameter):payload}
 
-        # dot_parameter = True
+        When dot_parameter = True
         {declaration.parameter:payload}
     """
 
@@ -88,6 +90,15 @@ class Verb:
         Parse the string into a verb
 
         Parameters
+        ----------
+        verb_string: str
+            The string to parse into a verb.
+        limit: int
+            The maximum number of characters to parse.
+
+        Returns
+        -------
+        None
         """
         self.parsed_string = verb_string[1:-1][:limit]
         self.parsed_length = len(self.parsed_string)
@@ -117,6 +128,21 @@ class Verb:
         self.set_payload()
 
     def _parse_paranthesis_parameter(self, i: int, v: str) -> bool:
+        """
+        Parse the parameter in parentheses
+
+        Parameters
+        ----------
+        i: int
+            ~
+        v: str
+            ~
+
+        Returns
+        -------
+        bool
+            Whether the parameter was parsed
+        """
         if v == "(":
             self.open_parameter(i)
         elif v == ")" and self.dec_depth:
@@ -124,6 +150,21 @@ class Verb:
         return False
 
     def _parse_dot_parameter(self, i: int, v: str) -> bool:
+        """
+        Parse the parameter after a dot
+        
+        Parameters
+        ----------
+        i: int
+            ~
+        v: str
+            ~
+        
+        Returns
+        -------
+        bool
+            Whether the parameter was parsed
+        """
         if v == ".":
             self.open_parameter(i)
         elif (v == ":" or i == self.parsed_length - 1) and self.dec_depth:

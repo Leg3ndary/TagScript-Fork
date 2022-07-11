@@ -103,5 +103,5 @@ class DebugBlock(Block):
         else:
             for k, v in ctx.response.variables.items():
                 debug[k] = v.get_value(ctx.verb)
-        ctx.response.debug = debug
+        ctx.response.extras["debug"] = debug
         return ""

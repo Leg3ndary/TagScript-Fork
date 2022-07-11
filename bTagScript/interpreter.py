@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import logging
 from itertools import islice
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple, Union
 
 from .exceptions import (
     BlocknameDuplicateError,
@@ -32,6 +32,7 @@ AdapterDict = Dict[str, Adapter]
 class Node:
     """
     A low-level object representing a bracketed block.
+
     Attributes
     ----------
     coordinates: Tuple[int, int]
@@ -46,15 +47,15 @@ class Node:
 
     def __init__(self, coordinates: Tuple[int, int], verb: Optional[Verb] = None) -> None:
         """
-        Init
+        Constructing the Node
         """
-        self.output: Optional[str] = None
-        self.verb = verb
         self.coordinates = coordinates
+        self.verb = verb
+        self.output: Optional[str] = None
 
     def __str__(self) -> str:
         """
-        str func
+        String function
         """
         return str(self.verb) + " at " + str(self.coordinates)
 
@@ -68,26 +69,32 @@ class Node:
 def build_node_tree(message: str) -> List[Node]:
     """
     Function that finds all possible nodes in a string.
+
+    Parameters
+    ----------
+    message: str
+        The string to find nodes in.
+
     Returns
     -------
     List[Node]
         A list of all possible text bracket blocks.
     """
     nodes = []
-    previous = r""
+    # previous = r""
 
     starts = []
     for i, ch in enumerate(message):
-        if ch == "{" and previous[1:] != "\\":
+        if ch == "{":  # and previous[1:] != "\\":
             starts.append(i)
-        if ch == "}" and previous[1:] != "\\":
+        if ch == "}":  # and previous[1:] != "\\":
             if not starts:
                 continue
             coords = (starts.pop(), i)
             n = Node(coords)
             nodes.append(n)
 
-        previous = previous[:1] + ch
+        # previous = previous[:1] + ch
     return nodes
 
 
@@ -103,23 +110,23 @@ class Response:
         A dictionary that blocks can access and modify to define post-processing actions.
     variables: Dict[str, Adapter]
         A dictionary of variables that blocks such as the `LooseVariableGetterBlock` can access.
-    extra_kwargs: Dict[str, Any]
+    extras: Dict[str, Any]
         A dictionary of extra keyword arguments that blocks can use to define their own behavior.
     """
 
-    __slots__ = ("body", "actions", "variables", "extra_kwargs", "debug")
+    __slots__ = ("body", "actions", "variables", "extras")
 
-    def __init__(
-        self, *, variables: AdapterDict = None, extra_kwargs: Dict[str, Any] = None
-    ) -> None:
+    def __init__(self, *, variables: AdapterDict = None, extras: Dict[str, Any] = None) -> None:
         self.body: str = None
         self.actions: Dict[str, Any] = {}
         self.variables: AdapterDict = variables if variables is not None else {}
-        self.extra_kwargs: Dict[str, Any] = extra_kwargs if extra_kwargs is not None else {}
-        self.debug: dict = {}
+        self.extras: Dict[str, Any] = extras if extras is not None else {}
 
-    def __repr__(self):
-        return f"<Response body={self.body!r} actions={self.actions!r} variables={self.variables!r} debug={self.debug!r}>"
+    def __repr__(self) -> str:
+        """
+        String repr
+        """
+        return f"<Response body={self.body!r} actions={self.actions!r} variables={self.variables!r} extras={self.extras!r}>"
 
 
 class Context:
@@ -141,7 +148,7 @@ class Context:
 
     def __init__(self, verb: Verb, res: Response, interpreter: Interpreter, og: str) -> None:
         """
-        Context class init
+        Construct the context
         """
         self.verb: Verb = verb
         self.original_message: str = og
@@ -158,19 +165,25 @@ class Context:
 class Interpreter:
     """
     The TagScript interpreter.
+
     Attributes
     ----------
-    blocks: List[Block]
-        A list of blocks to be used for TagScript processing.
+    blocks: UnionList[Block]
+        A list or tuple of blocks to be used for TagScript processing.
     """
 
     __slots__ = ("blocks", "_blocknames")
 
-    def __init__(self, blocks: List[Block]) -> None:
+    def __init__(self, blocks: Union[List[Block], Tuple[Block]]) -> None:
         """
         Creates a list of blocks, and also gets all acceptable names for processing
+
+        Raises
+        ------
+        BlocknameDuplicateError
+            If there are duplicate blocknames.
         """
-        self.blocks: List[Block] = blocks
+        self.blocks: Union[List[Block], Tuple[Block]] = blocks
         self._blocknames = []
         for block in blocks:
             for name in block.ACCEPTED_NAMES:
@@ -195,24 +208,65 @@ class Interpreter:
         dot_parameter: bool,
     ) -> Context:
         """
-        Get the context for a node.
+        Construct a context object for a node.
+
+        Parameters
+        ----------
+        node: Node
+            The node to construct the context for.
+        final: str
+            The final message to be processed.
+        response: Response
+            The response object to be passed to the context.
+        original_message: str
+            The original message passed to the interpreter.
+        verb_limit: int
+            The maximum number of verbs to process.
+        dot_parameter: bool
+            Whether or not to use the `.` parameter.
+
+        Returns
+        -------
+        Context
+            The constructed context.
         """
         # Get the updated verb string from coordinates and make the context
         start, end = node.coordinates
         node.verb = Verb(final[start : end + 1], limit=verb_limit, dot_parameter=dot_parameter)
         return Context(node.verb, response, self, original_message)
 
-    def _get_acceptors(self, ctx: Context) -> List[Block]:
+    def _get_acceptors(self, ctx: Context) -> Tuple[Block]:
         """
-        Get acceptors
+        Get a list of acceptors
+
+        Parameters
+        ----------
+        ctx: Context
+            The context to get the acceptors for.
+
+        Returns
+        -------
+        Tuple[Block]
         """
-        acceptors = [b for b in self.blocks if b.will_accept(ctx)]
+        acceptors = (b for b in self.blocks if b.will_accept(ctx))
         log.debug("%r acceptors: %r", ctx, acceptors)
         return acceptors
 
     def _process_blocks(self, ctx: Context, node: Node) -> Optional[str]:
         """
         Process the blocks
+
+        Parameters
+        ----------
+        ctx: Context
+            The context to process the blocks from.
+        node: Node
+            The node to process the blocks from.
+
+        Returns
+        -------
+        Optional[str]
+            The final message
         """
         acceptors = self._get_acceptors(ctx)
         for b in acceptors:
@@ -224,6 +278,28 @@ class Interpreter:
 
     @staticmethod
     def _check_workload(charlimit: int, total_work: int, output: str) -> Optional[int]:
+        """
+        Check if the workload has been exceeded.
+
+        Parameters
+        ----------
+        charlimit: int
+            The maximum number of characters to process.
+        total_work: int
+            The total number of characters processed.
+        output: str
+            The output string.
+
+        Returns
+        -------
+        Optional[int]
+            The total amount of work that has been processed.
+
+        Raises
+        ------
+        WorkloadExceededError
+            If the workload has been exceeded.
+        """
         if not charlimit:
             return
         total_work += len(output)
@@ -236,6 +312,25 @@ class Interpreter:
 
     @staticmethod
     def _text_deform(start: int, end: int, final: str, output: str) -> Tuple[str, int]:
+        """
+        Deform the text, replacing code with what was outputted.
+
+        Parameters
+        ----------
+        start: int
+            The start index of the code.
+        end: int
+            The end index of the code.
+        final: str
+            The final message.
+        output: str
+            The output string.
+
+        Returns
+        -------
+        Tuple[str, int]
+            The new final message, and the change in final length after the change has been applied.
+        """
         message_slice_len = (end + 1) - start
         replacement_len = len(output)
         differential = (
@@ -245,7 +340,27 @@ class Interpreter:
         return final, differential
 
     @staticmethod
-    def _translate_nodes(node_ordered_list: List[Node], index: int, start: int, differential: int):
+    def _translate_nodes(
+        node_ordered_list: List[Node], index: int, start: int, differential: int
+    ) -> None:
+        """
+        Get the new coordinates for each node.
+
+        Parameters
+        ----------
+        node_ordered_list: List[Node]
+            The list of nodes to translate.
+        index: int
+            The index of the node to translate.
+        start: int
+            The start index of the code.
+        differential: int
+            The change in final length after the change has been applied.
+
+        Returns
+        -------
+        None
+        """
         for future_n in islice(node_ordered_list, index + 1, None):
             new_start = None
             new_end = None
@@ -269,7 +384,30 @@ class Interpreter:
         charlimit: int,
         verb_limit: int = 2000,
         dot_parameter: bool,
-    ):
+    ) -> Optional[str]:
+        """
+        Solve the tagscript by proccessing all possible nodes.
+
+        Parameters
+        ----------
+        message: str
+            The message to process.
+        node_ordered_list: List[Node]
+            The list of nodes to process.
+        response: Response
+            The response object to be passed to the context.
+        charlimit: int
+            The maximum number of characters to process.
+        verb_limit: int
+            The maximum number of verbs to process.
+        dot_parameter: bool
+            Whether or not to use the `.` parameter.
+
+        Returns
+        -------
+        Optional[str]
+            The final, completely processed message.
+        """
         final = message
         total_work = 0
         for index, node in enumerate(node_ordered_list):
@@ -298,6 +436,21 @@ class Interpreter:
 
     @staticmethod
     def _return_response(response: Response, output: str) -> Response:
+        """
+        Return the response object.
+
+        Parameters
+        ----------
+        response: Response
+            The response object to be returned.
+        output: str
+            The output string.
+
+        Returns
+        -------
+        Response
+            The response object.
+        """
         if response.body is None:
             response.body = output.strip()
         else:
@@ -316,6 +469,7 @@ class Interpreter:
     ) -> Response:
         """
         Processes a given TagScript string.
+
         Parameters
         ----------
         message: str
@@ -328,10 +482,12 @@ class Interpreter:
             Whether the parameter should be followed after a "." or use the default of parantheses.
         kwargs: Dict[str, Any]
             Additional keyword arguments that may be used by blocks during processing.
+
         Returns
         -------
         Response
             A response object containing the processed body, actions and variables.
+
         Raises
         ------
         TagScriptError
@@ -341,7 +497,7 @@ class Interpreter:
         ProcessError
             An unexpected error occurred while processing blocks.
         """
-        response = Response(variables=seed_variables, extra_kwargs=kwargs)
+        response = Response(variables=seed_variables, extras=kwargs)
         node_ordered_list = build_node_tree(message)
         try:
             output = self._solve(
@@ -366,15 +522,36 @@ class AsyncInterpreter(Interpreter):
     See `Interpreter` for full documentation.
     """
 
-    async def _get_acceptors(self, ctx: Context) -> List[Block]:
+    async def _get_acceptors(self, ctx: Context) -> Tuple[Block]:
         """
-        Get acceptors for a given context.
+        Get a list of acceptors
+
+        Parameters
+        ----------
+        ctx: Context
+            The context to get the acceptors for.
+
+        Returns
+        -------
+        Tuple[Block]
         """
-        return [b for b in self.blocks if await maybe_await(b.will_accept, ctx)]
+        return (b for b in self.blocks if await maybe_await(b.will_accept, ctx))
 
     async def _process_blocks(self, ctx: Context, node: Node) -> Optional[str]:
         """
-        Process all blocks (Acceptors)
+        Process the blocks
+
+        Parameters
+        ----------
+        ctx: Context
+            The context to process the blocks from.
+        node: Node
+            The node to process the blocks from.
+
+        Returns
+        -------
+        Optional[str]
+            The final message
         """
         acceptors = await self._get_acceptors(ctx)
         for b in acceptors:
@@ -393,7 +570,30 @@ class AsyncInterpreter(Interpreter):
         charlimit: int,
         verb_limit: int = 2000,
         dot_parameter: bool,
-    ):
+    ) -> Optional[str]:
+        """
+        Solve the tagscript by proccessing all possible nodes.
+
+        Parameters
+        ----------
+        message: str
+            The message to process.
+        node_ordered_list: List[Node]
+            The list of nodes to process.
+        response: Response
+            The response object to be passed to the context.
+        charlimit: int
+            The maximum number of characters to process.
+        verb_limit: int
+            The maximum number of verbs to process.
+        dot_parameter: bool
+            Whether or not to use the `.` parameter.
+
+        Returns
+        -------
+        Optional[str]
+            The final, completely processed message.
+        """
         final = message
         total_work = 0
 
@@ -433,7 +633,7 @@ class AsyncInterpreter(Interpreter):
         This method has no additional attributes from the `Interpreter` class.
         See `Interpreter.process` for full documentation.
         """
-        response = Response(variables=seed_variables, extra_kwargs=kwargs)
+        response = Response(variables=seed_variables, extras=kwargs)
         node_ordered_list = build_node_tree(message)
         try:
             output = await self._solve(

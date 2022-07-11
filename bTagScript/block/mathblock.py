@@ -89,13 +89,13 @@ class NumericStringParser(object):
         # "atom [ ^ atom ]...", we get right-to-left exponents, instead of left-to-right
         # that is, 2^3^2 = 2^(3^2), not (2^3)^2.
         factor = Forward()
-        factor << atom + ZeroOrMore(
+        factor << atom + ZeroOrMore(  # pylint: disable=expression-not-assigned
             (expop + factor).setParseAction(self.pushFirst)
-        )  # pylint: disable=expression-not-assigned
+        )
         term = factor + ZeroOrMore((multop + factor).setParseAction(self.pushFirst))
-        expr << term + ZeroOrMore(
+        expr << term + ZeroOrMore(  # pylint: disable=expression-not-assigned
             (addop + term).setParseAction(self.pushFirst)
-        )  # pylint: disable=expression-not-assigned
+        )
         final = expr + ZeroOrMore((iop + expr).setParseAction(self.pushFirst))
         # addop_term = ( addop + term ).setParseAction( self.pushFirst )
         # general_term = term + ZeroOrMore( addop_term ) | OneOrMore( addop_term)

@@ -21,11 +21,15 @@ __all__ = (
 
 
 class TagScriptError(Exception):
-    """Base class for all module errors."""
+    """
+    Base class for all module errors.
+    """
 
 
 class WorkloadExceededError(TagScriptError):
-    """Raised when the interpreter goes over its passed character limit."""
+    """
+    Raised when the interpreter goes over its passed character limit.
+    """
 
 
 class ProcessError(TagScriptError):
@@ -42,7 +46,10 @@ class ProcessError(TagScriptError):
         The interpreter used for processing.
     """
 
-    def __init__(self, error: Exception, response: Response, interpreter: Interpreter):
+    def __init__(self, error: Exception, response: Response, interpreter: Interpreter) -> None:
+        """
+        Construct the error
+        """
         self.original: Exception = error
         self.response: Response = response
         self.interpreter: Interpreter = interpreter
@@ -50,7 +57,9 @@ class ProcessError(TagScriptError):
 
 
 class EmbedParseError(TagScriptError):
-    """Raised if an exception occurs while attempting to parse an embed."""
+    """
+    Raised if an exception occurs while attempting to parse an embed.
+    """
 
 
 class BadColourArgument(EmbedParseError):
@@ -63,7 +72,10 @@ class BadColourArgument(EmbedParseError):
         The invalid input.
     """
 
-    def __init__(self, argument: str):
+    def __init__(self, argument: str) -> None:
+        """
+        Init the error
+        """
         self.argument = argument
         super().__init__(f'Colour "{argument}" is invalid.')
 
@@ -99,7 +111,10 @@ class CooldownExceeded(StopError):
         The seconds left til the cooldown ends.
     """
 
-    def __init__(self, message: str, cooldown: Cooldown, key: str, retry_after: float):
+    def __init__(self, message: str, cooldown: Cooldown, key: str, retry_after: float) -> None:
+        """
+        Construct the error
+        """
         self.cooldown = cooldown
         self.key = key
         self.retry_after = retry_after
