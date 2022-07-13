@@ -6,10 +6,9 @@ from .assignblock import AssignmentBlock
 from .breakblock import BreakBlock
 from .commentblock import CommentBlock
 from .controlblock import AllBlock, AnyBlock, IfBlock
-from .countblock import CountBlock
+from .countingblocks import CountBlock, LengthBlock
 from .debugblock import DebugBlock
 from .discord import *
-from .lengthblock import LengthBlock
 from .loosevariablegetter import LooseVariableGetterBlock
 from .mathblock import MathBlock, OrdinalAbbreviationBlock
 from .randomblock import RandomBlock

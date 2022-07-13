@@ -1,5 +1,2 @@
-autoflake
-black
-discord.py
-isort
-pyparsing
+git+https://github.com/Rapptz/discord.py
+pyparsing>=3.0.9
