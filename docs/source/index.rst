@@ -6,6 +6,10 @@
 Welcome to TagScript's documentation!
 =====================================
 
+.. note::
+
+   Check out User Guides if first!
+
 .. toctree::
    :maxdepth: 1
    :caption: User Guides
@@ -46,4 +50,4 @@ Welcome to bTagScript's official documentation.
 
 .. note::
 
-   This documentation is still being regularily updated, I hope.
+   This documentation is still being regularily updated! Best to check back later if you can't find something you need.
