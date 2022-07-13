@@ -1,6 +1,7 @@
 from typing import Optional
 
-from ... import Context, verb_required_block
+from ...interface import verb_required_block
+from ...interpreter import Context
 
 
 class ReactBlock(verb_required_block(True, payload=True)):
