@@ -1,7 +1,7 @@
 from typing import Optional
 
-from ..interface import Block, verb_required_block
-from ..interpreter import Context
+from ...interface import Block, verb_required_block
+from ...interpreter import Context
 
 
 class CommandBlock(verb_required_block(True, payload=True)):

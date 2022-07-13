@@ -3,10 +3,10 @@ from typing import Any, Dict, Optional
 
 from discord.ext.commands import CooldownMapping
 
-from ..exceptions import CooldownExceeded
-from ..interface import verb_required_block
-from ..interpreter import Context
-from .helpers import helper_split
+from ...exceptions import CooldownExceeded
+from ...interface import verb_required_block
+from ...interpreter import Context
+from ..helpers import helper_split
 
 __all__ = ("CooldownBlock",)
 

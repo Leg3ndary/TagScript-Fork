@@ -9,7 +9,7 @@ class LengthBlock(verb_required_block(True, payload=True)):
     The length block will check the length of the given String.
     If a parameter is passed in, the block will check the length
     based on what you passed in, w for word, s for spaces.
-    If you provide an invalid paramet
+    If you provide an invalid parameter, the block will return -1.
 
     **Usage:** ``{length(["w", "s"]):<text>}``
 

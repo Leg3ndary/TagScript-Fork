@@ -152,14 +152,14 @@ class Verb:
     def _parse_dot_parameter(self, i: int, v: str) -> bool:
         """
         Parse the parameter after a dot
-        
+
         Parameters
         ----------
         i: int
             ~
         v: str
             ~
-        
+
         Returns
         -------
         bool

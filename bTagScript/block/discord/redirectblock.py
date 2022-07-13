@@ -1,7 +1,7 @@
 from typing import Optional
 
-from ..interface import verb_required_block
-from ..interpreter import Context
+from ...interface import verb_required_block
+from ...interpreter import Context
 
 
 class RedirectBlock(verb_required_block(True, parameter=True)):

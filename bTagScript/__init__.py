@@ -1,3 +1,10 @@
+"""
+This work is licensed under the Creative Commons Attribution 4.0 International License. To view a copy of this license,
+visit http://creativecommons.org/licenses/by/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
+
+This fork was made by _Leg3ndary and contains everything he thought should be added to tagscript. Hope you enjoy!
+"""
+
 from collections import namedtuple
 
 from .adapter import *

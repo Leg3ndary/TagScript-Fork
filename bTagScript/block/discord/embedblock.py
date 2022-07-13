@@ -4,10 +4,10 @@ from typing import Optional, Union
 
 from discord import Colour, Embed
 
-from ..exceptions import BadColourArgument, EmbedParseError
-from ..interface import Block
-from ..interpreter import Context
-from .helpers import helper_split, implicit_bool
+from ...exceptions import BadColourArgument, EmbedParseError
+from ...interface import Block
+from ...interpreter import Context
+from ..helpers import helper_split, implicit_bool
 
 
 def string_to_color(argument: str) -> Colour:

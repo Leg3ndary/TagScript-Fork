@@ -15,7 +15,7 @@ def _sub_match(match: re.Match) -> str:
     ----------
     match: re.Match
         The match object.
-    
+
     Returns
     -------
     str
