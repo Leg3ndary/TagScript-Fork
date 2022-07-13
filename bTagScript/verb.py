@@ -43,9 +43,7 @@ class Verb:
         "parsed_length",
     )
 
-    def __init__(
-        self, verb_string: Optional[str] = None, *, limit: int = 2000
-    ) -> None:
+    def __init__(self, verb_string: Optional[str] = None, *, limit: int = 2000) -> None:
         """
         Constructor for the class
         """
