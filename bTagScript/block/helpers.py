@@ -1,3 +1,7 @@
+"""
+Helpers for blocks, mainly for parsing expressions
+"""
+
 import re
 from typing import List, Optional
 

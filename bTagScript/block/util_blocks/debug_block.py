@@ -1,7 +1,7 @@
 from typing import Optional
 
-from ..interface import Block
-from ..interpreter import Context
+from ...interface import Block
+from ...interpreter import Context
 
 
 class DebugBlock(Block):

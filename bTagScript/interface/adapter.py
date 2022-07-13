@@ -8,7 +8,7 @@ if TYPE_CHECKING:
 
 class Adapter:
     """
-    The base class for TagScript blocks.
+    The base class for TagScript adapters.
 
     Implementations must subclass this to create adapters.
     """

@@ -16,7 +16,14 @@ readme = ""
 with open("README.md", "r", encoding="utf8") as file:
     readme = file.read()
 
-packages = ["bTagScript", "bTagScript.adapter", "bTagScript.block", "bTagScript.interface", "bTagScript.block.discordblocks"]
+packages = [
+    "bTagScript",
+    "bTagScript.adapter",
+    "bTagScript.block",
+    "bTagScript.interface",
+    "bTagScript.block.discord_blocks",
+    "bTagScript.block.util_blocks",
+]
 
 setup(
     name="bTagScript",

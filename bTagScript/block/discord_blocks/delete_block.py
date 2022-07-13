@@ -4,6 +4,7 @@ from ...interface import Block
 from ...interpreter import Context
 from .. import helper_parse_if
 
+
 class DeleteBlock(Block):
     """
     The delete block will delete the message if the condition provided in

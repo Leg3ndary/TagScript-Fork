@@ -12,13 +12,13 @@ blocks = [
     block.BreakBlock(),
     block.StrfBlock(),
     block.StopBlock(),
-    block.AssignmentBlock(),
+    block.VarBlock(),
     block.ShortCutRedirectBlock("message"),
     block.LooseVariableGetterBlock(),
     block.OrdinalAbbreviationBlock(),
     block.CommentBlock(),
     block.DebugBlock(),
-    block.ReactBlock()
+    block.ReactBlock(),
 ]
 x = Interpreter(blocks)
 

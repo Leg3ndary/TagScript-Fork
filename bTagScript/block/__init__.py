@@ -2,13 +2,11 @@
 from .helpers import *
 
 # isort: on
-from .assignblock import AssignmentBlock
-from .breakblock import BreakBlock
-from .commentblock import CommentBlock
-from .controlblock import AllBlock, AnyBlock, IfBlock
-from .countingblocks import CountBlock, LengthBlock
-from .debugblock import DebugBlock
-from .discordblocks import (
+from .break_block import BreakBlock
+from .comment_block import CommentBlock
+from .control_block import AllBlock, AnyBlock, IfBlock
+from .counting_blocks import CountBlock, LengthBlock
+from .discord_blocks import (
     BlacklistBlock,
     CommandBlock,
     CooldownBlock,
@@ -19,51 +17,46 @@ from .discordblocks import (
     RedirectBlock,
     RequireBlock,
 )
-from .loosevariablegetter import LooseVariableGetterBlock
-from .mathblock import MathBlock, OrdinalAbbreviationBlock
-from .randomblock import RandomBlock
-from .rangeblock import RangeBlock
-from .replaceblock import PythonBlock, ReplaceBlock
-from .shortcutredirect import ShortCutRedirectBlock
-from .stopblock import StopBlock
-from .strfblock import StrfBlock
-from .strictvariablegetter import StrictVariableGetterBlock
-from .urlblocks import URLDecodeBlock, URLEncodeBlock
+from .math_blocks import MathBlock, OrdinalAbbreviationBlock
+from .random_block import RandomBlock
+from .range_block import RangeBlock
+from .replace_block import PythonBlock, ReplaceBlock
+from .stop_block import StopBlock
+from .strf_block import StrfBlock
+from .url_blocks import URLDecodeBlock, URLEncodeBlock
+from .util_blocks.debug_block import DebugBlock
+from .var_block import VarBlock
+from .vargetter_blocks import LooseVariableGetterBlock, StrictVariableGetterBlock
 
-__all__ = (
-    "implicit_bool",
-    "helper_parse_if",
-    "helper_parse_list_if",
-    "helper_split",
+__all__ = [
+    "BreakBlock",
+    "CommentBlock",
     "AllBlock",
     "AnyBlock",
-    "AssignmentBlock",
+    "IfBlock",
+    "CountBlock",
+    "LengthBlock",
     "BlacklistBlock",
-    "BreakBlock",
     "CommandBlock",
     "CooldownBlock",
+    "DeleteBlock",
     "EmbedBlock",
-    "IfBlock",
-    "LooseVariableGetterBlock",
-    "MathBlock",
     "OverrideBlock",
-    "PythonBlock",
+    "ReactBlock",
+    "RedirectBlock",
+    "RequireBlock",
+    "MathBlock",
+    "OrdinalAbbreviationBlock",
     "RandomBlock",
     "RangeBlock",
-    "RedirectBlock",
+    "PythonBlock",
     "ReplaceBlock",
-    "RequireBlock",
-    "ShortCutRedirectBlock",
     "StopBlock",
     "StrfBlock",
-    "StrictVariableGetterBlock",
-    "URLEncodeBlock",
     "URLDecodeBlock",
-    "LengthBlock",
-    "CountBlock",
-    "CommentBlock",
-    "OrdinalAbbreviationBlock",
+    "URLEncodeBlock",
     "DebugBlock",
-    "DeleteBlock",
-    "ReactBlock",
-)
+    "VarBlock",
+    "LooseVariableGetterBlock",
+    "StrictVariableGetterBlock",
+]

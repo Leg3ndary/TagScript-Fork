@@ -1,55 +1,7 @@
 from typing import Optional
 
-from ...interface import Block, verb_required_block
+from ...interface import Block
 from ...interpreter import Context
-
-
-class CommandBlock(verb_required_block(True, payload=True)):
-    """
-    Run a command as if the tag invoker had ran it. Only 3 command
-    blocks can be used in a tag.
-
-    **Usage:** ``{command:<command>}``
-
-    **Aliases:** ``c, com, command``
-
-    **Payload:** command
-
-    **Parameter:** None
-
-    **Examples:**
-
-    .. tagscript::
-
-        {c:ping}
-        # Invokes ping command
-
-        {c:ban {target(id)} Chatflood/spam}
-        # Invokes ban command on the pinged user with the reason as "Chatflood/spam"
-    """
-
-    ACCEPTED_NAMES = ("c", "com", "command")
-
-    def __init__(self, limit: int = 3) -> None:
-        """
-        Construct with limits
-        """
-        self.limit = limit
-        super().__init__()
-
-    def process(self, ctx: Context) -> Optional[str]:
-        """
-        Process the block and update response.actions
-        """
-        command = ctx.verb.payload.strip()
-        actions = ctx.response.actions.get("commands")
-        if actions:
-            if len(actions) >= self.limit:
-                return f"`COMMAND LIMIT REACHED ({self.limit})`"
-        else:
-            ctx.response.actions["commands"] = []
-        ctx.response.actions["commands"].append(command)
-        return ""
 
 
 class OverrideBlock(Block):
@@ -66,6 +18,8 @@ class OverrideBlock(Block):
 
     **Usage:** ``{override(["admin"|"mod"|"permissions"]):[command]}``
 
+    **Aliases:** ``bypass``
+
     **Payload:** ``command``
 
     **Parameter:** ``"admin", "mod", "permissions"``
@@ -80,16 +34,17 @@ class OverrideBlock(Block):
         {override(admin)}
         overrides commands that require the admin role
 
-        {override(permissions)}
-        {override(mod)}
+        {bypass(permissions)}
+        {bypass(mod)}
         overrides commands that require the mod role or have user permission requirements
     """
 
-    ACCEPTED_NAMES = ("override",)
+    ACCEPTED_NAMES = ("override", "bypass")
 
     def process(self, ctx: Context) -> Optional[str]:
         """
-        Process the block and update response.actions with correct overrides"""
+        Process the block and update response.actions with correct overrides
+        """
         param = ctx.verb.parameter
         if not param:
             ctx.response.actions["overrides"] = {"admin": True, "mod": True, "permissions": True}

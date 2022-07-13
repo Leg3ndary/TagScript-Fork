@@ -42,4 +42,8 @@ class ReactBlock(verb_required_block(True, payload=True)):
         """
         Process the reactions
         """
+        reactions = ctx.verb.payload.strip().split("~" if "~" in ctx.verb.payload else ",")
+        if len(reactions) > self.limit:
+            return f"`Reaction Limit Reached ({self.limit})"
+        ctx.response.actions["reactions"] = reactions
         return ""

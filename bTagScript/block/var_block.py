@@ -5,7 +5,7 @@ from ..interface import verb_required_block
 from ..interpreter import Context
 
 
-class AssignmentBlock(verb_required_block(False, parameter=True)):
+class VarBlock(verb_required_block(False, parameter=True)):
     """
     Variables are useful for choosing a value and referencing it later in a tag.
     Variables can be referenced using brackets as any other block.

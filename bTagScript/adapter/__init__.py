@@ -1,8 +1,8 @@
-from .discordadapters import *
-from .functionadapter import FunctionAdapter
-from .intadapter import IntAdapter
-from .objectadapter import SafeObjectAdapter
-from .stringadapter import StringAdapter
+from .discord_adapters import *
+from .function_adapter import FunctionAdapter
+from .int_adapter import IntAdapter
+from .object_adapter import SafeObjectAdapter
+from .string_adapter import StringAdapter
 
 __all__ = (
     "SafeObjectAdapter",
