@@ -18,6 +18,7 @@ blocks = [
     block.OrdinalAbbreviationBlock(),
     block.CommentBlock(),
     block.DebugBlock(),
+    block.ReactBlock()
 ]
 x = Interpreter(blocks)
 

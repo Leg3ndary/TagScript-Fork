@@ -8,7 +8,7 @@ from .commentblock import CommentBlock
 from .controlblock import AllBlock, AnyBlock, IfBlock
 from .countingblocks import CountBlock, LengthBlock
 from .debugblock import DebugBlock
-from .discord import (
+from .discordblocks import (
     BlacklistBlock,
     CommandBlock,
     CooldownBlock,
