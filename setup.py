@@ -16,12 +16,7 @@ readme = ""
 with open("README.md", "r", encoding="utf8") as file:
     readme = file.read()
 
-packages = [
-    "bTagScript",
-    "bTagScript.adapter",
-    "bTagScript.block",
-    "bTagScript.interface"
-]
+packages = ["bTagScript", "bTagScript.adapter", "bTagScript.block", "bTagScript.interface"]
 
 setup(
     name="bTagScript",

@@ -8,7 +8,17 @@ from .commentblock import CommentBlock
 from .controlblock import AllBlock, AnyBlock, IfBlock
 from .countingblocks import CountBlock, LengthBlock
 from .debugblock import DebugBlock
-from .discord import *
+from .discord import (
+    BlacklistBlock,
+    CommandBlock,
+    CooldownBlock,
+    DeleteBlock,
+    EmbedBlock,
+    OverrideBlock,
+    ReactBlock,
+    RedirectBlock,
+    RequireBlock,
+)
 from .loosevariablegetter import LooseVariableGetterBlock
 from .mathblock import MathBlock, OrdinalAbbreviationBlock
 from .randomblock import RandomBlock
