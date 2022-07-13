@@ -13,8 +13,6 @@ class Verb:
         The string to parse into a verb.
     limit: int
         The maximum number of characters to parse.
-    dot_parameter: bool
-        Whether the parameter should be followed after a "." or use the default of parantheses.
 
     Attributes
     ----------
@@ -32,9 +30,6 @@ class Verb:
     .. tagscript::
         Normally
         {declaration(parameter):payload}
-
-        When dot_parameter = True
-        {declaration.parameter:payload}
     """
 
     __slots__ = (
@@ -46,11 +41,10 @@ class Verb:
         "dec_start",
         "skip_next",
         "parsed_length",
-        "dot_parameter",
     )
 
     def __init__(
-        self, verb_string: Optional[str] = None, *, limit: int = 2000, dot_parameter: bool = False
+        self, verb_string: Optional[str] = None, *, limit: int = 2000
     ) -> None:
         """
         Constructor for the class
@@ -58,7 +52,6 @@ class Verb:
         self.declaration: Optional[str] = None
         self.parameter: Optional[str] = None
         self.payload: Optional[str] = None
-        self.dot_parameter = dot_parameter
         if verb_string is None:
             return
         self.__parse(verb_string, limit)
@@ -72,7 +65,7 @@ class Verb:
         if self.declaration is not None:
             response += self.declaration
         if self.parameter is not None:
-            response += f".{self.parameter}" if self.dot_parameter else f"({self.parameter})"
+            response += f"({self.parameter})"
         if self.payload is not None:
             response += ":" + self.payload
         return response + "}"
@@ -106,9 +99,7 @@ class Verb:
         self.dec_start = 0
         self.skip_next = False
 
-        parse_parameter = (
-            self._parse_dot_parameter if self.dot_parameter else self._parse_paranthesis_parameter
-        )
+        parse_parameter = self._parse_parameter
 
         for i, v in enumerate(self.parsed_string):
             if self.skip_next:
@@ -127,7 +118,7 @@ class Verb:
         # Used to have an else here
         self.set_payload()
 
-    def _parse_paranthesis_parameter(self, i: int, v: str) -> bool:
+    def _parse_parameter(self, i: int, v: str) -> bool:
         """
         Parse the parameter in parentheses
 
@@ -147,28 +138,6 @@ class Verb:
             self.open_parameter(i)
         elif v == ")" and self.dec_depth:
             return self.close_parameter(i)
-        return False
-
-    def _parse_dot_parameter(self, i: int, v: str) -> bool:
-        """
-        Parse the parameter after a dot
-
-        Parameters
-        ----------
-        i: int
-            ~
-        v: str
-            ~
-
-        Returns
-        -------
-        bool
-            Whether the parameter was parsed
-        """
-        if v == ".":
-            self.open_parameter(i)
-        elif (v == ":" or i == self.parsed_length - 1) and self.dec_depth:
-            return self.close_parameter(i + 1)
         return False
 
     def set_payload(self) -> None:

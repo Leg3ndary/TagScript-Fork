@@ -205,7 +205,6 @@ class Interpreter:
         response: Response,
         original_message: str,
         verb_limit: int,
-        dot_parameter: bool,
     ) -> Context:
         """
         Construct a context object for a node.
@@ -222,8 +221,6 @@ class Interpreter:
             The original message passed to the interpreter.
         verb_limit: int
             The maximum number of verbs to process.
-        dot_parameter: bool
-            Whether or not to use the `.` parameter.
 
         Returns
         -------
@@ -232,7 +229,7 @@ class Interpreter:
         """
         # Get the updated verb string from coordinates and make the context
         start, end = node.coordinates
-        node.verb = Verb(final[start : end + 1], limit=verb_limit, dot_parameter=dot_parameter)
+        node.verb = Verb(final[start : end + 1], limit=verb_limit)
         return Context(node.verb, response, self, original_message)
 
     def _get_acceptors(self, ctx: Context) -> Tuple[Block]:
@@ -383,7 +380,6 @@ class Interpreter:
         *,
         charlimit: int,
         verb_limit: int = 2000,
-        dot_parameter: bool,
     ) -> Optional[str]:
         """
         Solve the tagscript by proccessing all possible nodes.
@@ -400,8 +396,6 @@ class Interpreter:
             The maximum number of characters to process.
         verb_limit: int
             The maximum number of verbs to process.
-        dot_parameter: bool
-            Whether or not to use the `.` parameter.
 
         Returns
         -------
@@ -418,7 +412,6 @@ class Interpreter:
                 response=response,
                 original_message=message,
                 verb_limit=verb_limit,
-                dot_parameter=dot_parameter,
             )
             log.debug("Processing context %r at (%r, %r)", ctx, start, end)
             try:
@@ -464,7 +457,6 @@ class Interpreter:
         seed_variables: AdapterDict = None,
         *,
         charlimit: Optional[int] = None,
-        dot_parameter: bool = False,
         **kwargs,
     ) -> Response:
         """
@@ -478,8 +470,6 @@ class Interpreter:
             A dictionary containing strings to adapters to provide context variables for processing.
         charlimit: int
             The maximum characters to process.
-        dot_parameter: bool
-            Whether the parameter should be followed after a "." or use the default of parantheses.
         kwargs: Dict[str, Any]
             Additional keyword arguments that may be used by blocks during processing.
 
@@ -505,7 +495,6 @@ class Interpreter:
                 node_ordered_list,
                 response,
                 charlimit=charlimit,
-                dot_parameter=dot_parameter,
             )
         except TagScriptError:
             raise
@@ -569,7 +558,6 @@ class AsyncInterpreter(Interpreter):
         *,
         charlimit: int,
         verb_limit: int = 2000,
-        dot_parameter: bool,
     ) -> Optional[str]:
         """
         Solve the tagscript by proccessing all possible nodes.
@@ -586,8 +574,6 @@ class AsyncInterpreter(Interpreter):
             The maximum number of characters to process.
         verb_limit: int
             The maximum number of verbs to process.
-        dot_parameter: bool
-            Whether or not to use the `.` parameter.
 
         Returns
         -------
@@ -605,7 +591,6 @@ class AsyncInterpreter(Interpreter):
                 response=response,
                 original_message=message,
                 verb_limit=verb_limit,
-                dot_parameter=dot_parameter,
             )
             try:
                 output = await self._process_blocks(ctx, node)
@@ -625,7 +610,6 @@ class AsyncInterpreter(Interpreter):
         seed_variables: AdapterDict = None,
         *,
         charlimit: Optional[int] = None,
-        dot_parameter: bool = False,
         **kwargs,
     ) -> Response:
         """
@@ -641,7 +625,6 @@ class AsyncInterpreter(Interpreter):
                 node_ordered_list,
                 response,
                 charlimit=charlimit,
-                dot_parameter=dot_parameter,
             )
         except TagScriptError:
             raise
