@@ -1,6 +1,6 @@
 from typing import Optional
 
-from bTagScript import Context, verb_required_block
+from ... import Context, verb_required_block
 
 
 class ReactBlock(verb_required_block(True, payload=True)):

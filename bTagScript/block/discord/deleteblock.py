@@ -1,6 +1,6 @@
 from typing import Optional
 
-from bTagScript import Block, Context, helper_parse_if
+from ... import Block, Context, helper_parse_if
 
 
 class DeleteBlock(Block):
