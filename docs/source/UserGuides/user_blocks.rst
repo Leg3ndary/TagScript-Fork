@@ -18,7 +18,7 @@ Any Block
 Assignment Block
 ----------------
 
-.. autoclass:: bTagScript.block.AssignmentBlock
+.. autoclass:: bTagScript.block.VarBlock
 
 ---------------
 Blacklist Block
@@ -104,9 +104,9 @@ Require Block
 
 .. autoclass:: bTagScript.block.RequireBlock
 
-----------------------
-ShortCutRedirect Block
-----------------------
+-------------------------
+DigitShorthandBlock Block
+-------------------------
 
 .. autoclass:: bTagScript.block.DigitShorthandBlock
 
