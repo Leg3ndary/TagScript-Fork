@@ -1,11 +1,11 @@
 from typing import Optional
 
 from ..adapter import StringAdapter
-from ..interface import verb_required_block
+from ..interface import Block
 from ..interpreter import Context
 
 
-class VarBlock(verb_required_block(False, parameter=True)):
+class VarBlock(Block):
     """
     Variables are useful for choosing a value and referencing it later in a tag.
     Variables can be referenced using brackets as any other block.

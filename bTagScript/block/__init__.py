@@ -28,7 +28,7 @@ from .util_blocks.debug_block import DebugBlock
 from .var_block import VarBlock
 from .vargetter_blocks import LooseVariableGetterBlock, StrictVariableGetterBlock
 
-__all__ = [
+__all__ = (
     "BreakBlock",
     "CommentBlock",
     "AllBlock",
@@ -59,4 +59,4 @@ __all__ = [
     "VarBlock",
     "LooseVariableGetterBlock",
     "StrictVariableGetterBlock",
-]
+)
