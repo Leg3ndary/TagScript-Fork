@@ -28,6 +28,7 @@ class Verb:
     Below is a visual representation of a block and its attributes::
 
     .. tagscript::
+
         Normally
         {declaration(parameter):payload}
     """

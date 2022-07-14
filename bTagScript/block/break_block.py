@@ -11,7 +11,7 @@ class BreakBlock(Block):
     expresssion evaluates true.
     If no message is provided to the payload, the tag output will be empty.
 
-    This differs from the `StopBlock` as the stop block stops all tagscript processing and returns
+    This differs from the StopBlock as the stop block stops all tagscript processing and returns
     its message while the break block continues to process blocks. If command blocks exist after
     the break block, they will still execute.
 

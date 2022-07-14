@@ -15,6 +15,7 @@ Welcome to TagScript's documentation!
    :caption: User Guides
    :hidden:
 
+   UserGuides/getting_started
    UserGuides/user_blocks
 
 .. toctree::
@@ -25,6 +26,7 @@ Welcome to TagScript's documentation!
    DeveloperGuides/getting_started
    DeveloperGuides/the_interpreter
    DeveloperGuides/blocks_and_adapters
+   DeveloperGuides/utils
 
 .. toctree::
    :maxdepth: 2

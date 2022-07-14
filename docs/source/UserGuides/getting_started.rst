@@ -15,4 +15,3 @@ Make sure the following dependencies are installed:
     git+https://github.com/Rapptz/discord.py
     pyparsing>=3.0.9
 
-

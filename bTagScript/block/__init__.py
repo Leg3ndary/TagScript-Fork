@@ -27,6 +27,7 @@ from .url_blocks import URLDecodeBlock, URLEncodeBlock
 from .util_blocks.debug_block import DebugBlock
 from .var_block import VarBlock
 from .vargetter_blocks import LooseVariableGetterBlock, StrictVariableGetterBlock
+from .digitshorthand_block import DigitShorthandBlock
 
 __all__ = (
     "BreakBlock",
@@ -59,4 +60,5 @@ __all__ = (
     "VarBlock",
     "LooseVariableGetterBlock",
     "StrictVariableGetterBlock",
+    "DigitShorthandBlock",
 )
