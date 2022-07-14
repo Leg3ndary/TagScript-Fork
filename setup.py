@@ -4,7 +4,7 @@ from setuptools import setup
 
 requirements = []
 with open("requirements.txt", "r", encoding="utf8") as file:
-    requirements = file.read().splitlines().remove("git+https://github.com/Rapptz/discord.py")
+    requirements = file.read().splitlines()
 
 version = ""
 with open("bTagScript/__init__.py", "r", encoding="utf8") as file:
