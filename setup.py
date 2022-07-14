@@ -2,9 +2,10 @@ import re
 
 from setuptools import setup
 
-requirements = []
-with open("requirements.txt", "r", encoding="utf8") as file:
-    requirements = file.read().splitlines()
+requirements = [
+    "discord.py>=1.7.3",
+    "pyparsing>=3.0.9"
+]
 
 version = ""
 with open("bTagScript/__init__.py", "r", encoding="utf8") as file:
