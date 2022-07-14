@@ -40,12 +40,12 @@ setup(
     long_description=readme,
     long_description_content_type="text/markdown",
     classifiers=[
-        "Development Status :: 5 - Production/Stable"
-        "Intended Audience :: Developers"
-        "License :: Freely Distributable"
-        "Natural Language :: English"
-        "Operating System :: OS Independent"
-        "Programming Language :: Python :: 3.8"
+        "Development Status :: 5 - Production/Stable",
+        "Intended Audience :: Developers",
+        "License :: Freely Distributable",
+        "Natural Language :: English",
+        "Operating System :: OS Independent",
+        "Programming Language :: Python :: 3.8",
     ],
     keywords=["tagscript"],
     license="Creative Commons Attribution 4.0 International License",
