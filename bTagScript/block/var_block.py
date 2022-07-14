@@ -43,9 +43,7 @@ class VarBlock(Block):
         """
         Process the block and assign the variable.
         """
-        if not ctx.verb.parameter:
-            return None
-        elif ctx.verb.parameter in ctx.interpreter._blocknames:  # pylint: disable=protected-access
+        if ctx.verb.parameter in ctx.interpreter._blocknames:  # pylint: disable=protected-access
             return None
         ctx.response.variables[ctx.verb.parameter] = StringAdapter(str(ctx.verb.payload))
         return ""

@@ -108,7 +108,7 @@ Require Block
 ShortCutRedirect Block
 ----------------------
 
-.. autoclass:: bTagScript.block.ShortCutRedirectBlock
+.. autoclass:: bTagScript.block.DigitShorthandBlock
 
 ----------
 STRF Block
@@ -163,3 +163,15 @@ Debug Block
 -----------
 
 .. autoclass:: bTagScript.block.DebugBlock
+
+------------
+Delete Block
+------------
+
+.. autoclass:: bTagScript.block.DeleteBlock
+
+-----------
+React Block
+-----------
+
+.. autoclass:: bTagScript.block.ReactBlock
