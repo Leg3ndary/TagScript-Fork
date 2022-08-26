@@ -1,6 +1,6 @@
 import unittest
 
-from bTagScript import Interpreter, WorkloadExceededError, adapter, block, interface
+from bTagScript import Interpreter, WorkloadExceededError, adapter, block
 
 
 class TestEdgeCases(unittest.TestCase):
@@ -15,11 +15,8 @@ class TestEdgeCases(unittest.TestCase):
             block.BreakBlock(),
             block.StrfBlock(),
             block.StopBlock(),
-            block.AssignmentBlock(),
-            block.FiftyFiftyBlock(),
-            block.ShortCutRedirectBlock("message"),
+            block.VarBlock(),
             block.LooseVariableGetterBlock(),
-            block.SubstringBlock(),
             block.PythonBlock(),
             block.ReplaceBlock(),
         ]

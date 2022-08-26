@@ -12,8 +12,7 @@ class TestVerbFunctionality(unittest.TestCase):
             block.RandomBlock(),
             block.RangeBlock(),
             block.StrfBlock(),
-            block.AssignmentBlock(),
-            block.FiftyFiftyBlock(),
+            block.VarBlock(),
             block.StrictVariableGetterBlock(),
         ]
         self.engine = Interpreter(self.blocks)
@@ -51,7 +50,7 @@ class TestVerbFunctionality(unittest.TestCase):
         # Test that it wont crash with a false block
         test = "{random:{ahad},one,two}"
         expect = ["{ahad}", "one", "two"]
-        self.assertTrue(self.seen_all(test, expect))
+        self.assertTrue(self.seen_all(test, expet))
 
         # Test that inner blocks can use , to sep and outer use ~ without tripping
         # Also testing embedded random
@@ -62,17 +61,6 @@ class TestVerbFunctionality(unittest.TestCase):
         # Test random being able to use a var
         test = "{assign(li):1,2,3,4}{random:{li}}"
         expect = ["1", "2", "3", "4"]
-        self.assertTrue(self.seen_all(test, expect))
-
-    def test_fifty(self):
-        # Test simple 5050
-        test = "Hi{5050: :)}"
-        expect = ["Hi", "Hi :)"]
-        self.assertTrue(self.seen_all(test, expect))
-
-        # Test simple embedded 5050
-        test = "Hi{5050: :){5050: :(}}"
-        expect = ["Hi", "Hi :)", "Hi :) :("]
         self.assertTrue(self.seen_all(test, expect))
 
     def test_range(self):

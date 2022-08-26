@@ -8,7 +8,7 @@ pattern = re.compile(r"(?<!\\)([{():|}])")
 
 
 def _sub_match(match: re.Match) -> str:
-    r"""
+    """
     Check if the character has a \ in front of it
 
     Parameters

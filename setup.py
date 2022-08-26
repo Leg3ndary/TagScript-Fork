@@ -3,7 +3,7 @@ import re
 from setuptools import setup
 
 requirements = [
-    "discord.py>=1.7.3",
+    "discord.py>=2.0.0",
     "pyparsing>=3.0.9"
 ]
 
