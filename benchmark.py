@@ -1,4 +1,5 @@
 import time
+from typing import Callable
 
 from bTagScript import Interpreter, adapter, block
 
@@ -7,7 +8,7 @@ blocks = [
     block.RandomBlock(),
     block.RangeBlock(),
     block.StrfBlock(),
-    block.AssignmentBlock(),
+    block.VarBlock(),
     block.LooseVariableGetterBlock(),
 ]
 x = Interpreter(blocks)
@@ -15,12 +16,12 @@ x = Interpreter(blocks)
 dummy = {"message": adapter.StringAdapter("Hello, this is my message.")}
 
 
-def timerfunc(func):
+def timerfunc(func: Callable) -> Callable:
     """
     A timer decorator
     """
 
-    def function_timer(*args, **kwargs):
+    def function_timer(*args, **kwargs) -> None:
         """
         A nested function for timing other functions
         """
@@ -28,21 +29,20 @@ def timerfunc(func):
         value = func(*args, **kwargs)
         end = time.time()
         runtime = end - start
-        msg = "The runtime for {func} took {time} seconds to complete 1,000 times"
-        print(msg.format(func=func.__name__, time=runtime))
+        print(f"The runtime for {func.__name__} took {runtime} seconds to complete 1,000 times")
         return value
 
     return function_timer
 
 
 @timerfunc
-def v2_test():
+def v2_test() -> None:
     """
     V2 Testing benchmarks
     """
     for _ in range(1000):
         x.process(
-            "{message} {#:1,2,3,4,5,6,7,8,9,10} {range:1-9} {=(variablename):Hello World} {variablename} {message} {strf:Its %A}",
+            r"{message} {#:1,2,3,4,5,6,7,8,9,10} {range:1-9} {=(variablename):Hello World} {variablename} {message} {strf:Its %A}",
             dummy,
         )
 
