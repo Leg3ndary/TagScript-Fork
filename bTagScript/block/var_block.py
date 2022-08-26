@@ -32,7 +32,7 @@ class VarBlock(Block):
         {if({day}==Wednesday):It's Wednesday my dudes!|The day is {day}.}
         The day is Monday.
 
-        Variables can also be created like so
+        Variables can also be created like so if the interpreter uses loose variables
         {$<name>:<value>}
         {$day:Monday} == {=(day):Monday}
     """

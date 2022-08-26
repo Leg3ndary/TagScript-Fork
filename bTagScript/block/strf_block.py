@@ -56,13 +56,13 @@ class StrfBlock(Block):
                 try:
                     t = datetime.fromtimestamp(int(ctx.verb.parameter))
                 except:  # pylint: disable=bare-except
-                    return
+                    return None
             else:
                 try:
                     t = datetime.fromisoformat(ctx.verb.parameter)
                     # converts datetime.__str__ to datetime
                 except ValueError:
-                    return
+                    return None
         else:
             t = datetime.now()
         if not t.tzinfo:

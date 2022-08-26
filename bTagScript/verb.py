@@ -104,16 +104,16 @@ class Verb:
             if self.skip_next:
                 self.skip_next = False
                 continue
-            elif v == "\\":
+            if v == "\\":
                 self.skip_next = True
                 continue
 
             if v == ":" and not self.dec_depth:
                 # if v == ":" and not dec_depth:
                 self.set_payload()
-                return
-            elif parse_parameter(i, v):
-                return
+                return None
+            if parse_parameter(i, v):
+                return None
         # Used to have an else here
         self.set_payload()
 

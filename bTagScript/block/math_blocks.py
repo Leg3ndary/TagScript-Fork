@@ -135,28 +135,31 @@ class NumericStringParser(object):
         Evaluate the expression on the input data in the stack.
         """
         op = s.pop()
+        final = None
         if op == "unary -":
-            return -self.evaluateStack(s)
-        if op in self.opn:
+            final = -self.evaluateStack(s) # pylint: disable=invalid-unary-operand-type
+        elif op in self.opn:
             op2 = self.evaluateStack(s)
             op1 = self.evaluateStack(s)
-            return self.opn[op](op1, op2)
+            final = self.opn[op](op1, op2)
         elif op == "PI":
-            return math.pi  # 3.1415926535
+            final = math.pi  # 3.1415926535
         elif op == "E":
-            return math.e  # 2.718281828
+            final = math.e  # 2.718281828
         elif op in self.fn:
-            return self.fn[op](self.evaluateStack(s))
+            final = self.fn[op](self.evaluateStack(s))
         elif op[0].isalpha():
-            return 0
-        else:
-            return float(op)
+            final = 0
+        if final is not None:
+            return final
+        return float(op)
 
     def eval(self, num_string: str, parseAll: bool = True) -> float:
         """
         Evaluate the expression on the input data.
         """
-        results = self.bnf.parseString(num_string, parseAll)  # pylint: disable=unused-variable
+        # results = self.bnf.parseString(num_string, parseAll)  # pylint: disable=unused-variable
+        self.bnf.parseString(num_string, parseAll)
         return self.evaluateStack(self.exprStack[:])
 
 
@@ -166,7 +169,8 @@ NSP = NumericStringParser()
 class MathBlock(Block):
     """
     A math block is a block that contains a math expression.
-    Will write out everything later bleh
+    If the block fails to parse if will return the declaration
+    plus error like so: `<math error>`, <+ error> etc.
 
     **Usage:** ``{math:<expression>}``
 
@@ -199,7 +203,7 @@ class MathBlock(Block):
         try:
             return str(NSP.eval(ctx.verb.payload.strip(" ")))
         except:  # pylint: disable=bare-except
-            return None
+            return f"<{ctx.verb.declaration} error>"
 
 
 class OrdinalAbbreviationBlock(Block):
@@ -209,7 +213,8 @@ class OrdinalAbbreviationBlock(Block):
     Comma being adding commas every 3 digits, indicator, meaning the ordinal indicator.
     (The st of 1st, nd of 2nd, etc.)
 
-    The number may be positive or negative, if the payload is invalid, -1 is returned.
+    The number may be positive or negative, if the payload is invalid, the
+    declaration plus error is returned.
 
     **Usage:** ``{ord(["c", "comma", "i", "indicator"]):<number>}``
 
@@ -249,4 +254,4 @@ class OrdinalAbbreviationBlock(Block):
             if ctx.verb.parameter in ["i", "indicator"]:
                 return f"{ctx.verb.payload}{indicator}"  # concatenation is slower?
             return f"{comma}{indicator}"
-        return "-1"
+        return f"<{ctx.verb.declaration} error>"
