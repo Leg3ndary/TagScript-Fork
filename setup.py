@@ -2,10 +2,7 @@ import re
 
 from setuptools import setup
 
-requirements = [
-    "discord.py>=2.0.0",
-    "pyparsing>=3.0.9"
-]
+requirements = ["discord.py>=2.0.0", "pyparsing>=3.0.9"]
 
 version = ""
 with open("bTagScript/__init__.py", "r", encoding="utf8") as file:

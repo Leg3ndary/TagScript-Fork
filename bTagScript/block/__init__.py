@@ -6,6 +6,7 @@ from .break_block import BreakBlock
 from .comment_block import CommentBlock
 from .control_block import AllBlock, AnyBlock, IfBlock
 from .counting_blocks import CountBlock, LengthBlock
+from .digitshorthand_block import DigitShorthandBlock
 from .discord_blocks import (
     BlacklistBlock,
     CommandBlock,
@@ -27,7 +28,6 @@ from .url_blocks import URLDecodeBlock, URLEncodeBlock
 from .util_blocks.debug_block import DebugBlock
 from .var_block import VarBlock
 from .vargetter_blocks import LooseVariableGetterBlock, StrictVariableGetterBlock
-from .digitshorthand_block import DigitShorthandBlock
 
 __all__ = (
     "BreakBlock",

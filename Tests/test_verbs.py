@@ -7,10 +7,10 @@ from bTagScript import Interpreter, adapter, block
 class TestVerbFunctionality(unittest.TestCase):
     """
     Test block functionalities
-    
+
     Add more later
     """
-    
+
     def setUp(self):
         self.blocks = [
             block.BreakBlock(),
