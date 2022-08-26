@@ -4,7 +4,9 @@ from ..verb import Verb
 
 class IntAdapter(Adapter):
     """
-    IntAdapter, so far no use for this?
+    IntAdapter
+
+    This will be useful in the future if types are ever introduced.
     """
 
     __slots__ = ("integer",)

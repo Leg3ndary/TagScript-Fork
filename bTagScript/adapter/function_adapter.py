@@ -22,7 +22,8 @@ class FunctionAdapter(Adapter):
 
     def __repr__(self) -> str:
         """
-        String repr"""
+        String repr
+        """
         return f"<{type(self).__qualname__} fn={self.fn!r}>"
 
     def get_value(self, ctx: Verb) -> str:

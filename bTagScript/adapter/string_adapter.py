@@ -37,29 +37,29 @@ class StringAdapter(Adapter):
             return self.string
 
         try:
+            index = None
             splitter = " " if ctx.payload is None else ctx.payload
             if ctx.parameter.isdigit():
                 index = int(ctx.parameter) - 1
-                return self.string.split(splitter)[index]
 
-            elif ctx.parameter.startswith("-") and ctx.parameter.split("-", 1)[-1].isdigit():
+            if ctx.parameter.startswith("-") and ctx.parameter.split("-", 1)[-1].isdigit():
                 index = int(ctx.parameter)
+
+            if index is not None:
                 return self.string.split(splitter)[index]
 
-            else:
-                index = (
-                    int(ctx.parameter.replace("+", "")) - 1
-                    if int(ctx.parameter.replace("+", "")) > 0
-                    else int(ctx.parameter.replace("+", ""))
-                )
-                splitter = " " if ctx.payload is None else ctx.payload
-                if ctx.parameter.startswith("+"):
-                    return splitter.join(self.string.split(splitter)[: index + 1])
-                elif ctx.parameter.endswith("+"):
-                    return splitter.join(self.string.split(splitter)[index:])
-                else:
-                    return self.string.split(splitter)[index]
-        except:  # pylint: disable=bare-except
+            index = (
+                int(ctx.parameter.replace("+", "")) - 1
+                if int(ctx.parameter.replace("+", "")) > 0
+                else int(ctx.parameter.replace("+", ""))
+            )
+            splitter = " " if ctx.payload is None else ctx.payload
+            if ctx.parameter.startswith("+"):
+                return splitter.join(self.string.split(splitter)[: index + 1])
+            if ctx.parameter.endswith("+"):
+                return splitter.join(self.string.split(splitter)[index:])
+            return self.string.split(splitter)[index]
+        except: # pylint: disable=bare-except
             return self.string
 
     def return_value(self, string: str) -> str:

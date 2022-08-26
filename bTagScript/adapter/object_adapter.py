@@ -6,7 +6,7 @@ from ..verb import Verb
 
 class SafeObjectAdapter(Adapter):
     """
-    For objects
+    Object adapter, though again this will likely not be used
     """
 
     __slots__ = ("object",)
@@ -29,13 +29,13 @@ class SafeObjectAdapter(Adapter):
         if ctx.parameter is None:
             return str(self.object)
         if ctx.parameter.startswith("_") or "." in ctx.parameter:
-            return
+            return None
         try:
             attribute = getattr(self.object, ctx.parameter)
         except AttributeError:
-            return
+            return None
         if ismethod(attribute):
-            return
+            return None
         if isinstance(attribute, float):
             attribute = int(attribute)
         return str(attribute)
