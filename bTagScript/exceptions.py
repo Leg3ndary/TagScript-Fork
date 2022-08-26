@@ -123,7 +123,7 @@ class CooldownExceeded(StopError):
 
 class BlocknameDuplicateError(TagScriptError):
     """
-    Raised when a block's name is duplicated when passed to the interpreter
+    Raised when a a duplicate block name is passed to the interpreter
 
     Attributes
     ----------

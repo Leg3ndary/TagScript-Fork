@@ -117,6 +117,9 @@ class Response:
     __slots__ = ("body", "actions", "variables", "extras")
 
     def __init__(self, *, variables: AdapterDict = None, extras: Dict[str, Any] = None) -> None:
+        """
+        Construct the response
+        """
         self.body: str = None
         self.actions: Dict[str, Any] = {}
         self.variables: AdapterDict = variables if variables is not None else {}
@@ -272,6 +275,7 @@ class Interpreter:
                 value = str(value)
                 node.output = value
                 return value
+        return None
 
     @staticmethod
     def _check_workload(charlimit: int, total_work: int, output: str) -> Optional[int]:
@@ -298,7 +302,7 @@ class Interpreter:
             If the workload has been exceeded.
         """
         if not charlimit:
-            return
+            return None
         total_work += len(output)
         if total_work > charlimit:
             raise WorkloadExceededError(

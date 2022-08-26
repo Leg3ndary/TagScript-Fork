@@ -3,6 +3,7 @@ disable=
     C0114, # missing-module-docstring
     C0103, # invalid-name
     W0236, # invalid-overridden-method
+    E1135, # unsupported-membership-test
 
 [FORMAT]
 max-line-length=240
