@@ -5,6 +5,12 @@ from bTagScript import Interpreter, adapter, block
 
 
 class TestVerbFunctionality(unittest.TestCase):
+    """
+    Test block functionalities
+    
+    Add more later
+    """
+    
     def setUp(self):
         self.blocks = [
             block.BreakBlock(),
@@ -50,7 +56,7 @@ class TestVerbFunctionality(unittest.TestCase):
         # Test that it wont crash with a false block
         test = "{random:{ahad},one,two}"
         expect = ["{ahad}", "one", "two"]
-        self.assertTrue(self.seen_all(test, expet))
+        self.assertTrue(self.seen_all(test, expect))
 
         # Test that inner blocks can use , to sep and outer use ~ without tripping
         # Also testing embedded random
