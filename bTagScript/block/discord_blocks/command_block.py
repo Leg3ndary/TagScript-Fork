@@ -32,7 +32,7 @@ class CommandBlock(verb_required_block(True, payload=True)):
 
     def __init__(self, limit: int = 3) -> None:
         """
-        Construct with limits
+        Construct the command block.
         """
         self.limit = limit
         super().__init__()
@@ -45,7 +45,7 @@ class CommandBlock(verb_required_block(True, payload=True)):
         actions = ctx.response.actions.get("commands")
         if actions:
             if len(actions) >= self.limit:
-                return f"`COMMAND LIMIT REACHED ({self.limit})`"
+                return f"<{ctx.verb.declaration} error: limit reached ({self.limit})>"
         else:
             ctx.response.actions["commands"] = []
         ctx.response.actions["commands"].append(command)
