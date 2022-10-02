@@ -36,4 +36,3 @@ class DigitShorthandBlock(Block):
         blank.declaration = self.redirect_name
         blank.parameter = ctx.verb.declaration
         ctx.verb = blank
-        return None

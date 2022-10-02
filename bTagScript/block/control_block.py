@@ -16,8 +16,7 @@ def parse_into_output(payload: str, result: Optional[bool]) -> Optional[str]:
         if output is not None and len(output) == 2:
             if result:
                 return output[0]
-            else:
-                return output[1]
+            return output[1]
         elif result:
             return payload
         else:
