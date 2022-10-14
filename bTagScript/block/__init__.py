@@ -3,6 +3,7 @@ from .helpers import *
 
 # isort: on
 from .break_block import BreakBlock
+from .case_block import LowerBlock, UpperBlock
 from .comment_block import CommentBlock
 from .control_block import AllBlock, AnyBlock, IfBlock
 from .counting_blocks import CountBlock, LengthBlock
@@ -61,4 +62,6 @@ __all__ = (
     "LooseVariableGetterBlock",
     "StrictVariableGetterBlock",
     "DigitShorthandBlock",
+    "UpperBlock",
+    "LowerBlock",
 )
